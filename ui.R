@@ -98,7 +98,7 @@ shinyUI(fluidPage(
             )
           ),
           column(4),
-          column(4, textOuput('def'))
+          column(4, textOutput('def'))
         ),
         fluidRow(
           column(3, 
@@ -122,7 +122,12 @@ shinyUI(fluidPage(
     ),
     
 
-    tabPanel(title = 'Cohort Enrollment'),
+    tabPanel(title = 'Cohort Enrollment',
+      sidebarLayout(
+        sidebarPanel(),
+        mainPanel()
+      )
+    ),
     
     
     tabPanel(title = 'Cohort Achievements')
