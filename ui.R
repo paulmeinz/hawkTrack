@@ -91,16 +91,27 @@ shinyUI(fluidPage(
               selectInput('definition', 'Select a cohort definition', 
                           definition)
             )
-          )
+          ),
+          column(4),
+          column(4, textOuput('def'))
         ),
         fluidRow(
           column(3, 
                  chartOutput('ethnicity', lib = 'nvd3'),
                  htmlOutput('defeth')
                  ),
-          column(3),
-          column(3),
-          column(3)
+          column(3,
+                 chartOutput('gender', lib = 'nvd3'),
+                 htmlOutput('defgen')
+                 ),
+          column(3,
+                 chartOutput('age', lib = 'nvd3'),
+                 htmlOutput('defage')
+                 ),
+          column(3,
+                 chartOutput('special', lib = 'nvd3'),
+                 htmlOutput('defspec')
+                 )
         )
       )
     ),
