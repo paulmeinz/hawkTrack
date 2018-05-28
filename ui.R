@@ -7,6 +7,8 @@ library(shinyjs)
 library(shinyBS)
 
 
+crcLink <- "https://researchapps.crc.losrios.edu/CRC_Research_Data_Request_Form"
+
 ################################################################################
 
 #                             DEFINE BUTTON OPTIONS
@@ -28,14 +30,70 @@ definition <- c('All', 'Two Year Path', 'Three Year Path',
 
 shinyUI(fluidPage(
   theme = 'style.css',
+  
   useShinyjs(),
   
-  # Application title
+
+  # Welcome page----------------------------------------------------------------
+  
+  
   navbarPage(title = 'CRC HawkTrack',
-    tabPanel(title = 'Welcome'),
+    tabPanel(title = 'Welcome',
+      fluidRow(id = 'welcome-top',
+               column(12,
+                      h1(id = 'welcome-header',
+                         'Welcome to the CRC HawkTrack!')
+                      ),
+               p(class = 'welcome-text', id = 'specific',
+                 "Click on the tabs above to select a cohort",
+                 ", look at current enrollment information, and ",
+                 "see which milestones they have achieved.")
+      ),
+      fluidRow(id = 'welcome-mid',
+               column(6,
+                      p(class = 'welcome-text', id = 'specific',
+                        "If you have questions, please contact:",
+                        br(),
+                        a(href = 'mailto:CRC-Research@crc.losrios.edu',
+                          style = 'color: #ffffff',
+                          "CRC-Research@crc.losrios.edu"))
+                      
+               ),
+               column(6,
+                      p(class = 'welcome-text', id = 'specific',
+                        "If you have a research question or want",
+                        br(),
+                        "additional data ",
+                        a(href = crcLink, style = 'color:#ffffff',
+                          target= '_blank',
+                          "CLICK HERE")) 
+               )
+      ),
+      fluidRow(id = 'copyright',
+               column(12,
+                      p(id = 'info',
+                        'Product of the CRC Office of',
+                        'Institutional Effectiveness')
+               )
+      )
+    ),
+    
+
+    # Cohort selection page-----------------------------------------------------
     
     
-    tabPanel(title = 'Select a Cohort'),
+    tabPanel(title = 'Select a Cohort',
+      verticalLayout(
+        fluidRow(
+          column(6,
+            inputPanel(
+              selectInput('cohort', 'Pick a cohort', cohorts),
+              selectInput('definition', 'Select a cohort definition', definition)
+            )
+          )
+        )
+      )
+    ),
     
     
     tabPanel(title = 'Cohort Enrollment'),
