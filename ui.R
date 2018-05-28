@@ -21,6 +21,11 @@ cohorts <- c('2014-2015', '2015-2016')
 definition <- c('All', 'Two Year Path', 'Three Year Path', 
                 'Degree/Transfer/Certificate Seeking')
 
+# Current Enrollment/Milestone Achievement--------------------------------------
+affirm <- c('Yes','No')
+demos <- c('spam', 'beautiful spam', 'delicious spam')
+options <- c('Compare to previous cohorts', 'Compare to previous years')
+
 ################################################################################
 
 #                                  DEFINE UI
@@ -116,7 +121,7 @@ shinyUI(fluidPage(
       )
     ),
     
-    
+
     tabPanel(title = 'Cohort Enrollment'),
     
     
