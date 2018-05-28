@@ -27,6 +27,7 @@ definition <- c('All', 'Two Year Path', 'Three Year Path',
 
 
 shinyUI(fluidPage(
+  theme = 'style.css',
   useShinyjs(),
   
   # Application title
@@ -37,7 +38,7 @@ shinyUI(fluidPage(
     tabPanel(title = 'Select a Cohort'),
     
     
-    tabPanel(title = 'Cohort Profile'),
+    tabPanel(title = 'Cohort Enrollment'),
     
     
     tabPanel(title = 'Cohort Achievements')
