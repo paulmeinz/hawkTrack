@@ -125,7 +125,11 @@ shinyUI(fluidPage(
     tabPanel(title = 'Cohort Enrollment',
       sidebarLayout(
         sidebarPanel(),
-        mainPanel()
+        mainPanel(
+          textOutput('cohort'),
+          chartOutput('enrollment', lib = 'nvd3'),
+          htmlOutput('defenr')
+        )
       )
     ),
     
