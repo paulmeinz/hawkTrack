@@ -85,12 +85,22 @@ shinyUI(fluidPage(
     tabPanel(title = 'Select a Cohort',
       verticalLayout(
         fluidRow(
-          column(6,
+          column(4,
             inputPanel(
               selectInput('cohort', 'Pick a cohort', cohorts),
-              selectInput('definition', 'Select a cohort definition', definition)
+              selectInput('definition', 'Select a cohort definition', 
+                          definition)
             )
           )
+        ),
+        fluidRow(
+          column(3, 
+                 chartOutput('ethnicity', lib = 'nvd3'),
+                 htmlOutput('defeth')
+                 ),
+          column(3),
+          column(3),
+          column(3)
         )
       )
     ),
