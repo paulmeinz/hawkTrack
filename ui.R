@@ -31,9 +31,15 @@ shinyUI(fluidPage(
   
   # Application title
   navbarPage(title = 'CRC HawkTrack',
-    tabPanel(title = 'Welcome'),         
+    tabPanel(title = 'Welcome'),
+    
+    
     tabPanel(title = 'Select a Cohort'),
+    
+    
     tabPanel(title = 'Cohort Profile'),
+    
+    
     tabPanel(title = 'Cohort Achievements')
   )
 

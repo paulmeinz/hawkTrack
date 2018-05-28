@@ -1,0 +1,74 @@
+.navbar-brand {
+	background-color: blue;
+	font-size: 175%;
+}
+
+.navbar-default .navbar-brand {
+	color: white;
+}
+
+p.help {
+	background-color: #ffbf80;
+	border-radius:10px;
+	text-align: center;
+}
+
+#compareDem, #compareCol, #compareA, #compareM, #compareE {
+	background-color: #d9d9d9;
+}
+
+#defA, #defS, #defM, #defE {
+	
+	padding: 1% 1% 1% 1%;
+	color: white;
+	text-shadow: -1.5px 0 #000000,0 1.5px #000000,1.5px 0 #000000,0 -1.5px #000000;
+	font-size: 115%;
+}
+
+#welcome-top {
+	height: 200px;
+	text-shadow: -2px 0 #000000,0 2px #000000,2px 0 #000000,0 -2px #000000;
+	font-weight: bold;
+}
+
+#welcome-mid {
+	height: 315px;
+}
+
+#welcome-header {
+	text-align: center;
+	color: white;
+}
+
+.welcome-text {
+	text-align: center;
+    height: 100%;
+	color: white;
+	font-size: 200%;
+	font-weight: bold;
+	text-shadow: -2px 0 #000000,0 2px #000000,2px 0 #000000,0 -2px #000000;
+}
+
+#specific {
+	font-size: 150%;
+}
+
+#histS, #histA, #histM, #histE {
+	background-color: white;
+	border-color: black;
+}
+
+.tab-pane {
+	background-image: url('LRC-home-banner1.jpg');
+
+}
+
+#info {
+	color: white;
+	text-align: right;
+	padding-right: 5px;
+	padding-top: 20px;
+}
+
+
+
