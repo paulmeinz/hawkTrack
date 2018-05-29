@@ -10,9 +10,13 @@ shinyServer(function(input, output, session) {
   
 ################################################################################
   
-  observeEvent(input$affirm1,{toggle(id = 'advanced', anim = TRUE)})
+  observe({
+    if(input$affirm1 == 'Yes') {toggle(id = 'advanced', anim = TRUE)}
+    if(input$affirm1 == 'No') {hideElement(id = 'advanced', anim = TRUE)}
+  })
+  
   output$cohort <- renderText({
-    print(input$cohort)
+    print(input$affirm1)
   })
   
 })

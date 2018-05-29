@@ -23,7 +23,7 @@ definition <- c('All', 'Two Year Path', 'Three Year Path',
                 'Degree/Transfer/Certificate Seeking')
 
 # Current Enrollment/Milestone Achievement--------------------------------------
-affirm <- c('Yes' = TRUE, 'No' = FALSE)
+affirm <- c('Yes', 'No')
 demos <- c(None = 'none', Age = 'age', Ethnicity = 'ethnicity', 
            'Foster Youth' = 'foster', Gender = 'gender', 
            'Reported Disability' = 'dsps', 'Veteran Status' = 'veteran')
@@ -130,7 +130,10 @@ shinyUI(fluidPage(
       sidebarLayout(
         sidebarPanel(
           textOutput('cohort'),
-          actionButton('affirm1', 'Perform a comparison'),
+          radioButtons('affirm1', 'Perform a comparison?', affirm,
+                       selected = 'No',
+                       inline = TRUE
+          ),
           hidden(
             div(id = 'advanced', 
                 selectInput('demo', 'Select a demographic', demos),
