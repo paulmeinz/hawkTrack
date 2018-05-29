@@ -6,6 +6,7 @@ library(tidyr)
 library(shinyjs)
 library(shinyBS)
 
+load('cohorts.rdata')
 
 crcLink <- "https://researchapps.crc.losrios.edu/CRC_Research_Data_Request_Form"
 
@@ -17,14 +18,17 @@ crcLink <- "https://researchapps.crc.losrios.edu/CRC_Research_Data_Request_Form"
 
 
 # Cohort Selection--------------------------------------------------------------
-cohorts <- c('2014-2015', '2015-2016')
+cohort <- unique(cohorts$acad_year[cohorts$term == 1])
 definition <- c('All', 'Two Year Path', 'Three Year Path', 
                 'Degree/Transfer/Certificate Seeking')
 
 # Current Enrollment/Milestone Achievement--------------------------------------
-affirm <- c('Yes','No')
-demos <- c('spam', 'beautiful spam', 'delicious spam')
-options <- c('Compare to previous cohorts', 'Compare to previous years')
+affirm <- c('Yes' = TRUE, 'No' = FALSE)
+demos <- c(None = 'none', Age = 'age', Ethnicity = 'ethnicity', 
+           'Foster Youth' = 'foster', Gender = 'gender', 
+           'Reported Disability' = 'dsps', 'Veteran Status' = 'veteran')
+options <- c('None', 'Compare to previous cohorts', 'Compare to previous years')
+enrollment <- c('[Pick One]','thisisametric','spam','beautifulspam')
 
 ################################################################################
 
@@ -50,8 +54,8 @@ shinyUI(fluidPage(
                          'Welcome to the CRC HawkTrack!')
                       ),
                p(class = 'welcome-text', id = 'specific',
-                 "Click on the tabs above to select a cohort",
-                 ", look at current enrollment information, and ",
+                 "Click on the tabs above to select a cohort,",
+                 "look at current enrollment information, and ",
                  "see which milestones they have achieved.")
       ),
       fluidRow(id = 'welcome-mid',
@@ -92,7 +96,7 @@ shinyUI(fluidPage(
         fluidRow(
           column(4,
             inputPanel(
-              selectInput('cohort', 'Pick a cohort', cohorts),
+              selectInput('cohort', 'Pick a cohort', cohort),
               selectInput('definition', 'Select a cohort definition', 
                           definition)
             )
@@ -104,19 +108,19 @@ shinyUI(fluidPage(
           column(3, 
                  chartOutput('ethnicity', lib = 'nvd3'),
                  htmlOutput('defeth')
-                 ),
+          ),
           column(3,
                  chartOutput('gender', lib = 'nvd3'),
                  htmlOutput('defgen')
-                 ),
+          ),
           column(3,
                  chartOutput('age', lib = 'nvd3'),
                  htmlOutput('defage')
-                 ),
+          ),
           column(3,
                  chartOutput('special', lib = 'nvd3'),
                  htmlOutput('defspec')
-                 )
+          )
         )
       )
     ),
@@ -124,9 +128,17 @@ shinyUI(fluidPage(
 
     tabPanel(title = 'Cohort Enrollment',
       sidebarLayout(
-        sidebarPanel(),
-        mainPanel(
+        sidebarPanel(
           textOutput('cohort'),
+          actionButton('affirm1', 'Perform a comparison'),
+          hidden(
+            div(id = 'advanced', 
+                selectInput('demo', 'Select a demographic', demos),
+                radioButtons('option', 'Comparisons', options)
+            )
+          )
+        ),
+        mainPanel(
           chartOutput('enrollment', lib = 'nvd3'),
           htmlOutput('defenr')
         )
