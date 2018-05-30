@@ -180,7 +180,7 @@ shinyUI(fluidPage(
           ),
           hidden(
             div(id = 'achieveSelect',
-                selectInput('achieve', 'Select an enrollment metric', milestones
+                selectInput('achieve', 'Select a mileston', milestones
                 )
             )
           ),
