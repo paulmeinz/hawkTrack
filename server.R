@@ -1,4 +1,5 @@
 library(shiny)
+library(hawkTrackHelp)
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output, session) {
@@ -45,8 +46,9 @@ shinyServer(function(input, output, session) {
   })
   
   # render a message based on cohort
-  output$cohort <- renderText({
-    print(input$affirm1)
+  output$cohort <- renderUI({
+    txt <- cohortMessage(input$cohort)
+    HTML(paste(txt))
   })
   
 })

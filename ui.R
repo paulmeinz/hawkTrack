@@ -125,14 +125,18 @@ shinyUI(fluidPage(
       )
     ),
     
-
+    
+    # Cohort Enrollment page----------------------------------------------------
+    
+    
     tabPanel(title = 'Cohort Enrollment',
       sidebarLayout(
         sidebarPanel(
-          htmlOutput('cohort'),
-          radioButtons('affirmEnroll', 'Perform a comparison?', affirm,
-                       selected = 'No',
-                       inline = TRUE
+          div(uiOutput('cohort')),
+          div(radioButtons('affirmEnroll', 'Perform a comparison?', affirm,
+                           selected = 'No',
+                           inline = TRUE
+              )
           ),
           hidden(
             div(id = 'enrollSelect',
