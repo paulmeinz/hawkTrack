@@ -20,7 +20,7 @@ crcLink <- "https://researchapps.crc.losrios.edu/CRC_Research_Data_Request_Form"
 # Cohort Selection--------------------------------------------------------------
 cohort <- unique(cohorts$acad_year[cohorts$term == 1])
 cohort <- cohort[order(cohort, decreasing = TRUE)]
-definition <- c('All', 'Two Year Path', 'Three Year Path', 
+definition <- c('All', 'Two Year Path', 'Three Year Path', 'Certificate Path', 
                 'Degree/Transfer/Certificate Seeking')
 
 # Current Enrollment/Milestone Achievement--------------------------------------
@@ -29,7 +29,8 @@ demos <- c(None = 'None', Age = 'age', Ethnicity = 'ethnicity',
            'Foster Youth' = 'foster', Gender = 'gender', 
            'Reported Disability' = 'dsps', 'Veteran Status' = 'veteran')
 options <- c('None', 'Compare to previous cohorts', 'Compare to previous years')
-enrollment <- c('[Select One]','thisisametric','spam','beautifulspam')
+enrollment <- c('[Select One]', 'thisisametric', 'spam', 'beautifulspam')
+milestones <- c('[Select One]', 'some stuff', 'this other stuff')
 
 ################################################################################
 
@@ -179,8 +180,7 @@ shinyUI(fluidPage(
           ),
           hidden(
             div(id = 'achieveSelect',
-                selectInput('achieve', 'Select an enrollment metric', 
-                            enrollment
+                selectInput('achieve', 'Select an enrollment metric', milestones
                 )
             )
           ),
