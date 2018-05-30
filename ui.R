@@ -24,7 +24,7 @@ definition <- c('All', 'Two Year Path', 'Three Year Path',
 
 # Current Enrollment/Milestone Achievement--------------------------------------
 affirm <- c('No', 'Yes')
-demos <- c(None = 'none', Age = 'age', Ethnicity = 'ethnicity', 
+demos <- c(None = 'None', Age = 'age', Ethnicity = 'ethnicity', 
            'Foster Youth' = 'foster', Gender = 'gender', 
            'Reported Disability' = 'dsps', 'Veteran Status' = 'veteran')
 options <- c('None', 'Compare to previous cohorts', 'Compare to previous years')
@@ -141,13 +141,15 @@ shinyUI(fluidPage(
           ),
           hidden(
             div(id = 'enrollComp', 
-                radioButtons('option', 'Comparisons', options),
-                selectInput('demo', 'Select a demographic', demos)
+                radioButtons('optionEnroll', 'Comparisons', options),
+                selectInput('demoEnroll', 'Select a demographic', demos)
             )
           ),
           hidden(
             div(id = 'enrollEquity',
-                radioButtons('equityEnroll', 'Evaluate equity?', affirm)
+                radioButtons('equityEnroll', 'Evaluate equity?', affirm,
+                             inline = TRUE
+                )
             )  
           )
         ),
