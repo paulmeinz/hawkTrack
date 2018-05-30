@@ -1,10 +1,17 @@
 library(shiny)
 library(hawkTrackHelp)
 
+# Load data
+load('cohorts.rdata')
+
+# Color blind palette
+colors <- c("#D55E00", "#0072B2", "#E69F00", "#009E73", "#999999", 
+            "#F0E442", "#000000", "#56B4E9", "#CC79A7", "#999900") 
+
 # Define server logic required to draw a histogram
 shinyServer(function(input, output, session) {
    
-  
+   
 ################################################################################
   
 #                              REACTIVE UI
@@ -100,7 +107,7 @@ shinyServer(function(input, output, session) {
   })
   
   
-})
+
 
 
 ################################################################################
@@ -110,3 +117,31 @@ shinyServer(function(input, output, session) {
 ################################################################################
 
 
+output$ethnicity <- renderChart({
+  
+  # Pull selected cohort
+  temp <- cohorts %>% filter(cohortyear == input$cohort & term == 1)
+  
+  # Specify filter column based on cohort selection
+  names(temp)[names(temp) == input$definition] <- 'filt'
+  
+  plotSet <- temp %>%
+    filter(!is.na(filt)) %>%
+    group_by(ethnicity) %>%
+    summarise(headcount = n()) %>%
+    mutate(percent = headcount/sum(headcount))
+  
+  form <- formula(paste('percent ~', 'ethnicity'))
+  
+  n1 <- nPlot(form,
+              data = plotSet,
+              type = "discreteBarChart",
+              width = session$clientData[["output_plot1_width"]])
+  
+  n1$addParams(dom = 'ethnicity')
+  n1$chart(color = colors)
+  return(n1)
+  
+})
+  
+})  

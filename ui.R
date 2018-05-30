@@ -10,6 +10,7 @@ load('cohorts.rdata')
 
 crcLink <- "https://researchapps.crc.losrios.edu/CRC_Research_Data_Request_Form"
 
+
 ################################################################################
 
 #                             DEFINE BUTTON OPTIONS
@@ -20,8 +21,11 @@ crcLink <- "https://researchapps.crc.losrios.edu/CRC_Research_Data_Request_Form"
 # Cohort Selection--------------------------------------------------------------
 cohort <- unique(cohorts$acad_year[cohorts$term == 1])
 cohort <- cohort[order(cohort, decreasing = TRUE)]
-definition <- c('All', 'Two Year Path', 'Three Year Path', 'Certificate Path', 
-                'Degree/Transfer/Certificate Seeking')
+definition <- c('All' = 'emplid', 
+                'Two Year Path' = 'twoyear', 
+                'Three Year Path' = 'threeyear', 
+                'Certificate Path' = 'cert', 
+                'Degree/Transfer/Certificate Seeking' = 'degreeseek')
 
 # Current Enrollment/Milestone Achievement--------------------------------------
 affirm <- c('No', 'Yes')
