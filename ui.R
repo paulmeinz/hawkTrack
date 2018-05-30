@@ -23,12 +23,12 @@ definition <- c('All', 'Two Year Path', 'Three Year Path',
                 'Degree/Transfer/Certificate Seeking')
 
 # Current Enrollment/Milestone Achievement--------------------------------------
-affirm <- c('Yes', 'No')
+affirm <- c('No', 'Yes')
 demos <- c(None = 'none', Age = 'age', Ethnicity = 'ethnicity', 
            'Foster Youth' = 'foster', Gender = 'gender', 
            'Reported Disability' = 'dsps', 'Veteran Status' = 'veteran')
 options <- c('None', 'Compare to previous cohorts', 'Compare to previous years')
-enrollment <- c('[Pick One]','thisisametric','spam','beautifulspam')
+enrollment <- c('[Select One]','thisisametric','spam','beautifulspam')
 
 ################################################################################
 
@@ -135,7 +135,12 @@ shinyUI(fluidPage(
                        inline = TRUE
           ),
           hidden(
-            div(id = 'advanced', 
+            div(id = 'enrollSelect',
+                selectInput('enroll', 'Select an enrollment metric', enrollment)
+            )
+          ),
+          hidden(
+            div(id = 'enrollComp', 
                 selectInput('demo', 'Select a demographic', demos),
                 radioButtons('option', 'Comparisons', options)
             )

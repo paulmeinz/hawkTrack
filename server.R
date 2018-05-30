@@ -10,11 +10,15 @@ shinyServer(function(input, output, session) {
   
 ################################################################################
   
+  # toggle enrollment selections
+  
+  # toggle comparison options
   observe({
-    if(input$affirm1 == 'Yes') {toggle(id = 'advanced', anim = TRUE)}
-    if(input$affirm1 == 'No') {hideElement(id = 'advanced', anim = TRUE)}
+    if(input$affirm1 == 'Yes') {toggle(id = 'enrollSelect', anim = TRUE)}
+    if(input$affirm1 == 'No') {hideElement(id = 'enrolSelect', anim = TRUE)}
   })
   
+  # render a message based on cohort
   output$cohort <- renderText({
     print(input$affirm1)
   })
