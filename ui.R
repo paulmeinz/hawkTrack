@@ -129,7 +129,7 @@ shinyUI(fluidPage(
     tabPanel(title = 'Cohort Enrollment',
       sidebarLayout(
         sidebarPanel(
-          textOutput('cohort'),
+          htmlOutput('cohort'),
           radioButtons('affirmEnroll', 'Perform a comparison?', affirm,
                        selected = 'No',
                        inline = TRUE

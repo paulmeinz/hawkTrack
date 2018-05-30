@@ -13,7 +13,9 @@ shinyServer(function(input, output, session) {
   # toggle enrollment selections
   observe({
     if(input$affirmEnroll == 'Yes') {toggle(id = 'enrollSelect', anim = TRUE)}
-    if(input$affirmEnroll == 'No') {hideElement(id = 'enrollSelect', anim = TRUE)}
+    if(input$affirmEnroll == 'No') {
+      hideElement(id = 'enrollSelect', anim = TRUE)
+    }
   })
   
   # toggle comparison options
