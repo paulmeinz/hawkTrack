@@ -90,7 +90,7 @@ shinyServer(function(input, output, session) {
       reset('demoAchieve')
       reset('optionAchieve')
     }
-    if(input$demoEnroll == 'None') {reset('equityAchieve')}
+    if(input$demoAchieve == 'None') {reset('equityAchieve')}
   })
   
   # render a message based on cohort
