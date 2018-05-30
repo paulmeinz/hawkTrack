@@ -133,8 +133,8 @@ shinyUI(fluidPage(
     tabPanel(title = 'Cohort Enrollment',
       sidebarLayout(
         sidebarPanel(
-          div(id = 'cohortMessage', uiOutput('cohort')),
-          div(radioButtons('affirmEnroll', 'Perform a comparison?', affirm,
+          div(id = 'cohortMessage', class = 'cohortmsg', uiOutput('cohort1')),
+          div(radioButtons('affirmEnroll', 'Conduct a comparison?', affirm,
                            selected = 'No',
                            inline = TRUE
               )
@@ -166,8 +166,45 @@ shinyUI(fluidPage(
     ),
     
     
-    tabPanel(title = 'Cohort Achievements')
-  )
+    # Cohort milestones page----------------------------------------------------
+    
+    tabPanel(title = 'Cohort Achievements',
+      sidebarLayout(
+        sidebarPanel(
+          div(id = 'cohortMessage2', class = 'cohortmsg', uiOutput('cohort2')),
+          div(radioButtons('affirmAchieve', 'Conduct a comparison?', affirm,
+                           selected = 'No',
+                           inline = TRUE
+              )
+          ),
+          hidden(
+            div(id = 'achieveSelect',
+                selectInput('achieve', 'Select an enrollment metric', 
+                            enrollment
+                )
+            )
+          ),
+          hidden(
+            div(id = 'achieveComp', 
+              radioButtons('optionAchieve', 'Comparisons', options),
+              selectInput('demoAchieve', 'Select a demographic', demos)
+            )
+          ),
+          hidden(
+            div(id = 'achieveEquity',
+              radioButtons('equityAchieve', 'Evaluate equity?', affirm,
+                           inline = TRUE
+              )
+            )  
+          )
+        ),
+        mainPanel(
+          chartOutput('achieve', lib = 'nvd3'),
+          htmlOutput('defach')
+        )
+      )
+    )  
+  )  
 
     
 ))

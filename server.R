@@ -11,6 +11,10 @@ shinyServer(function(input, output, session) {
   
 ################################################################################
   
+  
+  # Reactive UI for enrollment tab----------------------------------------------
+  
+  
   # toggle enrollment selections
   observe({
     if(input$affirmEnroll == 'Yes') {toggle(id = 'enrollSelect', anim = TRUE)}
@@ -46,9 +50,54 @@ shinyServer(function(input, output, session) {
   })
   
   # render a message based on cohort
-  output$cohort <- renderUI({
+  output$cohort1 <- renderUI({
     txt <- cohortMessage(input$cohort, input$definition)
     HTML(paste(txt))
   })
+  
+  
+  #Reactive UI for achievements tab---------------------------------------------
+  
+  
+  # toggle enrollment selections
+  observe({
+    if(input$affirmAchieve == 'Yes') {toggle(id = 'achieveSelect', anim = TRUE)}
+    if(input$affirmAchieve == 'No') {
+      hideElement(id = 'achieveSelect', anim = TRUE)
+    }
+  })
+  
+  # toggle comparison options
+  observe({
+    if(input$achieve != '[Select One]') 
+    {showElement(id = 'achieveComp', anim = TRUE)}
+    if(input$achieve == '[Select One]') 
+    {hideElement(id = 'achieveComp', anim = TRUE)}
+  })
+  
+  # toggle equity selector
+  observe({
+    if(input$demoAchieve != 'None')
+    {showElement(id = 'achieveEquity', anim = TRUE)}
+    if(input$demoAchieve == 'None')
+    {hideElement(id = 'achieveEquity', anim = TRUE)}
+  })
+  
+  # resets
+  observe({
+    if(input$affirmAchieve == 'No') {reset('achieve')}
+    if(input$achieve == '[Select One]') {
+      reset('demoAchieve')
+      reset('optionAchieve')
+    }
+    if(input$demoEnroll == 'None') {reset('equityAchieve')}
+  })
+  
+  # render a message based on cohort
+  output$cohort2 <- renderUI({
+    txt <- cohortMessage(input$cohort, input$definition)
+    HTML(paste(txt))
+  })
+  
   
 })
