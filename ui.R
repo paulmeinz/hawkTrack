@@ -133,7 +133,7 @@ shinyUI(fluidPage(
     tabPanel(title = 'Cohort Enrollment',
       sidebarLayout(
         sidebarPanel(
-          div(id = 'cohortMessage', class = 'cohortmsg', uiOutput('cohort1')),
+          div(id = 'cohortMessage', class = 'cohortMsg', uiOutput('cohort1')),
           div(radioButtons('affirmEnroll', 'Conduct a comparison?', affirm,
                            selected = 'No',
                            inline = TRUE
@@ -171,7 +171,7 @@ shinyUI(fluidPage(
     tabPanel(title = 'Cohort Achievements',
       sidebarLayout(
         sidebarPanel(
-          div(id = 'cohortMessage2', class = 'cohortmsg', uiOutput('cohort2')),
+          div(id = 'cohortMessage2', class = 'cohortMsg', uiOutput('cohort2')),
           div(radioButtons('affirmAchieve', 'Conduct a comparison?', affirm,
                            selected = 'No',
                            inline = TRUE
