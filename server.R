@@ -19,9 +19,27 @@ shinyServer(function(input, output, session) {
   # toggle comparison options
   observe({
     if(input$enroll != '[Select One]') 
-      {toggle(id = 'enrollComp', anim = TRUE)}
+      {showElement(id = 'enrollComp', anim = TRUE)}
     if(input$enroll == '[Select One]') 
       {hideElement(id = 'enrollComp', anim = TRUE)}
+  })
+  
+  # toggle equity selector
+  observe({
+    if(input$demoEnroll != 'None')
+      {showElement(id = 'enrollEquity', anim = TRUE)}
+    if(input$demoEnroll == 'None')
+      {hideElement(id = 'enrollEquity', anim = TRUE)}
+  })
+  
+  # resets
+  observe({
+    if(input$affirmEnroll == 'No') {reset('enroll')}
+    if(input$enroll == '[Select One]') {
+      reset('demoEnroll')
+      reset('optionEnroll')
+    }
+    if(input$demoEnroll == 'None') {reset('equityEnroll')}
   })
   
   # render a message based on cohort
