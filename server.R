@@ -47,7 +47,7 @@ shinyServer(function(input, output, session) {
   
   # render a message based on cohort
   output$cohort <- renderUI({
-    txt <- cohortMessage(input$cohort)
+    txt <- cohortMessage(input$cohort, input$definition)
     HTML(paste(txt))
   })
   
