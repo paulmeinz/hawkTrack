@@ -70,5 +70,11 @@ p.help {
 	padding-top: 20px;
 }
 
+#cohortMessage {
+	text-align: center;
+	padding-bottom: 10px;
+	font-size: 110%;
+}
+
 
 
