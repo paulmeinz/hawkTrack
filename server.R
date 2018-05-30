@@ -117,23 +117,43 @@ shinyServer(function(input, output, session) {
 ################################################################################
 
 
-output$ethnicity <- renderChart({
+  output$ethnicity <- renderChart({
   
-  # Pull selected cohort data
-  plotSet <- cohortSelectData(input$cohort, input$definition, 'ethnicity',
-                              cohorts)
+    # Pull selected cohort data
+    plotSet <- cohortSelectData(input$cohort, input$definition, 'ethnicity',
+                                cohorts)
   
-  form <- formula(paste('percent ~', 'ethnicity'))
+    form <- formula(paste('percent ~', 'ethnicity'))
   
-  n1 <- nPlot(form,
-              data = plotSet,
-              type = "discreteBarChart",
-              width = session$clientData[["output_plot1_width"]])
+    n1 <- nPlot(form,
+                data = plotSet,
+                type = "discreteBarChart",
+                width = session$clientData[["output_plot1_width"]])
   
-  n1$addParams(dom = 'ethnicity')
-  n1$chart(color = colors)
-  return(n1)
+    n1$addParams(dom = 'ethnicity')
+    n1$chart(color = colors)
+    return(n1)
   
-})
-  
+  })
+ 
+  output$gender <- renderChart({
+    
+    # Pull selected cohort data
+    plotSet <- cohortSelectData(input$cohort, input$definition, 'gender',
+                                cohorts)
+    
+    form <- formula(paste('percent ~', 'gender'))
+    
+    n1 <- nPlot(form,
+                data = plotSet,
+                type = "pieChart",
+                width = session$clientData[["output_plot2_width"]])
+    
+    n1$addParams(dom = 'gender')
+    n1$chart(color = colors)
+    n1$chart(donut = TRUE)
+    return(n1)
+    
+  })  
+   
 })  
