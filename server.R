@@ -119,17 +119,9 @@ shinyServer(function(input, output, session) {
 
 output$ethnicity <- renderChart({
   
-  # Pull selected cohort
-  temp <- cohorts %>% filter(cohortyear == input$cohort & term == 1)
-  
-  # Specify filter column based on cohort selection
-  names(temp)[names(temp) == input$definition] <- 'filt'
-  
-  plotSet <- temp %>%
-    filter(!is.na(filt)) %>%
-    group_by(ethnicity) %>%
-    summarise(headcount = n()) %>%
-    mutate(percent = headcount/sum(headcount))
+  # Pull selected cohort data
+  plotSet <- cohortSelectData(input$cohort, input$definition, 'ethnicity',
+                              cohorts)
   
   form <- formula(paste('percent ~', 'ethnicity'))
   
