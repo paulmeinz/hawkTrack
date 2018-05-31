@@ -76,5 +76,12 @@ p.help {
 	font-size: 105%;
 }
 
+#cohortSize {
+	font-size: 160%;
+	color: white;
+	text-align: center;
+	vertical-align: middle;
+}
+
 
 

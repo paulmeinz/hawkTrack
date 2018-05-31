@@ -27,6 +27,7 @@ definition <- c('All' = 'emplid',
                 'Certificate Path' = 'cert', 
                 'Degree/Trans/Cert Seeking' = 'degreeseek')
 
+
 # Current Enrollment/Milestone Achievement--------------------------------------
 affirm <- c('No', 'Yes')
 demos <- c(None = 'None', Age = 'age', Ethnicity = 'ethnicity', 
@@ -35,6 +36,7 @@ demos <- c(None = 'None', Age = 'age', Ethnicity = 'ethnicity',
 options <- c('None', 'Compare to previous cohorts', 'Compare to previous years')
 enrollment <- c('[Select One]', 'thisisametric', 'spam', 'beautifulspam')
 milestones <- c('[Select One]', 'some stuff', 'this other stuff')
+
 
 ################################################################################
 
@@ -107,7 +109,7 @@ shinyUI(fluidPage(
                           definition)
             )
           ),
-          column(4, textOutput('cohortSize')),
+          column(4, htmlOutput('cohortSize')),
           column(4, textOutput('def'))
         ),
         fluidRow(

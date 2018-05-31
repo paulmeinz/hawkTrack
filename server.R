@@ -1,5 +1,6 @@
 library(shiny)
 library(hawkTrackHelp)
+library(tidyr)
 
 # Load data
 load('cohorts.rdata')
@@ -117,6 +118,20 @@ shinyServer(function(input, output, session) {
 
 ################################################################################
 
+  output$cohortSize <- renderUI({
+    data <- cohorts %>% filter(cohortyear == input$cohort & term == 1)
+    
+    den <- data %>% summarise(headcount = n())
+
+    names(data)[names(data) == input$definition] <- 'filt'
+    
+    num <- data %>% filter(!is.na(filt)) %>% summarise(headcount = n())
+    
+    msg <- paste('Displaying data for ', num[1, 1], ' out of ', den[1, 1],
+                 ' students in the ', input$cohort, ' fall cohort.')
+    
+    HTML(paste(msg))
+  })
 
   output$ethnicity <- renderChart({
   
@@ -210,27 +225,32 @@ shinyServer(function(input, output, session) {
     
     foster <- data %>% 
       group_by(foster) %>%
-      summarize(headcount = n()) %>%
+      summarise(headcount = n()) %>%
       mutate(percent = headcount/sum(headcount) * 100, total = sum(headcount),
-             grp = 'Foster Youth')
+             grp = 'Foster Youth') %>%
+      complete(foster)
+    
     
     veteran <- data %>%
       group_by(veteran) %>%
-      summarize(headcount = n()) %>%
+      summarise(headcount = n()) %>%
       mutate(percent = headcount/sum(headcount) * 100, total = sum(headcount),
-             grp = 'Veteran Status')
+             grp = 'Veteran Status') %>%
+      complete(veteran)
     
     dsps <- data %>%
       group_by(dsps) %>%
-      summarize(headcount = n()) %>%
+      summarise(headcount = n()) %>%
       mutate(percent = headcount/sum(headcount) * 100, total = sum(headcount),
-             grp = 'Reported Disability')
+             grp = 'Reported Disability') %>%
+      complete(dsps)
     
     names(dsps)[1] <- 'demo'
     names(veteran)[1] <- 'demo'
     names(foster)[1] <- 'demo'
     
     plotSet <- data.frame(rbind(foster, veteran, dsps))
+    plotSet[is.na(plotSet)] <- 0
     plotSet <- plotSet %>% filter(demo %in% c('Foster Youth', 'Veteran',
                                               'Reported Disability'))
     
