@@ -25,7 +25,7 @@ definition <- c('All' = 'emplid',
                 'Two Year Path' = 'twoyear', 
                 'Three Year Path' = 'threeyear', 
                 'Certificate Path' = 'cert', 
-                'Degree/Trans/Cert Seeking' = 'degreeseek')
+                'Deg/Trans/Cert Seeking' = 'degreeseek')
 
 
 # Current Enrollment/Milestone Achievement--------------------------------------
