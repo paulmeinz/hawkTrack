@@ -219,31 +219,11 @@ shinyServer(function(input, output, session) {
   
   
   output$special <- renderChart ({
-    data <- cohorts %>% filter(cohortyear == input$cohort & term == 1)
-    names(data)[names(data) == input$definition] <- 'filt'
-    data <- data %>% filter(!is.na(filt))
-    
-    foster <- data %>% 
-      group_by(foster) %>%
-      summarise(headcount = n()) %>%
-      mutate(percent = headcount/sum(headcount) * 100, total = sum(headcount),
-             grp = 'Foster Youth') %>%
-      complete(foster)
-    
-    
-    veteran <- data %>%
-      group_by(veteran) %>%
-      summarise(headcount = n()) %>%
-      mutate(percent = headcount/sum(headcount) * 100, total = sum(headcount),
-             grp = 'Veteran Status') %>%
-      complete(veteran)
-    
-    dsps <- data %>%
-      group_by(dsps) %>%
-      summarise(headcount = n()) %>%
-      mutate(percent = headcount/sum(headcount) * 100, total = sum(headcount),
-             grp = 'Reported Disability') %>%
-      complete(dsps)
+    dsps <- cohortSelectData(input$cohort, input$definition, 'dsps', cohorts)
+    veteran <- cohortSelectData(input$cohort, input$definition, 'veteran',
+                                cohorts)
+    foster <- cohortSelectData(input$cohort, input$definition, 'foster', 
+                               cohorts)
     
     names(dsps)[1] <- 'demo'
     names(veteran)[1] <- 'demo'
