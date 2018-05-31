@@ -80,7 +80,14 @@ p.help {
 	font-size: 160%;
 	color: white;
 	text-align: center;
-	vertical-align: middle;
+	padding-top: 10px;
+}
+
+#def {
+	font-size: 100%;
+	color: white;
+	text-align: center;
+	padding-top: 10px;
 }
 
 

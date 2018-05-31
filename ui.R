@@ -110,7 +110,7 @@ shinyUI(fluidPage(
             )
           ),
           column(4, htmlOutput('cohortSize')),
-          column(4, textOutput('def'))
+          column(4, htmlOutput('def'))
         ),
         fluidRow(
           column(3, 

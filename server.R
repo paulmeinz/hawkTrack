@@ -132,7 +132,50 @@ shinyServer(function(input, output, session) {
     
     HTML(paste(msg))
   })
-
+  
+  
+  output$def <- renderUI({
+    if (input$definition == 'emplid') {
+      text <- "Students who were first time new at CRC in the fall with 
+      no experience in the District prior to summer (aside from dual 
+      enrollment)."
+    }
+    
+    if (input$definition == 'twoyear') {
+      text <- "Students who were first time new at CRC in the fall with no
+      experience in the District prior to summer (aside from dual enrollment) 
+      who in their first term: 1) Enrolled in 15 or more units, 2) declared a
+      major, 3) enrolled in math and English, 4) and completed a comprehensive
+      educational plan."
+    }
+    
+    if (input$definition == 'threeyear') {
+      text <- "Students who were first time new at CRC in the fall with no
+      experience in the District prior to summer (aside from dual enrollment) 
+      who in their first term: 1) Enrolled in 6 to 14.9 units, 2) declared a
+      major, 3) enrolled in math or English, 4) and completed a comprehensive
+      educational plan."
+    }
+    
+    if (input$definition == 'cert') {
+      text <- "Students who were first time new at CRC in the fall with no
+      experience in the District prior to summer (aside from dual enrollment) 
+      who in their first term: 1) Declared a major, 2) completed a 
+      comprehensive educational plan, and enrolled in at least 3 units in the
+      same 2 digit cip code as their major"
+    }
+    
+    if (input$definition == 'degreeseek') {
+      text <- "Students who were first time new at CRC in the fall with no
+      experience in the District prior to summer (aside from dual enrollment) 
+      who have completed at least 6 units at CRC and attempted math or English"
+    }
+    
+    HTML(paste(text))
+    
+  })
+  
+  
   output$ethnicity <- renderChart({
   
     # Pull selected cohort data
