@@ -74,6 +74,7 @@ shinyServer(function(input, output, session) {
     }
   })
   
+  
   # toggle comparison options
   observe({
     if(input$achieve != '[Select One]') 
@@ -82,6 +83,7 @@ shinyServer(function(input, output, session) {
     {hideElement(id = 'achieveComp', anim = TRUE)}
   })
   
+  
   # toggle equity selector
   observe({
     if(input$demoAchieve != 'None')
@@ -89,6 +91,7 @@ shinyServer(function(input, output, session) {
     if(input$demoAchieve == 'None')
     {hideElement(id = 'achieveEquity', anim = TRUE)}
   })
+  
   
   # resets
   observe({
@@ -100,14 +103,12 @@ shinyServer(function(input, output, session) {
     if(input$demoAchieve == 'None') {reset('equityAchieve')}
   })
   
+  
   # render a message based on cohort
   output$cohort2 <- renderUI({
     txt <- cohortMessage(input$cohort, input$definition)
     HTML(paste(txt))
   })
-  
-  
-
 
 
 ################################################################################
@@ -146,6 +147,7 @@ shinyServer(function(input, output, session) {
     return(n1)
   
   })
+  
  
   output$gender <- renderChart({
     
@@ -168,7 +170,8 @@ shinyServer(function(input, output, session) {
              showLabels = FALSE)
     return(n1)
     
-  })  
+  }) 
+  
  
   output$age <- renderChart({
     
@@ -198,6 +201,7 @@ shinyServer(function(input, output, session) {
     return(n1)
     
   })
+  
   
   output$special <- renderChart ({
     data <- cohorts %>% filter(cohortyear == input$cohort & term == 1)
