@@ -205,6 +205,8 @@ shinyServer(function(input, output, session) {
   
   output$special <- renderChart ({
     data <- cohorts %>% filter(cohortyear == input$cohort & term == 1)
+    names(data)[names(data) == input$definition] <- 'filt'
+    data <- data %>% filter(!is.na(filt))
     
     foster <- data %>% 
       group_by(foster) %>%

@@ -25,7 +25,7 @@ definition <- c('All' = 'emplid',
                 'Two Year Path' = 'twoyear', 
                 'Three Year Path' = 'threeyear', 
                 'Certificate Path' = 'cert', 
-                'Degree/Transfer/Certificate Seeking' = 'degreeseek')
+                'Degree/Trans/Cert Seeking' = 'degreeseek')
 
 # Current Enrollment/Milestone Achievement--------------------------------------
 affirm <- c('No', 'Yes')
@@ -107,7 +107,7 @@ shinyUI(fluidPage(
                           definition)
             )
           ),
-          column(4),
+          column(4, textOutput('cohortSize')),
           column(4, textOutput('def'))
         ),
         fluidRow(
