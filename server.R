@@ -132,8 +132,7 @@ shinyServer(function(input, output, session) {
                 width = session$clientData[["output_plot1_width"]])
  
     # Do some aesthetic stuff
-    tooltip = gsub("[\r\n]", "", makeDemoToolTip())
-    print(tooltip)
+    tooltip <- gsub("[\r\n]", "", makeDemoToolTip())
     n1$yAxis(axisLabel = 'Proportion of UNDUPLICATED Students (%)', 
              width = 50)
     n1$xAxis(rotateLabels = -25)
@@ -161,9 +160,11 @@ shinyServer(function(input, output, session) {
                 type = "pieChart",
                 width = session$clientData[["output_plot2_width"]])
     
+    tooltip <- gsub("[\r\n]", "", makeDemoToolTip(type = 'pie'))
     n1$addParams(dom = 'gender')
-    n1$chart(color = colors)
-    n1$chart(donut = TRUE)
+    n1$chart(color = colors,
+             donut = TRUE,
+             tooltipContent = tooltip)
     return(n1)
     
   })  
