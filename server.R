@@ -164,9 +164,87 @@ shinyServer(function(input, output, session) {
     n1$addParams(dom = 'gender')
     n1$chart(color = colors,
              donut = TRUE,
-             tooltipContent = tooltip)
+             tooltipContent = tooltip,
+             showLabels = FALSE)
     return(n1)
     
   })  
+ 
+  output$age <- renderChart({
+    
+    # Pull selected cohort data
+    plotSet <- cohortSelectData(input$cohort, input$definition, 'age',
+                                cohorts)
+    
+    form <- formula(paste('percent ~', 'age'))
+    
+    # Make a plot
+    n1 <- nPlot(form,
+                data = plotSet,
+                type = "discreteBarChart",
+                width = session$clientData[["output_plot3_width"]])
+    
+    # Do some aesthetic stuff
+    tooltip <- gsub("[\r\n]", "", makeDemoToolTip())
+    n1$yAxis(axisLabel = 'Proportion of UNDUPLICATED Students (%)', 
+             width = 50)
+    n1$chart(color = colors,
+             forceY = c(0, 100),
+             tooltipContent = tooltip)
+    
+    
+    # Display the chart
+    n1$addParams(dom = 'age')
+    return(n1)
+    
+  })
+  
+  output$special <- renderChart ({
+    data <- cohorts %>% filter(cohortyear == input$cohort & term == 1)
+    
+    foster <- data %>% 
+      group_by(foster) %>%
+      summarize(headcount = n()) %>%
+      mutate(percent = headcount/sum(headcount) * 100, total = sum(headcount),
+             grp = 'Foster Youth')
+    
+    veteran <- data %>%
+      group_by(veteran) %>%
+      summarize(headcount = n()) %>%
+      mutate(percent = headcount/sum(headcount) * 100, total = sum(headcount),
+             grp = 'Veteran Status')
+    
+    dsps <- data %>%
+      group_by(dsps) %>%
+      summarize(headcount = n()) %>%
+      mutate(percent = headcount/sum(headcount) * 100, total = sum(headcount),
+             grp = 'Reported Disability')
+    
+    names(dsps)[1] <- 'demo'
+    names(veteran)[1] <- 'demo'
+    names(foster)[1] <- 'demo'
+    
+    plotSet <- data.frame(rbind(foster, veteran, dsps))
+    plotSet <- plotSet %>% filter(demo %in% c('Foster Youth', 'Veteran',
+                                              'Reported Disability'))
+    
+    n1 <- nPlot(percent ~ demo,
+                data = plotSet,
+                type = "discreteBarChart",
+                width = session$clientData[["output_plot4_width"]])
+
+    # Do some aesthetic stuff
+    tooltip <- gsub("[\r\n]", "", makeDemoToolTip())
+    n1$yAxis(axisLabel = 'Proportion of UNDUPLICATED Students (%)', 
+             width = 50)
+    n1$chart(color = colors,
+             forceY = c(0, 100),
+             tooltipContent = tooltip)
+    
+    
+    # Display the chart
+    n1$addParams(dom = 'special')
+    return(n1)      
+  })
    
 })  
