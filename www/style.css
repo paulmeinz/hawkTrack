@@ -56,7 +56,6 @@ p.help {
 #ethnicity, #gender, #age, #special {
 	background-color: gray;
 	border-color: black;
-	opacity: 0.95;
 }
 
 .tab-pane {
