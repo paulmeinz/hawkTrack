@@ -320,4 +320,22 @@ shinyServer(function(input, output, session) {
 
 ################################################################################
   
+  
+  observe({
+    if (input$affirmEnroll == 'No') {
+      showElement(id = 'snapshot', anim = TRUE)
+      hideElement(id = 'compare', anim = TRUE)
+    }
+    
+    if (input$affirmEnroll == 'Yes') {
+      showElement(id = 'compare', anim = TRUE)
+      hideElement(id = 'snapshot', anim = TRUE)
+    }
+  })
+  
+  
+  output$blah <- renderText({'THIS IS SOME TEXT IF NO IS SELECTED'})
+  
+  
+  output$blah2 <- renderText({'THIS IS SOME TEXT IF YES IS SELECTED'})
 })  

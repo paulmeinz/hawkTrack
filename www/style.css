@@ -53,7 +53,7 @@ p.help {
 	font-size: 150%;
 }
 
-#ethnicity, #gender, #age, #special {
+#ethnicity, #gender, #age, #special #snapshot #compare {
 	background-color: #e6f2ff;
 	border-color: black;
 }

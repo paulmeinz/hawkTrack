@@ -174,8 +174,17 @@ shinyUI(fluidPage(
           )
         ),
         mainPanel(
-          chartOutput('enrollment', lib = 'nvd3'),
-          htmlOutput('defenr')
+          hidden(
+            div(id = 'snapshot',
+                textOutput('blah'))
+          ),
+          hidden(
+            div(id = 'compare',
+                textOutput('blah2'))
+          )
+          
+          #chartOutput('enrollment', lib = 'nvd3'),
+          #htmlOutput('defenr')
         )
       )
     ),
