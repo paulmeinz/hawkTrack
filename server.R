@@ -38,9 +38,9 @@ shinyServer(function(input, output, session) {
   
   # toggle comparison options
   observe({
-    if(input$enroll != '[Select One]') 
+    if(input$enroll != 'None') 
       {showElement(id = 'enrollComp', anim = TRUE)}
-    if(input$enroll == '[Select One]') 
+    if(input$enroll == 'None') 
       {hideElement(id = 'enrollComp', anim = TRUE)}
   })
   
@@ -319,5 +319,5 @@ shinyServer(function(input, output, session) {
 #                            CURRENT ENROLLMENT TAB
 
 ################################################################################
-     
+  
 })  

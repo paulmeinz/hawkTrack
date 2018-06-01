@@ -34,7 +34,15 @@ demos <- c(None = 'None', Age = 'age', Ethnicity = 'ethnicity',
            'Foster Youth' = 'foster', Gender = 'gender', 
            'Reported Disability' = 'dsps', 'Veteran Status' = 'veteran')
 options <- c('None', 'Compare to previous cohorts', 'Compare to previous years')
-enrollment <- c('[Select One]', 'thisisametric', 'spam', 'beautifulspam')
+enrollment <- c('[Select One]' = 'None', 
+                'Has a Declared Major' = 'hasmajor', 
+                'Average Units' = 'units', 
+                '% Enrolled' = 'enrolled',
+                'Enrolled Full Time (12 units)' = '12units',
+                'Enrolled Full Time (15 units)' = '15units',
+                'Enrolled in math' = 'Math',
+                'Enrolled in English' = 'English',
+                'Average Units Withdrawn' = 'wunits')
 milestones <- c('[Select One]', 'some stuff', 'this other stuff')
 
 
