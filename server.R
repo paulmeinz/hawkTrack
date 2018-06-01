@@ -136,7 +136,8 @@ shinyServer(function(input, output, session) {
     
     msg <- paste('Displaying data for ', num[1, 1], ' out of ', den[1, 1],
                  ' students in the ', input$cohort, ' fall cohort.',
-                 'This cohort is currently enrolled in term ', currentTerm())
+                 'This cohort is currently enrolled in their',
+                 createTermString(currentTerm()), ' term.')
     
     HTML(paste(msg))
   })
