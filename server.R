@@ -334,8 +334,7 @@ shinyServer(function(input, output, session) {
   })
   
   
-  output$blah <- renderText({'THIS IS SOME TEXT IF NO IS SELECTED'})
-  
-  
-  output$blah2 <- renderText({'THIS IS SOME TEXT IF YES IS SELECTED'})
+  output$enrollPerc <- renderChart({
+    
+  })
 })  
