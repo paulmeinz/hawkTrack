@@ -1,10 +1,10 @@
 library(shiny)
-library(shiny)
 library(dplyr)
 library(rCharts)
 library(tidyr)
 library(shinyjs)
 library(shinyBS)
+library(hawkTrackHelp)
 
 load('cohorts.rdata')
 

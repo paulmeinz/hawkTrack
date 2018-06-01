@@ -1,6 +1,4 @@
 library(shiny)
-library(hawkTrackHelp)
-library(tidyr)
 
 # Load data
 load('cohorts.rdata')
@@ -127,13 +125,9 @@ shinyServer(function(input, output, session) {
   
   output$cohortSize <- renderUI({
     data <- cohorts %>% filter(cohortyear == input$cohort & term == 1)
-    
     den <- data %>% summarise(headcount = n())
-
     names(data)[names(data) == input$definition] <- 'filt'
-    
     num <- data %>% filter(!is.na(filt)) %>% summarise(headcount = n())
-    
     msg <- paste('Displaying data for ', num[1, 1], ' out of ', den[1, 1],
                  ' students in the ', input$cohort, ' fall cohort.',
                  'This cohort is currently enrolled in their',
