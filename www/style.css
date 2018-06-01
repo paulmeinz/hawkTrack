@@ -53,8 +53,8 @@ p.help {
 	font-size: 150%;
 }
 
-#histS, #histA, #histM, #histE {
-	background-color: white;
+#ethnicity, #gender, #age, #special {
+	background-color: #e6f2ff;
 	border-color: black;
 }
 
@@ -68,6 +68,26 @@ p.help {
 	text-align: right;
 	padding-right: 5px;
 	padding-top: 20px;
+}
+
+.cohortMsg {
+	text-align: center;
+	padding-bottom: 10px;
+	font-size: 105%;
+}
+
+#cohortSize {
+	font-size: 160%;
+	color: white;
+	text-align: center;
+	padding-top: 10px;
+}
+
+#def {
+	font-size: 100%;
+	color: white;
+	text-align: center;
+	padding-top: 10px;
 }
 
 

@@ -6,8 +6,10 @@ library(tidyr)
 library(shinyjs)
 library(shinyBS)
 
+load('cohorts.rdata')
 
 crcLink <- "https://researchapps.crc.losrios.edu/CRC_Research_Data_Request_Form"
+
 
 ################################################################################
 
@@ -17,14 +19,24 @@ crcLink <- "https://researchapps.crc.losrios.edu/CRC_Research_Data_Request_Form"
 
 
 # Cohort Selection--------------------------------------------------------------
-cohorts <- c('2014-2015', '2015-2016')
-definition <- c('All', 'Two Year Path', 'Three Year Path', 
-                'Degree/Transfer/Certificate Seeking')
+cohort <- unique(cohorts$acad_year[cohorts$term == 1])
+cohort <- cohort[order(cohort, decreasing = TRUE)]
+definition <- c('All' = 'emplid', 
+                'Two Year Path' = 'twoyear', 
+                'Three Year Path' = 'threeyear', 
+                'Certificate Path' = 'cert', 
+                'Deg/Trans/Cert Seeking' = 'degreeseek')
+
 
 # Current Enrollment/Milestone Achievement--------------------------------------
-affirm <- c('Yes','No')
-demos <- c('spam', 'beautiful spam', 'delicious spam')
-options <- c('Compare to previous cohorts', 'Compare to previous years')
+affirm <- c('No', 'Yes')
+demos <- c(None = 'None', Age = 'age', Ethnicity = 'ethnicity', 
+           'Foster Youth' = 'foster', Gender = 'gender', 
+           'Reported Disability' = 'dsps', 'Veteran Status' = 'veteran')
+options <- c('None', 'Compare to previous cohorts', 'Compare to previous years')
+enrollment <- c('[Select One]', 'thisisametric', 'spam', 'beautifulspam')
+milestones <- c('[Select One]', 'some stuff', 'this other stuff')
+
 
 ################################################################################
 
@@ -50,8 +62,8 @@ shinyUI(fluidPage(
                          'Welcome to the CRC HawkTrack!')
                       ),
                p(class = 'welcome-text', id = 'specific',
-                 "Click on the tabs above to select a cohort",
-                 ", look at current enrollment information, and ",
+                 "Click on the tabs above to select a cohort,",
+                 "look at current enrollment information, and ",
                  "see which milestones they have achieved.")
       ),
       fluidRow(id = 'welcome-mid',
@@ -92,41 +104,68 @@ shinyUI(fluidPage(
         fluidRow(
           column(4,
             inputPanel(
-              selectInput('cohort', 'Pick a cohort', cohorts),
+              selectInput('cohort', 'Pick a cohort', cohort),
               selectInput('definition', 'Select a cohort definition', 
                           definition)
             )
           ),
-          column(4),
-          column(4, textOutput('def'))
+          column(4, htmlOutput('cohortSize')),
+          column(4, htmlOutput('def'))
         ),
         fluidRow(
           column(3, 
                  chartOutput('ethnicity', lib = 'nvd3'),
-                 htmlOutput('defeth')
-                 ),
+                 plotOutput('plot1', height = '0px')
+          ),
           column(3,
                  chartOutput('gender', lib = 'nvd3'),
-                 htmlOutput('defgen')
-                 ),
+                 plotOutput('plot2', height = '0px')
+          ),
           column(3,
                  chartOutput('age', lib = 'nvd3'),
-                 htmlOutput('defage')
-                 ),
+                 plotOutput('plot3', height = '0px')
+          ),
           column(3,
                  chartOutput('special', lib = 'nvd3'),
-                 htmlOutput('defspec')
-                 )
+                 plotOutput('plot4', height = '0px')
+          )
         )
       )
     ),
     
-
+    
+    # Cohort Enrollment page----------------------------------------------------
+    
+    
     tabPanel(title = 'Cohort Enrollment',
       sidebarLayout(
-        sidebarPanel(),
+        sidebarPanel(
+          div(id = 'cohortMessage', class = 'cohortMsg', uiOutput('cohort1')),
+          div(radioButtons('affirmEnroll', 'Conduct a comparison?', affirm,
+                           selected = 'No',
+                           inline = TRUE
+              )
+          ),
+          hidden(
+            div(id = 'enrollSelect',
+                selectInput('enroll', 'Select an enrollment metric', enrollment)
+            )
+          ),
+          hidden(
+            div(id = 'enrollComp', 
+                radioButtons('optionEnroll', 'Comparisons', options),
+                selectInput('demoEnroll', 'Select a demographic', demos)
+            )
+          ),
+          hidden(
+            div(id = 'enrollEquity',
+                radioButtons('equityEnroll', 'Evaluate equity?', affirm,
+                             inline = TRUE
+                )
+            )  
+          )
+        ),
         mainPanel(
-          textOutput('cohort'),
           chartOutput('enrollment', lib = 'nvd3'),
           htmlOutput('defenr')
         )
@@ -134,8 +173,44 @@ shinyUI(fluidPage(
     ),
     
     
-    tabPanel(title = 'Cohort Achievements')
-  )
+    # Cohort milestones page----------------------------------------------------
+    
+    tabPanel(title = 'Cohort Achievements',
+      sidebarLayout(
+        sidebarPanel(
+          div(id = 'cohortMessage2', class = 'cohortMsg', uiOutput('cohort2')),
+          div(radioButtons('affirmAchieve', 'Conduct a comparison?', affirm,
+                           selected = 'No',
+                           inline = TRUE
+              )
+          ),
+          hidden(
+            div(id = 'achieveSelect',
+                selectInput('achieve', 'Select a mileston', milestones
+                )
+            )
+          ),
+          hidden(
+            div(id = 'achieveComp', 
+              radioButtons('optionAchieve', 'Comparisons', options),
+              selectInput('demoAchieve', 'Select a demographic', demos)
+            )
+          ),
+          hidden(
+            div(id = 'achieveEquity',
+              radioButtons('equityAchieve', 'Evaluate equity?', affirm,
+                           inline = TRUE
+              )
+            )  
+          )
+        ),
+        mainPanel(
+          chartOutput('achieve', lib = 'nvd3'),
+          htmlOutput('defach')
+        )
+      )
+    )  
+  )  
 
     
 ))
