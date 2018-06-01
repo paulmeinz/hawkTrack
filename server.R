@@ -3,6 +3,13 @@ library(shiny)
 # Load data
 load('cohorts.rdata')
 
+# Choices for lookup
+definition <- c('All' = 'emplid', 
+                'Two Year Path' = 'twoyear', 
+                'Three Year Path' = 'threeyear', 
+                'Certificate Path' = 'cert', 
+                'Deg/Trans/Cert Seeking' = 'degreeseek')
+
 # Color blind palette
 colors <- c("#D55E00", "#0072B2", "#E69F00", "#009E73", "#999999", 
             "#F0E442", "#000000", "#56B4E9", "#CC79A7", "#999900") 
@@ -10,7 +17,7 @@ colors <- c("#D55E00", "#0072B2", "#E69F00", "#009E73", "#999999",
 # Define server logic required to draw a histogram
 shinyServer(function(input, output, session) {
    
-   
+     
 ################################################################################
   
 #                              REACTIVE UI
@@ -57,7 +64,9 @@ shinyServer(function(input, output, session) {
   
   # render a message based on cohort
   output$cohort1 <- renderUI({
-    txt <- cohortMessage(input$cohort, input$definition)
+    def <- names(definition)[definition == input$definition]
+    txt <- cohortMessage(input$cohort, def, 
+                         createTermString(currentTerm()))
     HTML(paste(txt))
   })
   
@@ -105,7 +114,9 @@ shinyServer(function(input, output, session) {
   
   # render a message based on cohort
   output$cohort2 <- renderUI({
-    txt <- cohortMessage(input$cohort, input$definition)
+    def <- names(definition)[definition == input$definition]
+    txt <- cohortMessage(input$cohort, def, 
+                         createTermString(currentTerm()))
     HTML(paste(txt))
   })
 
@@ -173,6 +184,9 @@ shinyServer(function(input, output, session) {
       experience in the District prior to summer (aside from dual enrollment) 
       who have completed at least 6 units at CRC and attempted math or English"
     }
+    
+    intro <- '<strong> Cohort Definition: </strong>'
+    text <- paste(intro, text, sep = '')
     
     HTML(paste(text))
     
