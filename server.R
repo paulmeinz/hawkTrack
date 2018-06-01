@@ -117,7 +117,14 @@ shinyServer(function(input, output, session) {
 #                           Pick a cohort tab
 
 ################################################################################
-
+  
+  
+  currentTerm <- reactive({
+    term <- max(cohorts$term[cohorts$cohortyear == input$cohort])
+    term
+  })
+  
+  
   output$cohortSize <- renderUI({
     data <- cohorts %>% filter(cohortyear == input$cohort & term == 1)
     
@@ -128,7 +135,8 @@ shinyServer(function(input, output, session) {
     num <- data %>% filter(!is.na(filt)) %>% summarise(headcount = n())
     
     msg <- paste('Displaying data for ', num[1, 1], ' out of ', den[1, 1],
-                 ' students in the ', input$cohort, ' fall cohort.')
+                 ' students in the ', input$cohort, ' fall cohort.',
+                 'This cohort is currently enrolled in term ', currentTerm())
     
     HTML(paste(msg))
   })
@@ -295,5 +303,12 @@ shinyServer(function(input, output, session) {
     n1$addParams(dom = 'special')
     return(n1)      
   })
-   
+
+
+################################################################################
+  
+#                            CURRENT ENROLLMENT TAB
+
+################################################################################
+     
 })  
