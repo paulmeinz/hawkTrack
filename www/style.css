@@ -13,9 +13,6 @@ p.help {
 	text-align: center;
 }
 
-#compareDem, #compareCol, #compareA, #compareM, #compareE {
-	background-color: #d9d9d9;
-}
 
 #defA, #defS, #defM, #defE {
 	
@@ -53,7 +50,7 @@ p.help {
 	font-size: 150%;
 }
 
-#ethnicity, #gender, #age, #special #snapshot #compare {
+#ethnicity, #gender, #age, #special #enrollPerc {
 	background-color: #e6f2ff;
 	border-color: black;
 }

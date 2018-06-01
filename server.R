@@ -335,6 +335,26 @@ shinyServer(function(input, output, session) {
   
   
   output$enrollPerc <- renderChart({
+    temp <- cohorts[cohorts$cohortyear == input$cohort & 
+                    cohorts$term == currentTerm(),]
     
+    percent <- temp %>% summarise('% Fulltime (12 Units)' = mean(units12) * 100, 
+                                  '% Fulltime (15 Units)' = mean(units15) * 100,
+                                  'Enrolled in English' = mean(English) * 100,
+                                  'Enrolled in math' = mean(Math) * 100)
+    percent <- gather(percent, 'variable', 'percent', 1:4)
+    
+    n1 <- nPlot(percent ~ variable,
+                data = percent,
+                type = "discreteBarChart")
+    
+    n1$yAxis(axisLabel = 'Proportion of UNDUPLICATED Students (%)', 
+             width = 50)
+    n1$chart(color = colors,
+             forceY = c(0, 100))
+    
+    # Display the chart
+    n1$addParams(dom = 'enrollPerc')
+    return(n1) 
   })
 })  
