@@ -391,4 +391,8 @@ shinyServer(function(input, output, session) {
     n1$addParams(dom = 'enrollPerc')
     return(n1) 
   })
+  
+  
+  # ENROLLMENT COMPARISON PLOT--------------------------------------------------
+
 })  
