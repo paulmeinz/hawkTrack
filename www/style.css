@@ -13,15 +13,6 @@ p.help {
 	text-align: center;
 }
 
-
-#defA, #defS, #defM, #defE {
-	
-	padding: 1% 1% 1% 1%;
-	color: white;
-	text-shadow: -1.5px 0 #000000,0 1.5px #000000,1.5px 0 #000000,0 -1.5px #000000;
-	font-size: 115%;
-}
-
 #welcome-top {
 	height: 200px;
 	text-shadow: -2px 0 #000000,0 2px #000000,2px 0 #000000,0 -2px #000000;
@@ -39,7 +30,7 @@ p.help {
 
 .welcome-text {
 	text-align: center;
-    height: 100%;
+        height: 100%;
 	color: white;
 	font-size: 200%;
 	font-weight: bold;
@@ -50,7 +41,12 @@ p.help {
 	font-size: 150%;
 }
 
-#ethnicity, #gender, #age, #special #enrollPerc {
+#ethnicity, #gender, #age, #special {
+	background-color: #e6f2ff;
+	border-color: black;
+}
+
+#enrollPerc {
 	background-color: #e6f2ff;
 	border-color: black;
 }
@@ -74,6 +70,13 @@ p.help {
 }
 
 #cohortSize {
+	font-size: 160%;
+	color: white;
+	text-align: center;
+	padding-top: 10px;
+}
+
+#enrollTitle {
 	font-size: 160%;
 	color: white;
 	text-align: center;

@@ -306,6 +306,7 @@ shinyServer(function(input, output, session) {
     n1$chart(color = colors,
              forceY = c(0, 100),
              tooltipContent = tooltip)
+    n1$set(title = 'Current enrollment snapshot')
     
     
     # Display the chart
@@ -319,6 +320,14 @@ shinyServer(function(input, output, session) {
 #                            CURRENT ENROLLMENT TAB
 
 ################################################################################
+  
+  
+  output$enrollTitle <- renderUI({
+    text <- paste('Current Enrollment Snapshot for the ', input$cohort,
+                  ' Cohort')  
+    
+    HTML(paste(text))
+  })
   
   
   observe({
@@ -335,23 +344,45 @@ shinyServer(function(input, output, session) {
   
   
   output$enrollPerc <- renderChart({
+    
+    # Filter based on input
     temp <- cohorts[cohorts$cohortyear == input$cohort & 
                     cohorts$term == currentTerm(),]
     
-    percent <- temp %>% summarise('% Fulltime (12 Units)' = mean(units12) * 100, 
+    # Calculate percentage variables
+    percent <- temp %>% summarise('% Enrolled' = mean(enrolled) * 100,
+                                  '% Fulltime (12 Units)' = mean(units12) * 100, 
                                   '% Fulltime (15 Units)' = mean(units15) * 100,
                                   'Enrolled in English' = mean(English) * 100,
                                   'Enrolled in math' = mean(Math) * 100)
-    percent <- gather(percent, 'variable', 'percent', 1:4)
+    percent <- gather(percent, 'variable', 'percent', 1:5)
     
+    headcount <- temp %>% summarise('% Enrolled' = sum(enrolled),
+                                    '% Fulltime (12 Units)' = sum(units12),
+                                    '% Fulltime (15 Units)' = sum(units15),
+                                    'Enrolled in English' = sum(English),
+                                    'Enrolled in math' = sum(Math))
+    headcount <- gather(headcount, 'variable', 'headcount', 1:5)
+    
+    total <- temp %>% summarise(total = n())
+    total <- total[1,1]
+    
+    percent <- percent %>% left_join(headcount)
+    percent <- data.frame(percent)
+    percent$total <- total
+    
+    # Percentage Plot
     n1 <- nPlot(percent ~ variable,
                 data = percent,
-                type = "discreteBarChart")
+                type = "discreteBarChart",
+                width = session$clientData[["output_plot5_width"]])
     
     n1$yAxis(axisLabel = 'Proportion of UNDUPLICATED Students (%)', 
              width = 50)
+    n1$xAxis(rotateLabels = -15)
     n1$chart(color = colors,
-             forceY = c(0, 100))
+             forceY = c(0, 100),
+             tooltipContent = makeDemoToolTip())
     
     # Display the chart
     n1$addParams(dom = 'enrollPerc')

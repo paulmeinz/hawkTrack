@@ -177,8 +177,13 @@ shinyUI(fluidPage(
           hidden(
             div(id = 'snapshot',
               fluidRow(
-                column(6, chartOutput('enrollPerc', lib = 'nvd3')),
-                column(6, chartOutput('enrollAVG', lib = 'nvd3'))
+                column(8, htmlOutput('enrollTitle'))
+              ),
+              fluidRow(
+                column(8, 
+                       chartOutput('enrollPerc', lib = 'nvd3'),
+                       plotOutput('plot5', height = '0px')
+                )
               )
             )
           ),
