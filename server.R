@@ -331,16 +331,19 @@ shinyServer(function(input, output, session) {
   
   
   observe({
-    if (input$affirmEnroll == 'No') {
+    if (input$affirmEnroll == 'No' | input$enroll == 'None') {
       showElement(id = 'snapshot', anim = TRUE)
       hideElement(id = 'compare', anim = TRUE)
     }
     
-    if (input$affirmEnroll == 'Yes') {
+    if (input$affirmEnroll == 'Yes' & input$enroll != 'None') {
       showElement(id = 'compare', anim = TRUE)
       hideElement(id = 'snapshot', anim = TRUE)
     }
   })
+  
+  
+  # SNAPSHOT Plot---------------------------------------------------------------
   
   
   output$enrollPerc <- renderChart({

@@ -33,7 +33,8 @@ affirm <- c('No', 'Yes')
 demos <- c(None = 'None', Age = 'age', Ethnicity = 'ethnicity', 
            'Foster Youth' = 'foster', Gender = 'gender', 
            'Reported Disability' = 'dsps', 'Veteran Status' = 'veteran')
-options <- c('None', 'Compare to previous cohorts', 'Compare to previous years')
+options <- c('Compare to previous years' = 'years', 
+             'Compare to previous cohorts' = 'cohorts')
 enrollment <- c('[Select One]' = 'None', 
                 'Has a Declared Major' = 'hasmajor', 
                 'Average Units' = 'units', 
@@ -189,7 +190,12 @@ shinyUI(fluidPage(
           ),
           hidden(
             div(id = 'compare',
-                textOutput('blah2'))
+              fluidRow(
+                column(8,
+                       chartOutput('enrollComp', lib = 'nvd3'),
+                       plotOutput('plot6'), height = '0px')
+              )
+            )
           )
           
           #chartOutput('enrollment', lib = 'nvd3'),
