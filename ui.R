@@ -193,9 +193,10 @@ shinyUI(fluidPage(
               fluidRow(
                 column(8,
                        chartOutput('enrollComp', lib = 'nvd3'),
-                       plotOutput('plot6'), height = '0px')
+                       plotOutput('plot6', height = '0px')
+                )
               )
-            )
+            )  
           )
           
           #chartOutput('enrollment', lib = 'nvd3'),
