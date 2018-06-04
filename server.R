@@ -23,6 +23,20 @@ shinyServer(function(input, output, session) {
 #                              REACTIVE UI
   
 ################################################################################
+ 
+  
+  # Get the current term for the selected cohort
+  currentTerm <- reactive({
+    term <- max(cohorts$term[cohorts$cohortyear == input$cohort])
+    term
+  })
+  
+  # Get the most recent term description
+  currentTermDesc <- reactive({
+    desc <- unique(cohorts$termdescr[cohorts$cohortyear == input$cohort &
+                                       cohorts$term == currentTerm()]
+    )
+  })
   
   
   # Reactive UI for enrollment tab----------------------------------------------
@@ -129,20 +143,7 @@ shinyServer(function(input, output, session) {
 
 ################################################################################
   
-  # Get the current term for the selected cohort
-  currentTerm <- reactive({
-    term <- max(cohorts$term[cohorts$cohortyear == input$cohort])
-    term
-  })
-  
-  
-  currentTermDesc <- reactive({
-    desc <- unique(cohorts$termdescr[cohorts$cohortyear == input$cohort &
-                                     cohorts$term == currentTerm()]
-            )
-  })
-  
-  
+
   output$cohortSize <- renderUI({
     data <- cohorts %>% filter(cohortyear == input$cohort & term == 1)
     den <- data %>% summarise(headcount = n())
