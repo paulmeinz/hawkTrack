@@ -403,6 +403,23 @@ shinyServer(function(input, output, session) {
   
   # ENROLLMENT COMPARISON PLOT--------------------------------------------------
 
-  
+  output$enrollCompPlt <- renderChart({
+    temp <- outcomeDisag(input$enroll,
+                         input$optionEnroll,
+                         input$cohort,
+                         input$definition,
+                         currentTerm(),
+                         input$equityEnroll,
+                         input$demoEnroll,
+                         data = cohorts)
+    
+    n1 <- nPlot(outcome ~ order,
+                data = temp,
+                type = "discreteBarChart",
+                width = session$clientData[["output_plot6_width"]])
+    
+    n1$addParams(dom = 'enrollCompPlt')
+    return(n1) 
+  })
   
 })  

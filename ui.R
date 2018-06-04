@@ -36,11 +36,10 @@ demos <- c(None = 'None', Age = 'age', Ethnicity = 'ethnicity',
 options <- c('Compare to previous years' = 'years', 
              'Compare to previous cohorts' = 'cohorts')
 enrollment <- c('[Select One]' = 'None', 
-                'Has a Declared Major' = 'hasmajor', 
                 'Average Units' = 'units', 
                 '% Enrolled' = 'enrolled',
-                'Enrolled Full Time (12 units)' = '12units',
-                'Enrolled Full Time (15 units)' = '15units',
+                'Enrolled Full Time (12 units)' = 'units12',
+                'Enrolled Full Time (15 units)' = 'units15',
                 'Enrolled in math' = 'Math',
                 'Enrolled in English' = 'English',
                 'Average Units Withdrawn' = 'wunits')
