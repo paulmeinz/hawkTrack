@@ -192,7 +192,7 @@ shinyUI(fluidPage(
             div(id = 'compare',
               fluidRow(
                 column(8,
-                       chartOutput('enrollComp', lib = 'nvd3'),
+                       chartOutput('enrollCompPlt', lib = 'nvd3'),
                        plotOutput('plot6', height = '0px')
                 )
               )
