@@ -30,10 +30,10 @@ shinyServer(function(input, output, session) {
   
   # toggle enrollment selections
   observe({
-    if(input$affirmEnroll == 'Yes') {toggle(id = 'enrollSelect', anim = TRUE)}
-    if(input$affirmEnroll == 'No') {
-      hideElement(id = 'enrollSelect', anim = TRUE)
-    }
+    if(input$affirmEnroll == 'Yes') 
+      {toggle(id = 'enrollSelect', anim = TRUE)}
+    if(input$affirmEnroll == 'No') 
+      {hideElement(id = 'enrollSelect', anim = TRUE)}
   })
   
   # toggle comparison options
@@ -55,7 +55,7 @@ shinyServer(function(input, output, session) {
   # resets
   observe({
     if(input$affirmEnroll == 'No') {reset('enroll')}
-    if(input$enroll == '[Select One]') {
+    if(input$enroll == 'None') {
       reset('demoEnroll')
       reset('optionEnroll')
     }
