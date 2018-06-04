@@ -64,9 +64,10 @@ shinyServer(function(input, output, session) {
   
   # render a message based on cohort
   output$cohort1 <- renderUI({
+    add <- paste(createTermString(currentTerm()), " (", currentTermDesc(),
+                  ")", sep = '')
     def <- names(definition)[definition == input$definition]
-    txt <- cohortMessage(input$cohort, def, 
-                         createTermString(currentTerm()))
+    txt <- cohortMessage(input$cohort, def, add)
     HTML(paste(txt))
   })
   
@@ -114,9 +115,10 @@ shinyServer(function(input, output, session) {
   
   # render a message based on cohort
   output$cohort2 <- renderUI({
+    add <- paste(createTermString(currentTerm()), " (", currentTermDesc(),
+                 ")", sep = '')
     def <- names(definition)[definition == input$definition]
-    txt <- cohortMessage(input$cohort, def, 
-                         createTermString(currentTerm()))
+    txt <- cohortMessage(input$cohort, def, add)
     HTML(paste(txt))
   })
 
@@ -127,10 +129,17 @@ shinyServer(function(input, output, session) {
 
 ################################################################################
   
-  
+  # Get the current term for the selected cohort
   currentTerm <- reactive({
     term <- max(cohorts$term[cohorts$cohortyear == input$cohort])
     term
+  })
+  
+  
+  currentTermDesc <- reactive({
+    desc <- unique(cohorts$termdescr[cohorts$cohortyear == input$cohort &
+                                     cohorts$term == currentTerm()]
+            )
   })
   
   
@@ -140,9 +149,7 @@ shinyServer(function(input, output, session) {
     names(data)[names(data) == input$definition] <- 'filt'
     num <- data %>% filter(!is.na(filt)) %>% summarise(headcount = n())
     msg <- paste('Displaying data for ', num[1, 1], ' out of ', den[1, 1],
-                 ' students in the ', input$cohort, ' fall cohort.',
-                 'This cohort is currently enrolled in their',
-                 createTermString(currentTerm()), ' term.')
+                 ' students in the ', input$cohort, ' fall cohort.')
     
     HTML(paste(msg))
   })
