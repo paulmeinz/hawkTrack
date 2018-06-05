@@ -497,8 +497,6 @@ shinyServer(function(input, output, session) {
                           floor(max(temp$outcome)) * 1.1),
                tooltipContent = makeDemoToolTip('equity'))
     }
-
-    print(enrollment)
     
     n1$addParams(dom = 'enrollCompPlt')
     return(n1) 
