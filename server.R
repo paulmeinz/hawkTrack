@@ -3,7 +3,7 @@ library(shiny)
 # Load data
 load('cohorts.rdata')
 
-# Choices for lookup
+# Cohort definition choices for lookup
 definition <- c('All' = 'emplid', 
                 'Two Year Path' = 'twoyear', 
                 'Three Year Path' = 'threeyear', 
@@ -76,6 +76,14 @@ shinyServer(function(input, output, session) {
       {showElement(id = 'enrollComp', anim = TRUE)}
     if(input$enroll == 'None') 
       {hideElement(id = 'enrollComp', anim = TRUE)}
+  })
+  
+  # toggle term selector
+  observe({
+    if(input$optionEnroll != 'years')
+    {showElement(id = 'enrollTerm', anim = TRUE)}
+    if(input$demoEnroll == 'years')
+    {hideElement(id = 'enrollTerm', anim = TRUE)}
   })
   
   # toggle equity selector

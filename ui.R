@@ -44,6 +44,7 @@ enrollment <- c('[Select One]' = 'None',
                 '% Enrolled in math' = 'Math',
                 '% Enrolled in English' = 'English')
 milestones <- c('[Select One]', 'some stuff', 'this other stuff')
+terms <- c('6th' = 6, '5th' = 5, '4th' = 4, '3rd' = 3, '2nd' = 2, '1st' = 1)
 
 
 ################################################################################
@@ -163,6 +164,11 @@ shinyUI(fluidPage(
             div(id = 'enrollComp', 
                 radioButtons('optionEnroll', 'Comparisons', options),
                 selectInput('demoEnroll', 'Select a demographic', demos)
+            )
+          ),
+          hidden(
+            div(id = 'enrollTerm',
+                selectInput('termEnroll', 'Select a comparison term', terms)
             )
           ),
           hidden(
