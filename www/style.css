@@ -76,7 +76,7 @@ p.help {
 	padding-top: 10px;
 }
 
-#enrollTitle {
+#enrollTitle, #enrollcompTitle {
 	font-size: 160%;
 	color: white;
 	text-align: center;

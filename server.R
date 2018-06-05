@@ -364,6 +364,20 @@ shinyServer(function(input, output, session) {
   })
   
   
+  output$enrollcompTitle <- renderUI({
+    if (input$optionEnroll == 'years') {
+      text <- paste('Trends for the ', input$cohort, ' Cohort')
+    }
+
+    if (input$optionEnroll == 'cohorts') {
+      text <- paste(input$cohort, ' Compared to Four Previous Cohorts ',
+                    'in the ', createTermString(input$termEnroll), ' Term')
+    }
+    
+    HTML(paste(text))
+  })
+  
+  
   observe({
     if (input$affirmEnroll == 'No' | input$enroll == 'None') {
       showElement(id = 'snapshot', anim = TRUE)
