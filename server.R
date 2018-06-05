@@ -10,6 +10,16 @@ definition <- c('All' = 'emplid',
                 'Certificate Path' = 'cert', 
                 'Deg/Trans/Cert Seeking' = 'degreeseek')
 
+# Lookup for comparison type
+compType <- c('None' = 'None', 
+              'units' = 'avg', 
+              'enrolled' = '%',
+              'units12' = '%',
+              'units15' = '%',
+              'Math' = '%',
+              'English' = '%',
+              'wunits' = 'avg')
+
 # Color blind palette
 colors <- c("#D55E00", "#0072B2", "#E69F00", "#009E73", "#999999", 
             "#F0E442", "#000000", "#56B4E9", "#CC79A7", "#999900") 
@@ -331,7 +341,8 @@ shinyServer(function(input, output, session) {
   
   
   output$enrollTitle <- renderUI({
-    text <- paste('Current Enrollment Snapshot for the ', input$cohort,
+    text <- paste(currentTermDesc(), ' Enrollment Snapshot for the ', 
+                  input$cohort,
                   ' Cohort')  
     
     HTML(paste(text))
@@ -404,6 +415,9 @@ shinyServer(function(input, output, session) {
   # ENROLLMENT COMPARISON PLOT--------------------------------------------------
 
   output$enrollCompPlt <- renderChart({
+    
+    type <- compType[input$enroll]
+    
     temp <- outcomeDisag(input$enroll,
                          input$optionEnroll,
                          input$cohort,
@@ -411,12 +425,26 @@ shinyServer(function(input, output, session) {
                          currentTerm(),
                          input$equityEnroll,
                          input$demoEnroll,
-                         data = cohorts)
+                         data = cohorts,
+                         type = type)
     
-    n1 <- nPlot(outcome ~ order,
-                data = temp,
-                type = "discreteBarChart",
-                width = session$clientData[["output_plot6_width"]])
+
+    
+    if (input$demoEnroll == 'None') {
+      n1 <- nPlot(outcome ~ order,
+                  data = temp,
+                  type = "discreteBarChart",
+                  width = session$clientData[["output_plot6_width"]])  
+    }
+    
+    if (input$demoEnroll != 'None') {
+      print(temp)
+      n1 <- nPlot(outcome ~ demo, group = "order", 
+                  data = temp,
+                  type = 'multiBarChart',
+                  width = session$clientData[["output_plot6_width"]])
+    }
+
     
     n1$addParams(dom = 'enrollCompPlt')
     return(n1) 
