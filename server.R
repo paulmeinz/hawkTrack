@@ -106,10 +106,8 @@ shinyServer(function(input, output, session) {
   
   # render a message based on cohort
   output$cohort1 <- renderUI({
-    add <- paste(createTermString(currentTerm()), " (", currentTermDesc(),
-                  ")", sep = '')
     def <- names(definition)[definition == input$definition]
-    txt <- cohortMessage(input$cohort, def, add)
+    txt <- cohortMessage(input$cohort, def)
     HTML(paste(txt))
   })
   
@@ -157,10 +155,8 @@ shinyServer(function(input, output, session) {
   
   # render a message based on cohort
   output$cohort2 <- renderUI({
-    add <- paste(createTermString(currentTerm()), " (", currentTermDesc(),
-                 ")", sep = '')
     def <- names(definition)[definition == input$definition]
-    txt <- cohortMessage(input$cohort, def, add)
+    txt <- cohortMessage(input$cohort, def)
     HTML(paste(txt))
   })
 
@@ -436,7 +432,6 @@ shinyServer(function(input, output, session) {
     
     type <- compType[input$enroll]
     type <- ifelse(input$equityEnroll == 'Yes', '%', type)
-    print(type)
     
     temp <- outcomeDisag(input$enroll,
                          input$optionEnroll,
