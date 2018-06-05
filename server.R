@@ -102,6 +102,7 @@ shinyServer(function(input, output, session) {
       reset('optionEnroll')
     }
     if(input$demoEnroll == 'None') {reset('equityEnroll')}
+    if(input$optionEnroll == 'years') {reset('termEnroll')}
   })
   
   # render a message based on cohort
@@ -437,7 +438,7 @@ shinyServer(function(input, output, session) {
                          input$optionEnroll,
                          input$cohort,
                          input$definition,
-                         currentTerm(),
+                         input$termEnroll,
                          input$equityEnroll,
                          input$demoEnroll,
                          data = cohorts,

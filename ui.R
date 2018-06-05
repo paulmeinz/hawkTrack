@@ -160,15 +160,17 @@ shinyUI(fluidPage(
                 selectInput('enroll', 'Select an enrollment metric', enrollment)
             )
           ),
+          
           hidden(
             div(id = 'enrollComp', 
                 radioButtons('optionEnroll', 'Comparisons', options),
+                hidden(
+                  div(id = 'enrollTerm',
+                      selectInput('termEnroll', 'Select a comparison term', 
+                                  terms)
+                  )
+                ),
                 selectInput('demoEnroll', 'Select a demographic', demos)
-            )
-          ),
-          hidden(
-            div(id = 'enrollTerm',
-                selectInput('termEnroll', 'Select a comparison term', terms)
             )
           ),
           hidden(
