@@ -438,12 +438,26 @@ shinyServer(function(input, output, session) {
     }
     
     if (input$demoEnroll != 'None') {
-      print(temp)
       n1 <- nPlot(outcome ~ demo, group = "order", 
                   data = temp,
                   type = 'multiBarChart',
                   width = session$clientData[["output_plot6_width"]])
     }
+    
+    yax <- c(0,100)
+    yax[yax == 100 & type != '%'] <- max(temp$outcome) + 3
+    
+    title <- 'Proportion of UNDUPLICATED Students (%)'
+    title[type != '%'] <- 'Average Units'
+    
+    tooltip <- ifelse(input$demoEnroll != 'None', 'non', 'bar')
+    
+    n1$yAxis(axisLabel = title, 
+             width = 50)
+    n1$xAxis(rotateLabels = -15)
+    n1$chart(color = colors,
+             forceY = yax,
+             tooltipContent = makeDemoToolTip(tooltip))
 
     
     n1$addParams(dom = 'enrollCompPlt')
