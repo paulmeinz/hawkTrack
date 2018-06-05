@@ -38,10 +38,10 @@ options <- c('Compare to previous years' = 'years',
 enrollment <- c('[Select One]' = 'None', 
                 'Average Units' = 'units', 
                 '% Enrolled' = 'enrolled',
-                'Enrolled Full Time (12 units)' = 'units12',
-                'Enrolled Full Time (15 units)' = 'units15',
-                'Enrolled in math' = 'Math',
-                'Enrolled in English' = 'English',
+                '% Enrolled Full Time (12 units)' = 'units12',
+                '% Enrolled Full Time (15 units)' = 'units15',
+                '% Enrolled in math' = 'Math',
+                '% Enrolled in English' = 'English',
                 'Average Units Withdrawn' = 'wunits')
 milestones <- c('[Select One]', 'some stuff', 'this other stuff')
 
@@ -190,7 +190,7 @@ shinyUI(fluidPage(
           hidden(
             div(id = 'compare',
               fluidRow(
-                column(8,
+                column(10,
                        chartOutput('enrollCompPlt', lib = 'nvd3'),
                        plotOutput('plot6', height = '0px')
                 )

@@ -20,6 +20,16 @@ compType <- c('None' = 'None',
               'English' = '%',
               'wunits' = 'avg')
 
+# Enrollment Lookup
+enrollment <- c('[Select One]' = 'None', 
+                'Average Units' = 'units', 
+                '% Enrolled' = 'enrolled',
+                '% Enrolled Full Time (12 units)' = 'units12',
+                '% Enrolled Full Time (15 units)' = 'units15',
+                '% Enrolled in math' = 'Math',
+                '% Enrolled in English' = 'English',
+                'Average Units Withdrawn' = 'wunits')
+
 # Color blind palette
 colors <- c("#D55E00", "#0072B2", "#E69F00", "#009E73", "#999999", 
             "#F0E442", "#000000", "#56B4E9", "#CC79A7", "#999900") 
@@ -417,6 +427,8 @@ shinyServer(function(input, output, session) {
   output$enrollCompPlt <- renderChart({
     
     type <- compType[input$enroll]
+    type <- ifelse(input$equityEnroll == 'Yes', '%', type)
+    print(type)
     
     temp <- outcomeDisag(input$enroll,
                          input$optionEnroll,
@@ -428,37 +440,65 @@ shinyServer(function(input, output, session) {
                          data = cohorts,
                          type = type)
     
-
-    
-    if (input$demoEnroll == 'None') {
-      n1 <- nPlot(outcome ~ order,
-                  data = temp,
-                  type = "discreteBarChart",
-                  width = session$clientData[["output_plot6_width"]])  
-    }
-    
-    if (input$demoEnroll != 'None') {
-      n1 <- nPlot(outcome ~ demo, group = "order", 
-                  data = temp,
-                  type = 'multiBarChart',
-                  width = session$clientData[["output_plot6_width"]])
-    }
     
     yax <- c(0,100)
     yax[yax == 100 & type != '%'] <- max(temp$outcome) + 3
     
-    title <- 'Proportion of UNDUPLICATED Students (%)'
-    title[type != '%'] <- 'Average Units'
+    title <- names(enrollment)[enrollment == input$enroll]
     
-    tooltip <- ifelse(input$demoEnroll != 'None', 'non', 'bar')
-    
-    n1$yAxis(axisLabel = title, 
-             width = 50)
-    n1$xAxis(rotateLabels = -15)
-    n1$chart(color = colors,
-             forceY = yax,
-             tooltipContent = makeDemoToolTip(tooltip))
+    if (input$demoEnroll == 'None') {
+      
+      tooltip <- ifelse(type == '%', 'bar', 'baravg')
+      
+      n1 <- nPlot(outcome ~ order,
+                  data = temp,
+                  type = "discreteBarChart",
+                  width = session$clientData[["output_plot6_width"]]) 
 
+      n1$yAxis(axisLabel = title, 
+               width = 50)
+      n1$chart(color = colors,
+               forceY = yax,
+               tooltipContent = makeDemoToolTip(tooltip))
+    }
+    
+    if (input$demoEnroll != 'None' & input$equityEnroll == 'No') {
+      
+      tooltip <- ifelse(type == '%', 'demo', 'demoavg')
+      
+      n1 <- nPlot(outcome ~ demo, group = "order", 
+                  data = temp,
+                  type = 'multiBarChart',
+                  width = session$clientData[["output_plot6_width"]])
+      
+      n1$yAxis(axisLabel = title, 
+               width = 50)
+      n1$xAxis(rotateLabels = -25)
+      n1$chart(color = colors,
+               showControls = F,
+               reduceXTicks = F,
+               forceY = yax,
+               tooltipContent = makeDemoToolTip(tooltip))
+    }
+    
+    if (input$demoEnroll != 'None' & input$equityEnroll == 'Yes') {
+      n1 <- nPlot(outcome ~ demo, group = "order", 
+                  data = temp,
+                  type = 'multiBarChart',
+                  width = session$clientData[["output_plot6_width"]])
+      
+      n1$yAxis(axisLabel = title, 
+               width = 50)
+      n1$xAxis(rotateLabels = -25)
+      n1$chart(color = colors,
+               showControls = F,
+               reduceXTicks = F,
+               forceY = c(floor(min(temp$outcome)) * .9, 
+                          floor(max(temp$outcome)) * 1.1),
+               tooltipContent = makeDemoToolTip('equity'))
+    }
+
+    print(enrollment)
     
     n1$addParams(dom = 'enrollCompPlt')
     return(n1) 
