@@ -127,9 +127,9 @@ shinyServer(function(input, output, session) {
   
   # toggle comparison options
   observe({
-    if(input$achieve != '[Select One]') 
+    if(input$achieve != 'None') 
     {showElement(id = 'achieveComp', anim = TRUE)}
-    if(input$achieve == '[Select One]') 
+    if(input$achieve == 'None') 
     {hideElement(id = 'achieveComp', anim = TRUE)}
   })
   

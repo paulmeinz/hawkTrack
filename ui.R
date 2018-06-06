@@ -217,9 +217,6 @@ shinyUI(fluidPage(
               )
             )  
           )
-          
-          #chartOutput('enrollment', lib = 'nvd3'),
-          #htmlOutput('defenr')
         )
       )
     ),
@@ -238,7 +235,7 @@ shinyUI(fluidPage(
           ),
           hidden(
             div(id = 'achieveSelect',
-                selectInput('achieve', 'Select a mileston', milestones
+                selectInput('achieve', 'Select a milestone', milestones
                 )
             )
           ),
@@ -257,8 +254,32 @@ shinyUI(fluidPage(
           )
         ),
         mainPanel(
-          chartOutput('achieve', lib = 'nvd3'),
-          htmlOutput('defach')
+          hidden(
+            div(id = 'achsnapshot',
+                fluidRow(
+                  column(8, htmlOutput('achTitle'))
+                ),
+                fluidRow(
+                  column(8, 
+                         chartOutput('achPerc', lib = 'nvd3'),
+                         plotOutput('plot7', height = '0px')
+                  )
+                )
+            )
+          ),
+          hidden(
+            div(id = 'achcompare',
+                fluidRow(
+                  column(8, htmlOutput('achcompTitle'))
+                ),  
+                fluidRow(
+                  column(8,
+                         chartOutput('achCompPlt', lib = 'nvd3'),
+                         plotOutput('plot8', height = '0px')
+                  )
+                )
+            )  
+          )
         )
       )
     )  
