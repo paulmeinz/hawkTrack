@@ -527,4 +527,47 @@ shinyServer(function(input, output, session) {
     return(n1) 
   })
   
+  
+  ################################################################################
+  
+  #                            Achievements TAB
+  
+  ################################################################################
+  
+  
+  output$achTitle <- renderUI({
+    text <- paste(currentTermDesc(), ' Enrollment Snapshot for the ', 
+                  input$cohort,
+                  ' Cohort')  
+    
+    HTML(paste(text))
+  })
+  
+  
+  output$achcompTitle <- renderUI({
+    if (input$optionAchieve == 'years') {
+      text <- paste('Trends for the ', input$cohort, ' Cohort')
+    }
+    
+    if (input$optionAchieve == 'cohorts') {
+      text <- paste(input$cohort, ' Compared to Four Previous Cohorts ',
+                    'in the ', createTermString(input$termAchieve), ' Term')
+    }
+    
+    HTML(paste(text))
+  })
+  
+  
+  observe({
+    if (input$affirmAchieve == 'No' | input$achieve == 'None') {
+      showElement(id = 'achsnapshot', anim = TRUE)
+      hideElement(id = 'achcompare', anim = TRUE)
+    }
+    
+    if (input$affirmAchieve == 'Yes' & input$achieve != 'None') {
+      showElement(id = 'achcompare', anim = TRUE)
+      hideElement(id = 'achsnapshot', anim = TRUE)
+    }
+  })  
+  
 })  
