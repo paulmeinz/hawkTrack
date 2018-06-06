@@ -407,6 +407,10 @@ shinyServer(function(input, output, session) {
     temp <- cohorts[cohorts$cohortyear == input$cohort & 
                     cohorts$term == currentTerm(),]
     
+    # Filter cohort definition
+    names(temp)[names(temp) == input$definition] <- 'filt'
+    temp <- temp[!is.na(temp$filt),]
+    
     # Calculate percentage variables
     percent <- temp %>% summarise('% Enrolled' = mean(enrolled) * 100,
                                   '% Fulltime (12 Units)' = mean(units12) * 100, 
@@ -536,7 +540,7 @@ shinyServer(function(input, output, session) {
   
   
   output$achTitle <- renderUI({
-    text <- paste(currentTermDesc(), ' Enrollment Snapshot for the ', 
+    text <- paste(currentTermDesc(), ' Achievement Snapshot for the ', 
                   input$cohort,
                   ' Cohort')  
     
@@ -568,6 +572,69 @@ shinyServer(function(input, output, session) {
       showElement(id = 'achcompare', anim = TRUE)
       hideElement(id = 'achsnapshot', anim = TRUE)
     }
-  })  
+  })
+  
+  # SNAPSHOT Plot---------------------------------------------------------------
+  
+  
+  output$achPerc <- renderChart({
+    
+    # Filter based on input
+    temp <- cohorts[cohorts$cohortyear == input$cohort & 
+                      cohorts$term == currentTerm(),]
+    
+    # Filter cohort definition
+    names(temp)[names(temp) == input$definition] <- 'filt'
+    temp <- temp[!is.na(temp$filt),]
+    
+    # Calculate percentage variables
+    percent <- temp %>% 
+      summarise('% Comp Ed Plan' = mean(comprehensive) * 100,
+                '% Transfer English' = mean(cumTransEnglish) * 100, 
+                '% Transfer Math' = mean(cumTransMath) * 100,
+                '% 15 Transfer Units' = mean(mile15) * 100,
+                '% 30 Transfer Units' = mean(mile30) * 100,
+                '% 45 Transfer Units' = mean(mile45) * 100,
+                '% 60 Transfer Units' = mean(mile60) * 100,
+                '% Completion' = mean(compcum) * 100)
+    percent <- gather(percent, 'variable', 'percent', 1:8)
+    
+    headcount <- temp %>% 
+      summarise('% Comp Ed Plan' = sum(comprehensive),
+                '% Transfer English' = sum(cumTransEnglish), 
+                '% Transfer Math' = sum(cumTransMath),
+                '% 15 Transfer Units' = sum(mile15),
+                '% 30 Transfer Units' = sum(mile30),
+                '% 45 Transfer Units' = sum(mile45),
+                '% 60 Transfer Units' = sum(mile60),
+                '% Completion' = sum(compcum))
+
+    headcount <- gather(headcount, 'variable', 'headcount', 1:8)
+    
+    total <- temp %>% summarise(total = n())
+    total <- total[1,1]
+    
+    percent <- percent %>% left_join(headcount)
+    percent <- data.frame(percent)
+    percent$total <- total
+    
+    # Percentage Plot
+    n1 <- nPlot(percent ~ variable,
+                data = percent,
+                type = "discreteBarChart",
+                width = session$clientData[["output_plot5_width"]])
+    
+    n1$yAxis(axisLabel = 'Proportion of UNDUPLICATED Students (%)', 
+             width = 50)
+    n1$xAxis(rotateLabels = -15)
+    n1$chart(color = colors,
+             forceY = c(0, 100),
+             tooltipContent = makeDemoToolTip())
+    
+    # Display the chart
+    n1$addParams(dom = 'achPerc')
+    return(n1) 
+  })
+  
   
 })  
