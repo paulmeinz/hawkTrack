@@ -18,7 +18,15 @@ compType <- c('None' = 'None',
               'units15' = '%',
               'Math' = '%',
               'English' = '%',
-              'wunits' = 'avg')
+              'wunits' = 'avg',
+              'comprehensive' = '%',
+              'cumTransEnglish' = '%',
+              'cumTransMath' = '%',
+              'mile15' = '%',
+              'mile30' = '%',
+              'mile45' = '%',
+              'mile60' = '%',
+              'compcum' = '%')
 
 # Enrollment Lookup
 enrollment <- c('[Select One]' = 'None', 
@@ -29,6 +37,18 @@ enrollment <- c('[Select One]' = 'None',
                 '% Enrolled in math' = 'Math',
                 '% Enrolled in English' = 'English',
                 'Average Units Withdrawn' = 'wunits')
+
+# Mileston Lookup
+milestones <- c('[Select One]' = 'None',
+                '% Comp Ed Plan' = 'comprehensive',
+                '% Transfer English' = 'cumTransEnglish',
+                '% Transfer Math' = 'cumTransMath',
+                '% 15 Transfer Units' = 'mile15',
+                '% 30 Transfer Units' = 'mile30',
+                '% 45 Transfer Units' = 'mile45',
+                '% 60 Transfer Units' = 'mile60',
+                '% Completion' = 'compcum'
+)
 
 # Color blind palette
 colors <- c("#D55E00", "#0072B2", "#E69F00", "#009E73", "#999999", 
@@ -633,6 +653,86 @@ shinyServer(function(input, output, session) {
     
     # Display the chart
     n1$addParams(dom = 'achPerc')
+    return(n1) 
+  })
+  
+  
+  # Achievement COMPARISON PLOT--------------------------------------------------
+  
+  output$achCompPlt <- renderChart({
+    
+    type <- compType[input$achieve]
+    type <- ifelse(input$equityAchieve == 'Yes', '%', type)
+    
+    temp <- outcomeDisag(input$achieve,
+                         input$optionAchieve,
+                         input$cohort,
+                         input$definition,
+                         input$termAchieve,
+                         input$equityAchieve,
+                         input$demoAchieve,
+                         data = cohorts,
+                         type = type)
+    
+    
+    yax <- c(0,100)
+    yax[yax == 100 & type != '%'] <- max(temp$outcome) + 3
+    
+    title <- names(milestones)[milestones == input$milestones]
+    
+    if (input$demoAchieve == 'None') {
+      
+      tooltip <- ifelse(type == '%', 'bar', 'baravg')
+      
+      n1 <- nPlot(outcome ~ order,
+                  data = temp,
+                  type = "discreteBarChart",
+                  width = session$clientData[["output_plot6_width"]]) 
+      
+      n1$yAxis(axisLabel = title, 
+               width = 50)
+      n1$chart(color = colors,
+               forceY = yax,
+               tooltipContent = makeDemoToolTip(tooltip))
+    }
+    
+    if (input$demoAchieve != 'None' & input$equityAchieve == 'No') {
+      
+      tooltip <- ifelse(type == '%', 'demo', 'demoavg')
+      
+      n1 <- nPlot(outcome ~ demo, group = "order", 
+                  data = temp,
+                  type = 'multiBarChart',
+                  width = session$clientData[["output_plot6_width"]])
+      
+      n1$yAxis(axisLabel = title, 
+               width = 50)
+      n1$xAxis(rotateLabels = -25)
+      n1$chart(color = colors,
+               showControls = F,
+               reduceXTicks = F,
+               forceY = yax,
+               tooltipContent = makeDemoToolTip(tooltip))
+    }
+    
+    if (input$demoAchieve != 'None' & input$equityAchieve == 'Yes') {
+      n1 <- nPlot(outcome ~ demo, group = "order", 
+                  data = temp,
+                  type = 'multiBarChart',
+                  width = session$clientData[["output_plot6_width"]])
+      
+      n1$yAxis(axisLabel = title, 
+               width = 50)
+      n1$xAxis(rotateLabels = -25)
+      n1$chart(color = colors,
+               showControls = F,
+               reduceXTicks = F,
+               forceY = c(floor(min(temp$outcome)) * .9, 
+                          floor(max(temp$outcome)) * 1.1),
+               tooltipContent = makeDemoToolTip('equity'))
+    }
+    
+    n1$addParams(dom = 'achCompPlt')
     return(n1) 
   })
   
