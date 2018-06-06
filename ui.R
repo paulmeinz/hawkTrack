@@ -43,7 +43,16 @@ enrollment <- c('[Select One]' = 'None',
                 '% Enrolled Full Time (15 units)' = 'units15',
                 '% Enrolled in math' = 'Math',
                 '% Enrolled in English' = 'English')
-milestones <- c('[Select One]', 'some stuff', 'this other stuff')
+milestones <- c('[Select One]' = 'None',
+                'Comprehensive Ed Plan' = 'comprehensive',
+                'Transfer English' = 'cumTransEnglish',
+                'Transfer Math' = 'cumTransMath',
+                '15 Transfer Units' = 'mile15',
+                '30 Transfer Units' = 'mile30',
+                '45 Transfer Units' = 'mile45',
+                '60 Transfer Units' = 'mile60',
+                'Completion' = 'compcum'
+                )
 terms <- c('6th' = 6, '5th' = 5, '4th' = 4, '3rd' = 3, '2nd' = 2, '1st' = 1)
 
 
