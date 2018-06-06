@@ -133,6 +133,13 @@ shinyServer(function(input, output, session) {
     {hideElement(id = 'achieveComp', anim = TRUE)}
   })
   
+  # toggle term selector
+  observe({
+    if(input$optionAchieve != 'years')
+    {showElement(id = 'achieveTerm', anim = TRUE)}
+    if(input$demoAchieve == 'years')
+    {hideElement(id = 'achieveTerm', anim = TRUE)}
+  })
   
   # toggle equity selector
   observe({
