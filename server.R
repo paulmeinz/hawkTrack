@@ -87,12 +87,12 @@ shinyServer(function(input, output, session) {
     updateSelectInput(session, 'termEnroll',
                       label = 'Select a comparison term',
                       choices = terms,
-                      selected = max(terms))
+                      selected = 1)
 
     updateSelectInput(session, 'termAchieve',
                       label = 'Select a comparison term',
                       choices = terms,
-                      selected = max(terms))
+                      selected = 1)
   })
 
   # Reactive UI for enrollment tab----------------------------------------------
@@ -118,7 +118,7 @@ shinyServer(function(input, output, session) {
   observe({
     if(input$optionEnroll != 'years')
     {showElement(id = 'enrollTerm', anim = TRUE)}
-    if(input$demoEnroll == 'years')
+    if(input$optionEnroll == 'years')
     {hideElement(id = 'enrollTerm', anim = TRUE)}
   })
 
@@ -173,7 +173,7 @@ shinyServer(function(input, output, session) {
   observe({
     if(input$optionAchieve != 'years')
     {showElement(id = 'achieveTerm', anim = TRUE)}
-    if(input$demoAchieve == 'years')
+    if(input$optionAchieve == 'years')
     {hideElement(id = 'achieveTerm', anim = TRUE)}
   })
 
