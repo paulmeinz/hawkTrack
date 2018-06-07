@@ -21,22 +21,22 @@ crcLink <- "https://researchapps.crc.losrios.edu/CRC_Research_Data_Request_Form"
 # Cohort Selection--------------------------------------------------------------
 cohort <- unique(cohorts$cohortyear[cohorts$term == 1])
 cohort <- cohort[order(cohort, decreasing = TRUE)]
-definition <- c('All' = 'emplid', 
-                'Two Year Path' = 'twoyear', 
-                'Three Year Path' = 'threeyear', 
-                'Certificate Path' = 'cert', 
+definition <- c('All' = 'emplid',
+                'Two Year Path' = 'twoyear',
+                'Three Year Path' = 'threeyear',
+                'Certificate Path' = 'cert',
                 'Deg/Trans/Cert Seeking' = 'degreeseek')
 
 
 # Current Enrollment/Milestone Achievement--------------------------------------
 affirm <- c('No', 'Yes')
-demos <- c(None = 'None', Age = 'age', Ethnicity = 'ethnicity', 
-           'Foster Youth' = 'foster', Gender = 'gender', 
+demos <- c(None = 'None', Age = 'age', Ethnicity = 'ethnicity',
+           'Foster Youth' = 'foster', Gender = 'gender',
            'Reported Disability' = 'dsps', 'Veteran Status' = 'veteran')
-options <- c('Look at trends for this cohort' = 'years', 
+options <- c('Look at trends for this cohort' = 'years',
              'Compare to previous cohorts' = 'cohorts')
-enrollment <- c('[Select One]' = 'None', 
-                'Average Units' = 'units', 
+enrollment <- c('[Select One]' = 'None',
+                'Average Units' = 'units',
                 'Average Units Withdrawn' = 'wunits',
                 '% Enrolled' = 'enrolled',
                 '% Enrolled Full Time (12 units)' = 'units12',
@@ -65,13 +65,13 @@ terms <- c('6th' = 6, '5th' = 5, '4th' = 4, '3rd' = 3, '2nd' = 2, '1st' = 1)
 
 shinyUI(fluidPage(
   theme = 'style.css',
-  
+
   useShinyjs(),
-  
+
 
   # Welcome page----------------------------------------------------------------
-  
-  
+
+
   navbarPage(title = 'CRC HawkTrack',
     tabPanel(title = 'Welcome',
       fluidRow(id = 'welcome-top',
@@ -92,7 +92,7 @@ shinyUI(fluidPage(
                         a(href = 'mailto:CRC-Research@crc.losrios.edu',
                           style = 'color: #ffffff',
                           "CRC-Research@crc.losrios.edu"))
-                      
+
                ),
                column(6,
                       p(class = 'welcome-text', id = 'specific',
@@ -101,7 +101,7 @@ shinyUI(fluidPage(
                         "additional data ",
                         a(href = crcLink, style = 'color:#ffffff',
                           target= '_blank',
-                          "CLICK HERE")) 
+                          "CLICK HERE"))
                )
       ),
       fluidRow(id = 'copyright',
@@ -112,18 +112,18 @@ shinyUI(fluidPage(
                )
       )
     ),
-    
+
 
     # Cohort selection page-----------------------------------------------------
-    
-    
+
+
     tabPanel(title = 'Select a Cohort',
       verticalLayout(
         fluidRow(
           column(4,
             inputPanel(
               selectInput('cohort', 'Pick a cohort', cohort),
-              selectInput('definition', 'Select a cohort definition', 
+              selectInput('definition', 'Select a cohort definition',
                           definition)
             )
           ),
@@ -131,7 +131,7 @@ shinyUI(fluidPage(
           column(4, htmlOutput('def'))
         ),
         fluidRow(
-          column(3, 
+          column(3,
                  chartOutput('ethnicity', lib = 'nvd3'),
                  plotOutput('plot1', height = '0px')
           ),
@@ -150,11 +150,11 @@ shinyUI(fluidPage(
         )
       )
     ),
-    
-    
+
+
     # Cohort Enrollment page----------------------------------------------------
-    
-    
+
+
     tabPanel(title = 'Cohort Enrollment',
       sidebarLayout(
         sidebarPanel(
@@ -169,14 +169,14 @@ shinyUI(fluidPage(
                 selectInput('enroll', 'Select an enrollment metric', enrollment)
             )
           ),
-          
+
           hidden(
-            div(id = 'enrollComp', 
+            div(id = 'enrollComp',
                 radioButtons('optionEnroll', 'Comparisons', options),
                 hidden(
                   div(id = 'enrollTerm',
-                      selectInput('termEnroll', 'Select a comparison term', 
-                                  terms)
+                      selectInput('termEnroll', 'Select a comparison term',
+                                  terms, selected = 1)
                   )
                 ),
                 selectInput('demoEnroll', 'Select a demographic', demos)
@@ -187,7 +187,7 @@ shinyUI(fluidPage(
                 radioButtons('equityEnroll', 'Evaluate equity?', affirm,
                              inline = TRUE
                 )
-            )  
+            )
           )
         ),
         mainPanel(
@@ -197,7 +197,7 @@ shinyUI(fluidPage(
                 column(8, htmlOutput('enrollTitle'))
               ),
               fluidRow(
-                column(8, 
+                column(8,
                        chartOutput('enrollPerc', lib = 'nvd3'),
                        plotOutput('plot5', height = '0px')
                 )
@@ -208,22 +208,22 @@ shinyUI(fluidPage(
             div(id = 'compare',
               fluidRow(
                   column(8, htmlOutput('enrollcompTitle'))
-              ),  
+              ),
               fluidRow(
                 column(8,
                        chartOutput('enrollCompPlt', lib = 'nvd3'),
                        plotOutput('plot6', height = '0px')
                 )
               )
-            )  
+            )
           )
         )
       )
     ),
-    
-    
+
+
     # Cohort milestones page----------------------------------------------------
-    
+
     tabPanel(title = 'Cohort Achievements',
       sidebarLayout(
         sidebarPanel(
@@ -240,12 +240,12 @@ shinyUI(fluidPage(
             )
           ),
           hidden(
-            div(id = 'achieveComp', 
+            div(id = 'achieveComp',
               radioButtons('optionAchieve', 'Comparisons', options),
               hidden(
                 div(id = 'achieveTerm',
-                    selectInput('termAchieve', 'Select a comparison term', 
-                                terms)
+                    selectInput('termAchieve', 'Select a comparison term',
+                                terms, selected = 1)
                 )
               ),
               selectInput('demoAchieve', 'Select a demographic', demos)
@@ -256,7 +256,7 @@ shinyUI(fluidPage(
               radioButtons('equityAchieve', 'Evaluate equity?', affirm,
                            inline = TRUE
               )
-            )  
+            )
           )
         ),
         mainPanel(
@@ -266,7 +266,7 @@ shinyUI(fluidPage(
                   column(8, htmlOutput('achTitle'))
                 ),
                 fluidRow(
-                  column(8, 
+                  column(8,
                          chartOutput('achPerc', lib = 'nvd3'),
                          plotOutput('plot7', height = '0px')
                   )
@@ -277,22 +277,22 @@ shinyUI(fluidPage(
             div(id = 'achcompare',
                 fluidRow(
                   column(8, htmlOutput('achcompTitle'))
-                ),  
+                ),
                 fluidRow(
                   column(8,
                          chartOutput('achCompPlt', lib = 'nvd3'),
                          plotOutput('plot8', height = '0px')
                   )
                 )
-            )  
+            )
           )
         )
       )
-    )  
-  )  
+    )
+  )
 
-    
+
 ))
-             
-  
-  
+
+
+
