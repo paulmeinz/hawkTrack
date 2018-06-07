@@ -94,6 +94,12 @@ shinyServer(function(input, output, session) {
                       choices = terms,
                       selected = 1)
   })
+  
+  # Reset enrollment/achieve tabs if a cohort is selected
+  observeEvent(input$cohort, {
+    reset('affirmEnroll')
+    reset('affirmAchieve')
+  })
 
   # Reactive UI for enrollment tab----------------------------------------------
 
