@@ -414,7 +414,7 @@ shinyServer(function(input, output, session) {
 
     if (input$optionEnroll == 'cohorts') {
       text <- paste(input$cohort, ' Compared to Four Previous Cohorts ',
-                    'in the ', createTermString(input$termEnroll), ' Term')
+                    'in their ', createTermString(input$termEnroll), ' Term')
     }
 
     HTML(paste(text))
@@ -591,7 +591,7 @@ shinyServer(function(input, output, session) {
 
     if (input$optionAchieve == 'cohorts') {
       text <- paste(input$cohort, ' Compared to Four Previous Cohorts ',
-                    'in the ', createTermString(input$termAchieve), ' Term')
+                    'in their ', createTermString(input$termAchieve), ' Term')
     }
 
     HTML(paste(text))
