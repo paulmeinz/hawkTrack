@@ -664,7 +664,7 @@ shinyServer(function(input, output, session) {
     n1 <- nPlot(percent ~ variable,
                 data = percent,
                 type = "discreteBarChart",
-                width = session$clientData[["output_plot5_width"]])
+                width = session$clientData[["output_plot7_width"]])
 
     n1$yAxis(axisLabel = 'Proportion of UNDUPLICATED Students (%)',
              width = 50)
@@ -709,7 +709,7 @@ shinyServer(function(input, output, session) {
       n1 <- nPlot(outcome ~ order,
                   data = temp,
                   type = "discreteBarChart",
-                  width = session$clientData[["output_plot6_width"]])
+                  width = session$clientData[["output_plot8_width"]])
 
       n1$yAxis(axisLabel = title,
                width = 50)
@@ -725,7 +725,7 @@ shinyServer(function(input, output, session) {
       n1 <- nPlot(outcome ~ demo, group = "order",
                   data = temp,
                   type = 'multiBarChart',
-                  width = session$clientData[["output_plot6_width"]])
+                  width = session$clientData[["output_plot8_width"]])
 
       n1$yAxis(axisLabel = title,
                width = 50)
@@ -741,7 +741,7 @@ shinyServer(function(input, output, session) {
       n1 <- nPlot(outcome ~ demo, group = "order",
                   data = temp,
                   type = 'multiBarChart',
-                  width = session$clientData[["output_plot6_width"]])
+                  width = session$clientData[["output_plot8_width"]])
 
       n1$yAxis(axisLabel = title,
                width = 50)
