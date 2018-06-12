@@ -332,6 +332,8 @@ shinyServer(function(input, output, session) {
 
   output$special <- renderChart ({
     age <- cohortSelectData(input$cohort, input$definition, 'age', cohorts)
+    firstgen <- cohortSelectData(input$cohort, input$definition, 'firstgen', 
+                                 cohorts)
     dsps <- cohortSelectData(input$cohort, input$definition, 'dsps', cohorts)
     veteran <- cohortSelectData(input$cohort, input$definition, 'veteran',
                                 cohorts)
@@ -339,15 +341,17 @@ shinyServer(function(input, output, session) {
                                cohorts)
 
     names(age)[1] <- 'demo'
+    names(firstgen)[1] <- 'demo'
     names(dsps)[1] <- 'demo'
     names(veteran)[1] <- 'demo'
     names(foster)[1] <- 'demo'
     
-    plotSet <- data.frame(rbind(age, foster, veteran, dsps))
+    plotSet <- data.frame(rbind(age, firstgen, foster, veteran, dsps))
     plotSet[is.na(plotSet)] <- 0
     plotSet <- plotSet %>% filter(demo %in% c('Foster Youth', 'Veteran',
                                               'Reported Disability',
-                                              '24 and younger'))
+                                              '24 and younger',
+                                              'First Generation'))
 
     n1 <- nPlot(percent ~ demo,
                 data = plotSet,

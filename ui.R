@@ -31,6 +31,7 @@ definition <- c('All' = 'emplid',
 # Current Enrollment/Milestone Achievement--------------------------------------
 affirm <- c('No', 'Yes')
 demos <- c(None = 'None', Age = 'age', Ethnicity = 'ethnicity',
+           'First Generation' = 'firstgen',
            'Foster Youth' = 'foster', Gender = 'gender',
            'Reported Disability' = 'dsps', 'Veteran Status' = 'veteran')
 options <- c('Look at trends for this cohort' = 'years',
