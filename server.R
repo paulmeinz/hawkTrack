@@ -197,7 +197,7 @@ shinyServer(function(input, output, session) {
   # resets
   observe({
     if(input$affirmAchieve == 'No') {reset('achieve')}
-    if(input$achieve == '[Select One]') {
+    if(input$achieve == 'None') {
       reset('demoAchieve')
       reset('optionAchieve')
     }
