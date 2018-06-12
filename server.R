@@ -553,7 +553,8 @@ shinyServer(function(input, output, session) {
                reduceXTicks = F,
                forceY = c(floor(min(temp$outcome)) * .9,
                           floor(max(temp$outcome)) * 1.1),
-               tooltipContent = makeDemoToolTip('equity'))
+               tooltipContent = makeDemoToolTip('equity',
+                                                compType[input$enroll]))
     }
 
     n1$addParams(dom = 'enrollCompPlt')
@@ -738,7 +739,8 @@ shinyServer(function(input, output, session) {
                reduceXTicks = F,
                forceY = c(floor(min(temp$outcome)) * .9,
                           floor(max(temp$outcome)) * 1.1),
-               tooltipContent = makeDemoToolTip('equity'))
+               tooltipContent = makeDemoToolTip('equity', 
+                                                compType[input$achieve]))
     }
 
     n1$addParams(dom = 'achCompPlt')
