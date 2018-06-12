@@ -45,6 +45,7 @@ enrollment <- c('[Select One]' = 'None',
                 '% Enrolled in math' = 'Math',
                 '% Enrolled in English' = 'English')
 milestones <- c('[Select One]' = 'None',
+                'Averge GPA' = 'gpa',
                 '% Comp Ed Plan' = 'comprehensive',
                 '% Transfer English' = 'cumTransEnglish',
                 '% Transfer Math' = 'cumTransMath',
