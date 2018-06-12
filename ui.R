@@ -131,19 +131,15 @@ shinyUI(fluidPage(
           column(4, htmlOutput('def'))
         ),
         fluidRow(
-          column(3,
+          column(4,
                  chartOutput('ethnicity', lib = 'nvd3'),
                  plotOutput('plot1', height = '0px')
           ),
-          column(3,
+          column(4,
                  chartOutput('gender', lib = 'nvd3'),
                  plotOutput('plot2', height = '0px')
           ),
-          column(3,
-                 chartOutput('age', lib = 'nvd3'),
-                 plotOutput('plot3', height = '0px')
-          ),
-          column(3,
+          column(4,
                  chartOutput('special', lib = 'nvd3'),
                  plotOutput('plot4', height = '0px')
           )

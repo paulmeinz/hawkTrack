@@ -330,36 +330,6 @@ shinyServer(function(input, output, session) {
   })
 
 
-  output$age <- renderChart({
-
-    # Pull selected cohort data
-    plotSet <- cohortSelectData(input$cohort, input$definition, 'age',
-                                cohorts)
-
-    form <- formula(paste('percent ~', 'age'))
-
-    # Make a plot
-    n1 <- nPlot(form,
-                data = plotSet,
-                type = "discreteBarChart",
-                width = session$clientData[["output_plot3_width"]])
-
-    # Do some aesthetic stuff
-    tooltip <- gsub("[\r\n]", "", makeDemoToolTip())
-    n1$yAxis(axisLabel = 'Proportion of UNDUPLICATED Students (%)',
-             width = 50)
-    n1$chart(color = colors,
-             forceY = c(0, 100),
-             tooltipContent = tooltip)
-
-
-    # Display the chart
-    n1$addParams(dom = 'age')
-    return(n1)
-
-  })
-
-
   output$special <- renderChart ({
     age <- cohortSelectData(input$cohort, input$definition, 'age', cohorts)
     dsps <- cohortSelectData(input$cohort, input$definition, 'dsps', cohorts)
