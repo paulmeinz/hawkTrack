@@ -361,6 +361,7 @@ shinyServer(function(input, output, session) {
     n1$chart(color = colors,
              forceY = c(0, 100),
              tooltipContent = tooltip)
+    n1$xAxis(rotateLabels = -25)
     n1$set(title = 'Current enrollment snapshot')
 
 
