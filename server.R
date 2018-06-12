@@ -79,23 +79,6 @@ shinyServer(function(input, output, session) {
                                        cohorts$term == currentTerm()]
     )
   })
-
-  # Update term input selections based on cohort selected
-  observe({
-    terms <- unique(cohorts$term[cohorts$cohortyear == input$cohort])
-    names(terms) <- createTermString(terms)
-    terms <- terms[order(terms)]
-
-    updateSelectInput(session, 'termEnroll',
-                      label = 'Select a comparison term',
-                      choices = terms,
-                      selected = 1)
-
-    updateSelectInput(session, 'termAchieve',
-                      label = 'Select a comparison term',
-                      choices = terms,
-                      selected = 1)
-  })
   
   # Reset enrollment/achieve tabs if a cohort is selected
   observeEvent(input$cohort, {
@@ -120,6 +103,18 @@ shinyServer(function(input, output, session) {
       {showElement(id = 'enrollComp', anim = TRUE)}
     if(input$enroll == 'None')
       {hideElement(id = 'enrollComp', anim = TRUE)}
+  })
+  
+  # Update term input selections based on cohort selected
+  observeEvent(input$optionEnroll, {
+    terms <- unique(cohorts$term[cohorts$cohortyear == input$cohort])
+    names(terms) <- createTermString(terms)
+    terms <- terms[order(terms)]
+    
+    updateSelectInput(session, 'termEnroll',
+                      label = 'Select a comparison term',
+                      choices = terms,
+                      selected = max(terms))
   })
 
   # toggle term selector
@@ -175,6 +170,18 @@ shinyServer(function(input, output, session) {
     {showElement(id = 'achieveComp', anim = TRUE)}
     if(input$achieve == 'None')
     {hideElement(id = 'achieveComp', anim = TRUE)}
+  })
+  
+  # Update term input selections based on cohort selected
+  observeEvent(input$optionAchieve, {
+    terms <- unique(cohorts$term[cohorts$cohortyear == input$cohort])
+    names(terms) <- createTermString(terms)
+    terms <- terms[order(terms)]
+    
+    updateSelectInput(session, 'termAchieve',
+                      label = 'Select a comparison term',
+                      choices = terms,
+                      selected = max(terms))
   })
 
   # toggle term selector
