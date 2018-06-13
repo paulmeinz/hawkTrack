@@ -283,6 +283,7 @@ shinyServer(function(input, output, session) {
 
     form <- formula(paste('percent ~', 'ethnicity'))
 
+    print(session$clientData[["output_plot1_width"]])
     # Make a plot
     n1 <- nPlot(form,
                 data = plotSet,
@@ -395,7 +396,12 @@ shinyServer(function(input, output, session) {
 
   output$enrollcompTitle <- renderUI({
     if (input$optionEnroll == 'years') {
-      text <- paste('Trends for the ', input$cohort, ' Cohort')
+      desc <- unique(cohorts$termdescr[cohorts$cohortyear == input$cohort &
+                                         cohorts$term == input$termEnroll]
+      )
+      text <- paste(input$cohort, 'Cohort: Trends on or before the ', 
+                    createTermString(input$termEnroll), ' term (',
+                    desc, ')', sep = '')
     }
 
     if (input$optionEnroll == 'cohorts') {
@@ -575,7 +581,12 @@ shinyServer(function(input, output, session) {
 
   output$achcompTitle <- renderUI({
     if (input$optionAchieve == 'years') {
-      text <- paste('Trends for the ', input$cohort, ' Cohort')
+      desc <- unique(cohorts$termdescr[cohorts$cohortyear == input$cohort &
+                                         cohorts$term == input$termAchieve]
+      )
+      text <- paste(input$cohort, 'Cohort: Trends on or before the ', 
+                    createTermString(input$terAchieve), ' term (',
+                    desc, ')', sep = '')
     }
 
     if (input$optionAchieve == 'cohorts') {

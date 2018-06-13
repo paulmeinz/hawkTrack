@@ -75,10 +75,11 @@ p.help {
 }
 
 #enrollTitle, #enrollcompTitle, #achcompTitle, #achTitle  {
-	font-size: 160%;
+	font-size: 175%;
 	color: white;
 	text-align: center;
-	padding-top: 10px;
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
 
 #def {
