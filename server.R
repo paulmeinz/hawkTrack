@@ -531,7 +531,7 @@ shinyServer(function(input, output, session) {
 
       n1$yAxis(axisLabel = title,
                width = 50)
-      n1$xAxis(rotateLabels = -25)
+      n1$xAxis(rotateLabels = -15)
       n1$chart(color = colors,
                showControls = F,
                reduceXTicks = F,
@@ -547,7 +547,7 @@ shinyServer(function(input, output, session) {
 
       n1$yAxis(axisLabel = title,
                width = 50)
-      n1$xAxis(rotateLabels = -25)
+      n1$xAxis(rotateLabels = -15)
       n1$chart(color = colors,
                showControls = F,
                reduceXTicks = F,
@@ -717,7 +717,7 @@ shinyServer(function(input, output, session) {
 
       n1$yAxis(axisLabel = title,
                width = 50)
-      n1$xAxis(rotateLabels = -25)
+      n1$xAxis(rotateLabels = -15)
       n1$chart(color = colors,
                showControls = F,
                reduceXTicks = F,
@@ -733,7 +733,7 @@ shinyServer(function(input, output, session) {
 
       n1$yAxis(axisLabel = title,
                width = 50)
-      n1$xAxis(rotateLabels = -25)
+      n1$xAxis(rotateLabels = -15)
       n1$chart(color = colors,
                showControls = F,
                reduceXTicks = F,
