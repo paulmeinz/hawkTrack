@@ -133,7 +133,6 @@ shinyServer(function(input, output, session) {
       reset('optionEnroll')
     }
     if(input$demoEnroll == 'None') {reset('equityEnroll')}
-    if(input$optionEnroll == 'years') {reset('termEnroll')}
   })
 
   # render a message based on cohort
@@ -171,7 +170,7 @@ shinyServer(function(input, output, session) {
     terms <- terms[order(terms)]
     
     updateSelectInput(session, 'termAchieve',
-                      label = 'Select a comparison term',
+                      label = 'Select a term',
                       choices = terms,
                       selected = max(terms))
   })
@@ -564,10 +563,12 @@ shinyServer(function(input, output, session) {
 
 
   output$achTitle <- renderUI({
-    text <- paste(currentTermDesc(), ' Achievement Snapshot for the ',
-                  input$cohort,
-                  ' Cohort')
-
+    desc <- unique(cohorts$termdescr[cohorts$cohortyear == input$cohort &
+                                       cohorts$term == input$termAchieve]
+    )
+    text <- paste(input$cohort, ' Cohort: Milestone Snapshot, ', desc,
+                  ' (', createTermString(input$termAchieve), ' term)', sep = '')
+    
     HTML(paste(text))
   })
 
@@ -605,7 +606,7 @@ shinyServer(function(input, output, session) {
 
     # Filter based on input
     temp <- cohorts[cohorts$cohortyear == input$cohort &
-                      cohorts$term == currentTerm(),]
+                      cohorts$term == input$termAchieve,]
 
     # Filter cohort definition
     names(temp)[names(temp) == input$definition] <- 'filt'

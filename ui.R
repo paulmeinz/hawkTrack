@@ -233,7 +233,8 @@ shinyUI(fluidPage(
                                terms, selected = 1)
             ),
             column(6,
-                   radioButtons('affirmAchieve', 'Conduct a comparison?', affirm,
+                   radioButtons('affirmAchieve', 'Conduct a comparison?', 
+                                affirm,
                                 selected = 'No',
                                 inline = TRUE
                    )
