@@ -106,7 +106,7 @@ shinyServer(function(input, output, session) {
   })
   
   # Update term input selections based on cohort selected
-  observeEvent(input$optionEnroll, {
+  observeEvent(input$cohort, {
     terms <- unique(cohorts$term[cohorts$cohortyear == input$cohort])
     names(terms) <- createTermString(terms)
     terms <- terms[order(terms)]
@@ -115,14 +115,6 @@ shinyServer(function(input, output, session) {
                       label = 'Select a term',
                       choices = terms,
                       selected = max(terms))
-  })
-
-  # toggle term selector
-  observe({
-    if(input$optionEnroll != 'years')
-    {showElement(id = 'enrollTerm', anim = TRUE)}
-    if(input$optionEnroll == 'years')
-    {hideElement(id = 'enrollTerm', anim = TRUE)}
   })
 
   # toggle equity selector
@@ -173,7 +165,7 @@ shinyServer(function(input, output, session) {
   })
   
   # Update term input selections based on cohort selected
-  observeEvent(input$optionAchieve, {
+  observeEvent(input$cohort, {
     terms <- unique(cohorts$term[cohorts$cohortyear == input$cohort])
     names(terms) <- createTermString(terms)
     terms <- terms[order(terms)]
