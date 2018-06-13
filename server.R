@@ -112,7 +112,7 @@ shinyServer(function(input, output, session) {
     terms <- terms[order(terms)]
     
     updateSelectInput(session, 'termEnroll',
-                      label = 'Select a comparison term',
+                      label = 'Select a term',
                       choices = terms,
                       selected = max(terms))
   })

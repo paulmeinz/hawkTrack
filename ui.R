@@ -157,10 +157,17 @@ shinyUI(fluidPage(
       sidebarLayout(
         sidebarPanel(
           div(id = 'cohortMessage', class = 'cohortMsg', uiOutput('cohort1')),
-          div(radioButtons('affirmEnroll', 'Conduct a comparison?', affirm,
-                           selected = 'No',
-                           inline = TRUE
-              )
+          fluidRow(
+            column(6,
+              selectInput('termEnroll', 'Select a term',
+                          terms, selected = 1)
+            ),
+            column(6,
+                   radioButtons('affirmEnroll', 'Conduct a comparison?', affirm,
+                                selected = 'No',
+                                inline = TRUE
+                   )
+            )
           ),
           hidden(
             div(id = 'enrollSelect',
@@ -172,9 +179,8 @@ shinyUI(fluidPage(
             div(id = 'enrollComp',
                 radioButtons('optionEnroll', 'Comparisons', options),
                 hidden(
-                  div(id = 'enrollTerm',
-                      selectInput('termEnroll', 'Select a comparison term',
-                                  terms, selected = 1)
+                  div(id = 'enrollTerm'
+
                   )
                 ),
                 selectInput('demoEnroll', 'Select a demographic', demos)
