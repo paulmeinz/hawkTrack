@@ -302,7 +302,7 @@ shinyServer(function(input, output, session) {
     tooltip <- gsub("[\r\n]", "", makeDemoToolTip())
     n1$yAxis(axisLabel = 'Proportion of UNDUPLICATED Students (%)',
              width = 50)
-    n1$xAxis(rotateLabels = -25)
+    n1$xAxis(rotateLabels = -15)
     n1$chart(color = colors,
              forceY = c(0, 100),
              tooltipContent = tooltip)
@@ -374,7 +374,7 @@ shinyServer(function(input, output, session) {
     n1$chart(color = colors,
              forceY = c(0, 100),
              tooltipContent = tooltip)
-    n1$xAxis(rotateLabels = -25)
+    n1$xAxis(rotateLabels = -15)
     n1$set(title = 'Current enrollment snapshot')
 
 
