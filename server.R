@@ -384,9 +384,11 @@ shinyServer(function(input, output, session) {
 
 
   output$enrollTitle <- renderUI({
-    text <- paste(currentTermDesc(), ' Enrollment Snapshot for the ',
-                  input$cohort,
-                  ' Cohort')
+    desc <- unique(cohorts$termdescr[cohorts$cohortyear == input$cohort &
+                                       cohorts$term == input$termEnroll]
+    )
+    text <- paste(input$cohort, ' Cohort: Enrollment Snapshot, ', desc,
+                  ' (', createTermString(input$termEnroll), ' term)', sep = '')
 
     HTML(paste(text))
   })
@@ -426,7 +428,7 @@ shinyServer(function(input, output, session) {
 
     # Filter based on input
     temp <- cohorts[cohorts$cohortyear == input$cohort &
-                    cohorts$term == currentTerm(),]
+                    cohorts$term == input$termEnroll,]
 
     # Filter cohort definition
     names(temp)[names(temp) == input$definition] <- 'filt'
