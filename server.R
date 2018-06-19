@@ -111,6 +111,12 @@ shinyServer(function(input, output, session) {
     names(terms) <- createTermString(terms)
     terms <- terms[order(terms)]
     
+    # Add asterisks to terms
+    actTerms <- cohorts[cohorts$cohortyear == input$cohort
+                        & cohorts$livestatusenroll == 'Live', 'term']
+    names(terms)[terms %in% actTerms] <- paste(names(terms)[terms %in% actTerms],
+                                               '*', sep = '')
+    
     updateSelectInput(session, 'termEnroll',
                       label = 'Select a term',
                       choices = terms,
@@ -168,6 +174,12 @@ shinyServer(function(input, output, session) {
     terms <- unique(cohorts$term[cohorts$cohortyear == input$cohort])
     names(terms) <- createTermString(terms)
     terms <- terms[order(terms)]
+    
+    # Add asterisks to terms
+    actTerms <- cohorts[cohorts$cohortyear == input$cohort
+                        & cohorts$livestatuscomp == 'Live', 'term']
+    names(terms)[terms %in% actTerms] <- paste(names(terms)[terms %in% actTerms], 
+                                               '*', sep = '')
     
     updateSelectInput(session, 'termAchieve',
                       label = 'Select a term',

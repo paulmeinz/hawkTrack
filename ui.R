@@ -198,7 +198,8 @@ shinyUI(fluidPage(
               fluidRow(
                 column(8,
                        chartOutput('enrollPerc', lib = 'nvd3'),
-                       plotOutput('plot5', height = '0px')
+                       plotOutput('plot5', height = '0px'),
+                       hidden(div(id = 'enwarn', htmlOutput('warn1')))
                 )
               )
             )
