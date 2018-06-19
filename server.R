@@ -508,6 +508,8 @@ shinyServer(function(input, output, session) {
                          input$demoEnroll,
                          data = cohorts,
                          type = type)
+    
+    temp <- activeData(temp, input$termEnroll, cohorts, type = 'enroll')
 
 
     yax <- c(0,100)
@@ -701,7 +703,8 @@ shinyServer(function(input, output, session) {
                          input$demoAchieve,
                          data = cohorts,
                          type = type)
-
+    
+    temp <- activeData(temp, input$termEnroll, cohorts, type = 'comp')
 
     yax <- c(0,100)
     yax[yax == 100 & type != '%'] <- max(temp$outcome) + 3
