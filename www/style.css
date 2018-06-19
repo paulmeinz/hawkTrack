@@ -89,5 +89,13 @@ p.help {
 	padding-top: 10px;
 }
 
+#warn1 {
+	color:red;
+	font-size: 110%;
+	padding-top: 10px;
+	background-color: #e6f2ff;
+	text-align: center;
+}
+
 
 

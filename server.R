@@ -443,11 +443,11 @@ shinyServer(function(input, output, session) {
                              'livestatusenroll'])
     print(active)
     if (active == 'Live') {
-      showElement(id = 'enwarn')
+      showElement(id = 'enwarn', anim = TRUE)
     }
     
     if (active == 'Archive') {
-      hideElement(id = 'enwarn')
+      hideElement(id = 'enwarn', anim = TRUE)
     }
   })
   
