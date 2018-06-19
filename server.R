@@ -295,7 +295,6 @@ shinyServer(function(input, output, session) {
 
     form <- formula(paste('percent ~', 'ethnicity'))
 
-    print(session$clientData[["output_plot1_width"]])
     # Make a plot
     n1 <- nPlot(form,
                 data = plotSet,
@@ -435,6 +434,28 @@ shinyServer(function(input, output, session) {
       showElement(id = 'compare', anim = TRUE)
       hideElement(id = 'snapshot', anim = TRUE)
     }
+  })
+  
+  # Hide or show warning message based on active data status
+  observe({
+    active <- unique(cohorts[cohorts$term == input$termEnroll &
+                             cohorts$cohortyear == input$cohort,
+                             'livestatusenroll'])
+    print(active)
+    if (active == 'Live') {
+      showElement(id = 'enwarn')
+    }
+    
+    if (active == 'Archive') {
+      hideElement(id = 'enwarn')
+    }
+  })
+  
+  output$warn1 <- renderUI({
+    text <- '*Data from the selected term is NOT FINALIZED and may change
+      on a day to day basis'
+    
+    HTML(paste(text))
   })
 
 
