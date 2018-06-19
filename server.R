@@ -106,7 +106,7 @@ shinyServer(function(input, output, session) {
   })
   
   # Update term input selections based on cohort selected
-  observeEvent(input$cohort, {
+  observe({
     terms <- unique(cohorts$term[cohorts$cohortyear == input$cohort])
     names(terms) <- createTermString(terms)
     terms <- terms[order(terms)]
@@ -170,7 +170,7 @@ shinyServer(function(input, output, session) {
   })
   
   # Update term input selections based on cohort selected
-  observeEvent(input$cohort, {
+  observe({
     terms <- unique(cohorts$term[cohorts$cohortyear == input$cohort])
     names(terms) <- createTermString(terms)
     terms <- terms[order(terms)]
@@ -438,7 +438,16 @@ shinyServer(function(input, output, session) {
   
   # Hide or show warning message based on active data status
   observe({
-    active <- unique(cohorts[cohorts$term == input$termEnroll &
+    term <- input$termEnroll
+    
+    x <- cohorts %>% 
+      filter(cohortyear == input$cohort) %>%
+      summarise(max(term))
+    x <- x[1,1]
+    
+    if(term > x) {term <- x}
+    
+    active <- unique(cohorts[cohorts$term == term &
                              cohorts$cohortyear == input$cohort,
                              'livestatusenroll'])
     
@@ -461,7 +470,16 @@ shinyServer(function(input, output, session) {
   
   # Hide or show warning message based on active data status (comparison pane)
   observe({
-    active <- unique(cohorts[cohorts$term == input$termEnroll &
+    term <- input$termEnroll
+    
+    x <- cohorts %>% 
+      filter(cohortyear == input$cohort) %>%
+      summarise(max(term))
+    x <- x[1,1]
+    
+    if(term > x) {term <- x}
+    
+    active <- unique(cohorts[cohorts$term == term &
                                cohorts$cohortyear == input$cohort,
                              'livestatusenroll'])
 
@@ -672,7 +690,16 @@ shinyServer(function(input, output, session) {
   
   # Hide or show warning message based on active data status
   observe({
-    active <- unique(cohorts[cohorts$term == input$termAchieve &
+    term <- input$termAchieve
+    
+    x <- cohorts %>% 
+      filter(cohortyear == input$cohort) %>%
+      summarise(max(term))
+    x <- x[1,1]
+    
+    if(term > x) {term <- x}
+    
+    active <- unique(cohorts[cohorts$term == term &
                                cohorts$cohortyear == input$cohort,
                              'livestatuscomp'])
 
@@ -695,7 +722,16 @@ shinyServer(function(input, output, session) {
   
   # Hide or show warning message based on active data status (comparison pane)
   observe({
-    active <- unique(cohorts[cohorts$term == input$termAchieve &
+    term <- input$termAchieve
+    
+    x <- cohorts %>% 
+      filter(cohortyear == input$cohort) %>%
+      summarise(max(term))
+    x <- x[1,1]
+    
+    if(term > x) {term <- x}
+    
+    active <- unique(cohorts[cohorts$term == term &
                                cohorts$cohortyear == input$cohort,
                              'livestatuscomp'])
 
