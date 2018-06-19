@@ -441,7 +441,7 @@ shinyServer(function(input, output, session) {
     active <- unique(cohorts[cohorts$term == input$termEnroll &
                              cohorts$cohortyear == input$cohort,
                              'livestatusenroll'])
-    print(active)
+    
     if (active == 'Live') {
       showElement(id = 'enwarn', anim = TRUE)
     }
@@ -451,9 +451,34 @@ shinyServer(function(input, output, session) {
     }
   })
   
+  # Warning message for live data
   output$warn1 <- renderUI({
     text <- '*Data from the selected term is NOT FINALIZED and may change
       on a day to day basis'
+    
+    HTML(paste(text))
+  })
+  
+  # Hide or show warning message based on active data status (comparison pane)
+  observe({
+    active <- unique(cohorts[cohorts$term == input$termEnroll &
+                               cohorts$cohortyear == input$cohort,
+                             'livestatusenroll'])
+
+    if (active == 'Live') {
+      showElement(id = 'enwarn2', anim = TRUE)
+    }
+    
+    if (active == 'Archive') {
+      hideElement(id = 'enwarn2', anim = TRUE)
+    }
+  })
+  
+  # Warning message for live data
+  output$warn2 <- renderUI({
+    text <- '*Some data in this plot is NOT FINALIZED and may change
+      on a day to day basis. Incomplete data is indicated by an asterisk (*)
+      on an X-Axis label'
     
     HTML(paste(text))
   })
@@ -644,6 +669,53 @@ shinyServer(function(input, output, session) {
       hideElement(id = 'achsnapshot', anim = TRUE)
     }
   })
+  
+  # Hide or show warning message based on active data status
+  observe({
+    active <- unique(cohorts[cohorts$term == input$termAchieve &
+                               cohorts$cohortyear == input$cohort,
+                             'livestatuscomp'])
+
+    if (active == 'Live') {
+      showElement(id = 'acwarn', anim = TRUE)
+    }
+    
+    if (active == 'Archive') {
+      hideElement(id = 'acwarn', anim = TRUE)
+    }
+  })
+  
+  # Warning message for live data
+  output$warn3 <- renderUI({
+    text <- '*Data from the selected term is NOT FINALIZED and may change
+    on a day to day basis'
+    
+    HTML(paste(text))
+  })
+  
+  # Hide or show warning message based on active data status (comparison pane)
+  observe({
+    active <- unique(cohorts[cohorts$term == input$termAchieve &
+                               cohorts$cohortyear == input$cohort,
+                             'livestatuscomp'])
+
+    if (active == 'Live') {
+      showElement(id = 'acwarn2', anim = TRUE)
+    }
+    
+    if (active == 'Archive') {
+      hideElement(id = 'acwarn2', anim = TRUE)
+    }
+  })
+  
+  # Warning message for live data
+  output$warn4 <- renderUI({
+    text <- '*Some data in this plot is NOT FINALIZED and may change
+      on a day to day basis. Incomplete data is indicated by an asterisk (*)
+      on an X-Axis label'
+    
+    HTML(paste(text))
+  })
 
   # SNAPSHOT Plot---------------------------------------------------------------
 
@@ -730,7 +802,8 @@ shinyServer(function(input, output, session) {
     yax <- c(0,100)
     yax[yax == 100 & type != '%'] <- max(temp$outcome) + 3
 
-    title <- names(milestones)[milestones == input$milestones]
+    title <- names(milestones)[milestones == input$achieve]
+    print(title)
 
     if (input$demoAchieve == 'None') {
 

@@ -198,8 +198,9 @@ shinyUI(fluidPage(
               fluidRow(
                 column(8,
                        chartOutput('enrollPerc', lib = 'nvd3'),
-                       plotOutput('plot5', height = '0px'),
-                       hidden(div(id = 'enwarn', htmlOutput('warn1')))
+                       plotOutput('plot5', height = '0px')
+                ),
+                column(3, hidden(div(id = 'enwarn', htmlOutput('warn1')))
                 )
               )
             )
@@ -213,6 +214,8 @@ shinyUI(fluidPage(
                 column(8,
                        chartOutput('enrollCompPlt', lib = 'nvd3'),
                        plotOutput('plot6', height = '0px')
+                ),
+                column(3, hidden(div(id = 'enwarn2', htmlOutput('warn2')))
                 )
               )
             )
@@ -271,6 +274,8 @@ shinyUI(fluidPage(
                   column(8,
                          chartOutput('achPerc', lib = 'nvd3'),
                          plotOutput('plot7', height = '0px')
+                  ),
+                  column(3, hidden(div(id = 'acwarn', htmlOutput('warn3')))
                   )
                 )
             )
@@ -284,6 +289,8 @@ shinyUI(fluidPage(
                   column(8,
                          chartOutput('achCompPlt', lib = 'nvd3'),
                          plotOutput('plot8', height = '0px')
+                  ),
+                  column(3, hidden(div(id = 'acwarn2', htmlOutput('warn4')))
                   )
                 )
             )

@@ -68,14 +68,14 @@ p.help {
 }
 
 #cohortSize {
-	font-size: 160%;
+	font-size: 170%;
 	color: white;
 	text-align: center;
 	padding-top: 10px;
 }
 
 #enrollTitle, #enrollcompTitle, #achcompTitle, #achTitle  {
-	font-size: 175%;
+	font-size: 160%;
 	color: white;
 	text-align: center;
 	padding-top: 20px;
@@ -89,11 +89,11 @@ p.help {
 	padding-top: 10px;
 }
 
-#warn1 {
+#warn1, #warn2, #acwarn, #acwarn2 {
 	color:red;
-	font-size: 110%;
-	padding-top: 10px;
-	background-color: #e6f2ff;
+	font-size: 130%;
+	padding: 10px;
+	background-color: white;
 	text-align: center;
 }
 
