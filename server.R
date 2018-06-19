@@ -438,6 +438,7 @@ shinyServer(function(input, output, session) {
   
   # Hide or show warning message based on active data status
   observe({
+    print(input$termEnroll)
     active <- unique(cohorts[cohorts$term == input$termEnroll &
                              cohorts$cohortyear == input$cohort,
                              'livestatusenroll'])
