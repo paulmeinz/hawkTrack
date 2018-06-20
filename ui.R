@@ -25,12 +25,14 @@ definition <- c('All' = 'emplid',
                 'Two Year Path' = 'twoyear',
                 'Three Year Path' = 'threeyear',
                 'Certificate Path' = 'cert',
-                'Deg/Trans/Cert Seeking' = 'degreeseek')
+                'Deg/Trans/Cert Seeking' = 'degreeseek',
+                'Recent High School Grads' = 'recenths')
 
 
 # Current Enrollment/Milestone Achievement--------------------------------------
 affirm <- c('No', 'Yes')
-demos <- c(None = 'None', Age = 'age', Ethnicity = 'ethnicity',
+demos <- c(None = 'None', Age = 'age', 
+           'EGUSD Students' = 'egusd', Ethnicity = 'ethnicity',
            'First Generation' = 'firstgen',
            'Foster Youth' = 'foster', Gender = 'gender',
            'Reported Disability' = 'dsps', 'Veteran Status' = 'veteran')
@@ -81,10 +83,12 @@ shinyUI(fluidPage(
                       h1(id = 'welcome-header',
                          'Welcome to the CRC HawkTrack!')
                       ),
-               p(class = 'welcome-text', id = 'specific',
-                 "Click on the tabs above to select a cohort,",
-                 "look at current enrollment information, and ",
-                 "see which milestones they have achieved.")
+               p(class = 'welcome-text', id = 'specific1',
+                 "The HawkTrack follows new students at CRC from their first",
+                 "fall to their sixth major term (three years).",
+                 " Select a cohort in the 'Select a Cohort' tab. Then click",
+                 " the enrollment/achievement tabs to look at data for the",
+                 " cohort - from term enrollment to completion.")
       ),
       fluidRow(id = 'welcome-mid',
                column(6,
