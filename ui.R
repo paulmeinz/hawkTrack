@@ -83,7 +83,7 @@ shinyUI(fluidPage(
                       h1(id = 'welcome-header',
                          'Welcome to the CRC HawkTrack!')
                       ),
-               p(class = 'welcome-text', id = 'specific1',
+               p(class = 'welcome-text', id = 'specific',
                  "The HawkTrack follows new students at CRC from their first",
                  "fall to their sixth major term (three years).",
                  " Select a cohort in the 'Select a Cohort' tab. Then click",
