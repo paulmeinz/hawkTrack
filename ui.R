@@ -22,10 +22,10 @@ crcLink <- "https://researchapps.crc.losrios.edu/CRC_Research_Data_Request_Form"
 cohort <- unique(cohorts$cohortyear[cohorts$term == 1])
 cohort <- cohort[order(cohort, decreasing = TRUE)]
 definition <- c('All' = 'emplid',
-                'Two Year Path' = 'twoyear',
-                'Three Year Path' = 'threeyear',
                 'Certificate Path' = 'cert',
                 'Deg/Trans/Cert Seeking' = 'degreeseek',
+                'Two Year Path' = 'twoyear',
+                'Three Year Path' = 'threeyear',
                 'Recent High School Grads' = 'recenths')
 
 
