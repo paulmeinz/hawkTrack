@@ -480,7 +480,7 @@ shinyServer(function(input, output, session) {
     if(term > x) {term <- x}
     
     active <- unique(cohorts[cohorts$term == term &
-                               cohorts$cohortyear == input$cohort,
+                             cohorts$cohortyear == input$cohort,
                              'livestatusenroll'])
 
     if (active == 'Live') {
