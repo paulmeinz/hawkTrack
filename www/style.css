@@ -32,13 +32,9 @@ p.help {
 	text-align: center;
     height: 100%;
 	color: white;
-	font-size: 200%;
+	font-size: 150%;
 	font-weight: bold;
 	text-shadow: -2px 0 #000000,0 2px #000000,2px 0 #000000,0 -2px #000000;
-}
-
-#specific {
-	font-size: 150%;
 }
 
 #specific1 {
