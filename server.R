@@ -8,7 +8,8 @@ definition <- c('All' = 'emplid',
                 'Two Year Path' = 'twoyear',
                 'Three Year Path' = 'threeyear',
                 'Certificate Path' = 'cert',
-                'Deg/Trans/Cert Seeking' = 'degreeseek')
+                'Deg/Trans/Cert Seeking' = 'degreeseek',
+                'Recent High School' = 'recenths')
 
 # Lookup for comparison type
 compType <- c('None' = 'None',
@@ -270,13 +271,19 @@ shinyServer(function(input, output, session) {
       experience in the District prior to summer (aside from dual enrollment)
       who in their first term: 1) Declared a major, 2) completed a
       comprehensive educational plan, and enrolled in at least 3 units in the
-      same 2 digit cip code as their major"
+      same 2 digit cip code as their major."
     }
 
     if (input$definition == 'degreeseek') {
       text <- "Students who were first time new at CRC in the fall with no
       experience in the District prior to summer (aside from dual enrollment)
-      who have completed at least 6 units at CRC and attempted math or English"
+      who have completed at least 6 units at CRC and attempted math or English."
+    }
+    
+    if (input$definition == 'recenths') {
+      text <- "Students who were first time new at CRC in the fall with no
+      experience in the District prior to summer (aside from dual enrollment)
+      who graduated high school in the prior (spring) term."
     }
 
     intro <- '<strong> Cohort Definition: </strong>'
