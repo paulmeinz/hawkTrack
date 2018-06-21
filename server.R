@@ -3,7 +3,8 @@ library(shiny)
 # Load data
 load('cohorts.rdata')
 
-# Cohort definition choices for lookup
+# Cohort definition choices for lookup, I'll probably pull these from a 
+# db or R file at a later date but for now....
 definition <- c('All' = 'emplid',
                 'Two Year Path' = 'twoyear',
                 'Three Year Path' = 'threeyear',
@@ -117,6 +118,8 @@ shinyServer(function(input, output, session) {
                         & cohorts$livestatusenroll == 'Live', 'term']
     names(terms)[terms %in% actTerms] <- paste(names(terms)[terms %in% actTerms],
                                                '*', sep = '')
+    names(terms)[length(terms)] <- paste(names(terms)[length(terms)], 
+                                         ' (Current Term)', sep = '')
     
     updateSelectInput(session, 'termEnroll',
                       label = 'Select a term',
@@ -182,6 +185,11 @@ shinyServer(function(input, output, session) {
     names(terms)[terms %in% actTerms] <- paste(names(terms)[terms %in% actTerms], 
                                                '*', sep = '')
     
+    # Label the "Current" term
+    names(terms)[length(terms)] <- paste(names(terms)[length(terms)], 
+                                         ' (Current Term)', sep = '')
+    
+    # Update choices
     updateSelectInput(session, 'termAchieve',
                       label = 'Select a term',
                       choices = terms,
@@ -231,11 +239,18 @@ shinyServer(function(input, output, session) {
 ################################################################################
 
 
+  # Display the number of students in a selected cohort
   output$cohortSize <- renderUI({
+    
+    # pull cohort year data
     data <- cohorts %>% filter(cohortyear == input$cohort & term == 1)
-    den <- data %>% summarise(headcount = n())
+    den <- data %>% summarise(headcount = n()) # get headcount
+    
+    # label cohort definition and filter
     names(data)[names(data) == input$definition] <- 'filt'
     num <- data %>% filter(!is.na(filt)) %>% summarise(headcount = n())
+    
+    # write html
     msg <- paste('Displaying data for ', num[1, 1], ' out of ', den[1, 1],
                  ' students in the ', input$cohort, ' fall cohort.')
 
@@ -243,6 +258,7 @@ shinyServer(function(input, output, session) {
   })
 
 
+  # Cohort definitions that get displayed in the upper right
   output$def <- renderUI({
     if (input$definition == 'emplid') {
       text <- "Students who were first time new at CRC in the fall with
@@ -294,13 +310,14 @@ shinyServer(function(input, output, session) {
   })
 
 
+  # Ethnicity plot
   output$ethnicity <- renderChart({
 
     # Pull selected cohort data
     plotSet <- cohortSelectData(input$cohort, input$definition, 'ethnicity',
                                 cohorts)
 
-    form <- formula(paste('percent ~', 'ethnicity'))
+    form <- formula(paste('percent ~', 'ethnicity')) #ugly code
 
     # Make a plot
     n1 <- nPlot(form,
@@ -325,6 +342,7 @@ shinyServer(function(input, output, session) {
   })
 
 
+  # Gender plot
   output$gender <- renderChart({
 
     # Pull selected cohort data
@@ -338,6 +356,7 @@ shinyServer(function(input, output, session) {
                 type = "pieChart",
                 width = session$clientData[["output_plot2_width"]])
 
+    # Aesthetics
     tooltip <- gsub("[\r\n]", "", makeDemoToolTip(type = 'pie'))
     n1$addParams(dom = 'gender')
     n1$chart(color = colors,
@@ -349,7 +368,10 @@ shinyServer(function(input, output, session) {
   })
 
 
+  # Other demographics plot
   output$special <- renderChart ({
+    
+    # Calc percentages for each demo in the plot
     age <- cohortSelectData(input$cohort, input$definition, 'age', cohorts)
     firstgen <- cohortSelectData(input$cohort, input$definition, 'firstgen', 
                                  cohorts)
@@ -358,20 +380,27 @@ shinyServer(function(input, output, session) {
                                 cohorts)
     foster <- cohortSelectData(input$cohort, input$definition, 'foster',
                                cohorts)
-
+    
+    # chenge the demographic column name so theyll stack
     names(age)[1] <- 'demo'
     names(firstgen)[1] <- 'demo'
     names(dsps)[1] <- 'demo'
     names(veteran)[1] <- 'demo'
     names(foster)[1] <- 'demo'
     
+    # stack em
     plotSet <- data.frame(rbind(age, firstgen, foster, veteran, dsps))
+    
+    # replace all NA values with 0
     plotSet[is.na(plotSet)] <- 0
+    
+    # Only select certain groups (theyre all binary so only one level is nec.)
     plotSet <- plotSet %>% filter(demo %in% c('Foster Youth', 'Veteran',
                                               'Reported Disability',
                                               '24 and younger',
                                               'First Generation'))
 
+    # make plot
     n1 <- nPlot(percent ~ demo,
                 data = plotSet,
                 type = "discreteBarChart",
@@ -401,10 +430,15 @@ shinyServer(function(input, output, session) {
 ################################################################################
 
 
+  # Create the enrollment plot title
   output$enrollTitle <- renderUI({
+    
+    # Filter term and cohort
     desc <- unique(cohorts$termdescr[cohorts$cohortyear == input$cohort &
                                        cohorts$term == input$termEnroll]
     )
+    
+    # Create enrollment plot title
     text <- paste(input$cohort, ' Cohort: Enrollment Snapshot, ', desc,
                   ' (', createTermString(input$termEnroll), ' term)', sep = '')
 
@@ -412,7 +446,10 @@ shinyServer(function(input, output, session) {
   })
 
 
+  # Create comparison plot title
   output$enrollcompTitle <- renderUI({
+    
+    # title depends on the particular comparison selected
     if (input$optionEnroll == 'years') {
       desc <- unique(cohorts$termdescr[cohorts$cohortyear == input$cohort &
                                          cohorts$term == input$termEnroll]
@@ -431,6 +468,7 @@ shinyServer(function(input, output, session) {
   })
 
 
+  # hide and show the snapshot/comparison plot depending on the selections
   observe({
     if (input$affirmEnroll == 'No' | input$enroll == 'None') {
       showElement(id = 'snapshot', anim = TRUE)
@@ -447,17 +485,23 @@ shinyServer(function(input, output, session) {
   observe({
     term <- input$termEnroll
     
+    # This is wonky but when a new term is selected
+    # The selection values arent updated quick enough...
+    # resulting in a crash if you switch from an early cohort to a leter
     x <- cohorts %>% 
       filter(cohortyear == input$cohort) %>%
       summarise(max(term))
     x <- x[1,1]
     
+    # So compare the max sterm for a particular cohort to the input
+    # and replace if the max strm is higher
     if(term > x) {term <- x}
     
     active <- unique(cohorts[cohorts$term == term &
                              cohorts$cohortyear == input$cohort,
                              'livestatusenroll'])
     
+    # if the status is live then show the warning message box
     if (active == 'Live') {
       showElement(id = 'enwarn', anim = TRUE)
     }
@@ -479,6 +523,7 @@ shinyServer(function(input, output, session) {
   observe({
     term <- input$termEnroll
     
+    # see previous comments... could make this into a helper function
     x <- cohorts %>% 
       filter(cohortyear == input$cohort) %>%
       summarise(max(term))
@@ -530,6 +575,7 @@ shinyServer(function(input, output, session) {
                                   'Enrolled in math' = mean(Math) * 100)
     percent <- gather(percent, 'variable', 'percent', 1:5)
 
+    # calculate headcounts
     headcount <- temp %>% summarise('% Enrolled' = sum(enrolled),
                                     '% Fulltime (12 Units)' = sum(units12),
                                     '% Fulltime (15 Units)' = sum(units15),
@@ -537,6 +583,7 @@ shinyServer(function(input, output, session) {
                                     'Enrolled in math' = sum(Math))
     headcount <- gather(headcount, 'variable', 'headcount', 1:5)
 
+    # get the total and assign it to each row
     total <- temp %>% summarise(total = n())
     total <- total[1,1]
 
@@ -568,8 +615,11 @@ shinyServer(function(input, output, session) {
   output$enrollCompPlt <- renderChart({
 
     type <- compType[input$enroll]
+    
+    # this helps determin the tooltip type
     type <- ifelse(input$equityEnroll == 'Yes', '%', type)
 
+    # disaggregate function
     temp <- outcomeDisag(input$enroll,
                          input$optionEnroll,
                          input$cohort,
@@ -582,12 +632,16 @@ shinyServer(function(input, output, session) {
     
     temp <- activeData(temp, input$termEnroll, cohorts, type = 'enroll')
 
-
+    # default x axis
     yax <- c(0,100)
+    
+    # x axis if it isnt a percentage plot
     yax[yax == 100 & type != '%'] <- max(temp$outcome) + 3
 
+    # input name is the title
     title <- names(enrollment)[enrollment == input$enroll]
 
+    # plot if no demo is selected
     if (input$demoEnroll == 'None') {
 
       tooltip <- ifelse(type == '%', 'bar', 'baravg')
@@ -604,6 +658,7 @@ shinyServer(function(input, output, session) {
                tooltipContent = makeDemoToolTip(tooltip))
     }
 
+    # plot if demo selected but equity evaluation is not selected
     if (input$demoEnroll != 'None' & input$equityEnroll == 'No') {
 
       tooltip <- ifelse(type == '%', 'demo', 'demoavg')
@@ -623,6 +678,7 @@ shinyServer(function(input, output, session) {
                tooltipContent = makeDemoToolTip(tooltip))
     }
 
+    # plot if demo selected and equity eveluation selected
     if (input$demoEnroll != 'None' & input$equityEnroll == 'Yes') {
       n1 <- nPlot(outcome ~ demo, group = "order",
                   data = temp,
@@ -653,6 +709,7 @@ shinyServer(function(input, output, session) {
   ################################################################################
 
 
+  # generate the title of the snapshot plot depending on term/cohort
   output$achTitle <- renderUI({
     desc <- unique(cohorts$termdescr[cohorts$cohortyear == input$cohort &
                                        cohorts$term == input$termAchieve]
@@ -663,8 +720,10 @@ shinyServer(function(input, output, session) {
     HTML(paste(text))
   })
 
-
+  # comparison plot title
   output$achcompTitle <- renderUI({
+    
+    # create a comparison title based on the comparison selected
     if (input$optionAchieve == 'years') {
       desc <- unique(cohorts$termdescr[cohorts$cohortyear == input$cohort &
                                          cohorts$term == input$termAchieve]
@@ -682,7 +741,7 @@ shinyServer(function(input, output, session) {
     HTML(paste(text))
   })
 
-
+  # show/hide plots depending on selections
   observe({
     if (input$affirmAchieve == 'No' | input$achieve == 'None') {
       showElement(id = 'achsnapshot', anim = TRUE)
@@ -699,6 +758,8 @@ shinyServer(function(input, output, session) {
   observe({
     term <- input$termAchieve
     
+    # see previous explanations of this code
+    # basically ensures that the term selection exists
     x <- cohorts %>% 
       filter(cohortyear == input$cohort) %>%
       summarise(max(term))
@@ -710,6 +771,7 @@ shinyServer(function(input, output, session) {
                                cohorts$cohortyear == input$cohort,
                              'livestatuscomp'])
 
+    # display warning selection depending on term active status
     if (active == 'Live') {
       showElement(id = 'acwarn', anim = TRUE)
     }
@@ -731,6 +793,7 @@ shinyServer(function(input, output, session) {
   observe({
     term <- input$termAchieve
     
+    # oof shoulda made this a helper function...theres four of these
     x <- cohorts %>% 
       filter(cohortyear == input$cohort) %>%
       summarise(max(term))
@@ -785,6 +848,7 @@ shinyServer(function(input, output, session) {
                 '% Completion' = mean(compcum) * 100)
     percent <- gather(percent, 'variable', 'percent', 1:8)
 
+    # calculate headcounts
     headcount <- temp %>%
       summarise('% Comp Ed Plan' = sum(comprehensive),
                 '% Transfer English' = sum(cumTransEnglish),
@@ -797,11 +861,15 @@ shinyServer(function(input, output, session) {
 
     headcount <- gather(headcount, 'variable', 'headcount', 1:8)
 
+    # calculate total
     total <- temp %>% summarise(total = n())
     total <- total[1,1]
 
+    # join headcounts onto percentage
     percent <- percent %>% left_join(headcount)
     percent <- data.frame(percent)
+    
+    # add total value to total column
     percent$total <- total
 
     # Percentage Plot
@@ -828,6 +896,8 @@ shinyServer(function(input, output, session) {
   output$achCompPlt <- renderChart({
 
     type <- compType[input$achieve]
+    
+    # helps select tooltip type
     type <- ifelse(input$equityAchieve == 'Yes', '%', type)
 
     temp <- outcomeDisag(input$achieve,
