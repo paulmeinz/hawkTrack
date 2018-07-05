@@ -9,6 +9,7 @@ library(hawkTrackHelp)
 load('cohorts.rdata')
 
 crcLink <- "https://researchapps.crc.losrios.edu/CRC_Research_Data_Request_Form"
+defLink <- "https://www.crc.losrios.edu/files/ie/HawkTrack_Data_Element_Definitions.pdf"
 
 
 ################################################################################
@@ -204,7 +205,13 @@ shinyUI(fluidPage(
                        chartOutput('enrollPerc', lib = 'nvd3'),
                        plotOutput('plot5', height = '0px')
                 ),
-                column(3, hidden(div(id = 'enwarn', htmlOutput('warn1')))
+                column(3, 
+                       hidden(div(id = 'enwarn', htmlOutput('warn1'))),
+                       div(class = 'defLink', 
+                           a(href = defLink, style = 'color: #ffffff',
+                             target= '_blank',"CLICK HERE for metric and
+                             cohort definitions")
+                          )
                 )
               )
             )
@@ -219,7 +226,13 @@ shinyUI(fluidPage(
                        chartOutput('enrollCompPlt', lib = 'nvd3'),
                        plotOutput('plot6', height = '0px')
                 ),
-                column(3, hidden(div(id = 'enwarn2', htmlOutput('warn2')))
+                column(3, 
+                       hidden(div(id = 'enwarn2', htmlOutput('warn2'))),
+                       div(class = 'defLink', 
+                           a(href = defLink, style = 'color: #ffffff',
+                             target= '_blank',"CLICK HERE for metric and
+                             cohort definitions")
+                       )
                 )
               )
             )
@@ -279,7 +292,13 @@ shinyUI(fluidPage(
                          chartOutput('achPerc', lib = 'nvd3'),
                          plotOutput('plot7', height = '0px')
                   ),
-                  column(3, hidden(div(id = 'acwarn', htmlOutput('warn3')))
+                  column(3, 
+                         hidden(div(id = 'acwarn', htmlOutput('warn3'))),
+                         div(class = 'defLink', 
+                             a(href = defLink, style = 'color: #ffffff',
+                               target= '_blank',"CLICK HERE for metric and
+                               cohort definitions")
+                         )
                   )
                 )
             )
@@ -294,7 +313,13 @@ shinyUI(fluidPage(
                          chartOutput('achCompPlt', lib = 'nvd3'),
                          plotOutput('plot8', height = '0px')
                   ),
-                  column(3, hidden(div(id = 'acwarn2', htmlOutput('warn4')))
+                  column(3, 
+                         hidden(div(id = 'acwarn2', htmlOutput('warn4'))),
+                         div(class = 'defLink', 
+                             a(href = defLink, style = 'color: #ffffff',
+                               target= '_blank',"CLICK HERE for metric and
+                               cohort definitions")
+                         )
                   )
                 )
             )
