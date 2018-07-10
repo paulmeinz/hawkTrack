@@ -118,8 +118,12 @@ shinyServer(function(input, output, session) {
                         & cohorts$livestatusenroll == 'Live', 'term']
     names(terms)[terms %in% actTerms] <- paste(names(terms)[terms %in% actTerms],
                                                '*', sep = '')
+    
+    # Label the "Current" term or "Last Term"
+    a <- grepl('[*]', names(terms)[length(names(terms))])
+    add <- ifelse(a == TRUE, ' (Current Term)', ' (Last Tracked Term)')
     names(terms)[length(terms)] <- paste(names(terms)[length(terms)], 
-                                         ' (Current Term)', sep = '')
+                                         add , sep = '')
     
     updateSelectInput(session, 'termEnroll',
                       label = 'Select a term',
@@ -185,9 +189,11 @@ shinyServer(function(input, output, session) {
     names(terms)[terms %in% actTerms] <- paste(names(terms)[terms %in% actTerms], 
                                                '*', sep = '')
     
-    # Label the "Current" term
+    # Label the "Current" term or "Last Term"
+    a <- grepl('[*]', names(terms)[length(names(terms))])
+    add <- ifelse(a == TRUE, ' (Current Term)', ' (Last Tracked Term)')
     names(terms)[length(terms)] <- paste(names(terms)[length(terms)], 
-                                         ' (Current Term)', sep = '')
+                                         add , sep = '')
     
     # Update choices
     updateSelectInput(session, 'termAchieve',
