@@ -1,5 +1,5 @@
 .navbar-brand {
-	background-color: blue;
+	background-color: #001A72;
 	font-size: 175%;
 }
 
@@ -55,6 +55,7 @@ p.help {
 
 .tab-pane {
 	background-image: url('LRC-home-banner1.jpg');
+	background-color: #001A72;
 
 }
 
@@ -92,10 +93,10 @@ p.help {
 }
 
 #warn1, #warn2, #acwarn, #acwarn2 {
-	color:red;
+	color:white;
 	font-size: 130%;
 	padding: 10px;
-	background-color: white;
+	background-color: #001A72;
 	text-align: center;
 }
 

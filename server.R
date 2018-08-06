@@ -55,7 +55,7 @@ milestones <- c('[Select One]' = 'None',
 )
 
 # Color blind palette
-colors <- c("#D55E00", "#0072B2", "#E69F00", "#009E73", "#999999",
+colors <- c("#E87722", "#001A72", "#E69F00", "#009E73", "#999999",
             "#F0E442", "#000000", "#56B4E9", "#CC79A7", "#999900")
 
 # Define server logic required to draw a histogram
