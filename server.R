@@ -916,7 +916,7 @@ shinyServer(function(input, output, session) {
                          data = cohorts,
                          type = type)
     
-    temp <- activeData(temp, input$termEnroll, cohorts, type = 'comp')
+    temp <- activeData(temp, input$termAchieve, cohorts, type = 'comp')
 
     yax <- c(0,100)
     yax[yax == 100 & type != '%'] <- max(temp$outcome) + 3
