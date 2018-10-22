@@ -183,7 +183,17 @@ shinyUI(fluidPage(
           hidden(
             div(id = 'enrollComp',
                 radioButtons('optionEnroll', 'Comparisons', options),
-                selectInput('demoEnroll', 'Select a demographic', demos)
+                selectInput('demoEnroll', 'Select a demographic', demos),
+                fluidRow(
+                  column(6,
+                         selectInput('filtEnroll', 'Filter by a demographic', 
+                                     demos)
+                  ),
+                  column(6,
+                         selectInput('filtOptionEnroll', 'Select Filter', 
+                                     'None')
+                  )
+                )
             )
           ),
           hidden(
