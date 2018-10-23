@@ -657,6 +657,8 @@ shinyServer(function(input, output, session) {
                          input$cohort,
                          input$definition,
                          input$termEnroll,
+                         input$filtEnroll,
+                         input$filtOptionEnroll,
                          input$equityEnroll,
                          input$demoEnroll,
                          data = cohorts,
