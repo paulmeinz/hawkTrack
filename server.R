@@ -215,6 +215,18 @@ shinyServer(function(input, output, session) {
                       selected = max(terms))
   })
 
+  # Update enrollment filter options
+  observe({
+    if(input$filtAchieve != 'None') {
+      choices <- as.factor(cohorts[,input$filtAchieve])
+      updateSelectInput(session, 'filtOptionAchieve',
+                        choices = levels(choices))
+    } else {
+      updateSelectInput(session, 'filtOptionAchieve', choices = 'None')
+    }
+    
+  })
+  
   # toggle term selector
   observe({
     if(input$optionAchieve != 'years')
@@ -238,6 +250,7 @@ shinyServer(function(input, output, session) {
     if(input$achieve == 'None') {
       reset('demoAchieve')
       reset('optionAchieve')
+      reset('filtAchieve')
     }
     if(input$demoAchieve == 'None') {reset('equityAchieve')}
   })
