@@ -130,6 +130,18 @@ shinyServer(function(input, output, session) {
                       choices = terms,
                       selected = max(terms))
   })
+  
+  # Update enrollment filter options
+  observe({
+    if(input$filtEnroll != 'None') {
+      choices <- as.factor(cohorts[,input$filtEnroll])
+      updateSelectInput(session, 'filtOptionEnroll',
+                        choices = levels(choices))
+    } else {
+      updateSelectInput(session, 'filtOptionEnroll', choices = 'None')
+    }
+    
+  })
 
   # toggle equity selector
   observe({
@@ -145,6 +157,7 @@ shinyServer(function(input, output, session) {
     if(input$enroll == 'None') {
       reset('demoEnroll')
       reset('optionEnroll')
+      reset('filtEnroll')
     }
     if(input$demoEnroll == 'None') {reset('equityEnroll')}
   })
