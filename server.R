@@ -939,6 +939,8 @@ shinyServer(function(input, output, session) {
                          input$cohort,
                          input$definition,
                          input$termAchieve,
+                         input$filtAchieve,
+                         input$filtOptionAchieve,
                          input$equityAchieve,
                          input$demoAchieve,
                          data = cohorts,
