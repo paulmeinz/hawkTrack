@@ -133,18 +133,14 @@ shinyServer(function(input, output, session) {
   
   # Update enrollment filter options
   observe({
-    filt <- input$filtEnroll
-    
-    if(input$filtEnroll == 'None') {
-      updateSelectInput(session, 'filtOptionEnroll', choices = 'None')
-
-    } else {
-      choices <- as.factor(cohorts[,filt])
+    if(input$filtEnroll != 'None') {
+      choices <- as.factor(cohorts[,input$filtEnroll])
       print(choices)
       updateSelectInput(session, 'filtOptionEnroll',
                         choices = levels(choices))
+    } else {
+      updateSelectInput(session, 'filtOptionEnroll', choices = 'None')
     }
-    
   })
 
   # toggle equity selector
