@@ -135,7 +135,6 @@ shinyServer(function(input, output, session) {
   observe({
     if(input$filtEnroll != 'None') {
       choices <- as.factor(cohorts[,input$filtEnroll])
-      print(choices)
       updateSelectInput(session, 'filtOptionEnroll',
                         choices = levels(choices))
     } else {
@@ -218,9 +217,7 @@ shinyServer(function(input, output, session) {
   # Update achievement filter options
   observe({
     if(input$filtAchieve != 'None') {
-      print(input$filtAchieve)
       choices <- as.factor(cohorts[,input$filtAchieve])
-      print(levels(choices))
       updateSelectInput(session, 'filtOptionAchieve',
                         choices = levels(choices))
     } else {
@@ -665,6 +662,8 @@ shinyServer(function(input, output, session) {
                          input$demoEnroll,
                          data = cohorts,
                          type = type)
+    
+    print(temp)
     
     temp <- activeData(temp, input$termEnroll, cohorts, type = 'enroll')
 

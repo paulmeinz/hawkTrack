@@ -183,14 +183,19 @@ shinyUI(fluidPage(
           hidden(
             div(id = 'enrollComp',
                 radioButtons('optionEnroll', 'Comparisons', options),
-                selectInput('demoEnroll', 'Select a demographic', demos),
+                selectInput('demoEnroll', 
+                            'Break the results down by demographic
+                            groups:', 
+                            demos),
                 fluidRow(
                   column(6,
-                         selectInput('filtEnroll', 'Filter by a demographic', 
+                         selectInput('filtEnroll', 
+                                     'And/or look within a group:', 
                                      demos)
                   ),
                   column(6,
-                         selectInput('filtOptionEnroll', 'Select Filter', 
+                         selectInput('filtOptionEnroll', 
+                                     'Select specific group', 
                                      'None', selected = 1)
                   )
                 )
@@ -283,7 +288,9 @@ shinyUI(fluidPage(
               selectInput('demoAchieve', 'Select a demographic', demos),
               fluidRow(
                 column(6,
-                       selectInput('filtAchieve', 'Filter by a demographic', 
+                       selectInput('filtAchieve', 
+                                   'Break the results down by demographic
+                                   groups?', 
                                    demos)
                 ),
                 column(6,
