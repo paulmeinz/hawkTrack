@@ -133,12 +133,16 @@ shinyServer(function(input, output, session) {
   
   # Update enrollment filter options
   observe({
-    if(input$filtEnroll != 'None') {
-      choices <- as.factor(cohorts[,input$filtEnroll])
+    filt <- input$filtEnroll
+    
+    if(input$filtEnroll == 'None') {
+      updateSelectInput(session, 'filtOptionEnroll', choices = 'None')
+
+    } else {
+      choices <- as.factor(cohorts[,filt])
+      print(choices)
       updateSelectInput(session, 'filtOptionEnroll',
                         choices = levels(choices))
-    } else {
-      updateSelectInput(session, 'filtOptionEnroll', choices = 'None')
     }
     
   })
@@ -215,10 +219,12 @@ shinyServer(function(input, output, session) {
                       selected = max(terms))
   })
 
-  # Update enrollment filter options
+  # Update achievement filter options
   observe({
     if(input$filtAchieve != 'None') {
+      print(input$filtAchieve)
       choices <- as.factor(cohorts[,input$filtAchieve])
+      print(levels(choices))
       updateSelectInput(session, 'filtOptionAchieve',
                         choices = levels(choices))
     } else {
@@ -952,7 +958,7 @@ shinyServer(function(input, output, session) {
     yax[yax == 100 & type != '%'] <- max(temp$outcome) + 3
 
     title <- names(milestones)[milestones == input$achieve]
-    print(title)
+
 
     if (input$demoAchieve == 'None') {
 

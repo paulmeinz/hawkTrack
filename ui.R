@@ -191,7 +191,7 @@ shinyUI(fluidPage(
                   ),
                   column(6,
                          selectInput('filtOptionEnroll', 'Select Filter', 
-                                     'None')
+                                     'None', selected = 1)
                   )
                 )
             )
