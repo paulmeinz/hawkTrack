@@ -285,16 +285,18 @@ shinyUI(fluidPage(
           hidden(
             div(id = 'achieveComp',
               radioButtons('optionAchieve', 'Comparisons', options),
-              selectInput('demoAchieve', 'Select a demographic', demos),
+              selectInput('demoAchieve', 
+                          'Break the results down by demographic groups:', 
+                          demos),
               fluidRow(
                 column(6,
                        selectInput('filtAchieve', 
-                                   'Break the results down by demographic
-                                   groups?', 
+                                   'And/or look within a group:', 
                                    demos)
                 ),
                 column(6,
-                       selectInput('filtOptionAchieve', 'Select Filter', 
+                       selectInput('filtOptionAchieve', 
+                                   'Select a specific group', 
                                    'None')
                 )
               )

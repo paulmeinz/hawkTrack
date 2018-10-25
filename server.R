@@ -54,6 +54,13 @@ milestones <- c('[Select One]' = 'None',
                 '% Completion' = 'compcum'
 )
 
+# Demo lookup
+demos <- c(None = 'None', Age = 'age', 
+           'EGUSD Students' = 'egusd', Ethnicity = 'ethnicity',
+           'First Generation' = 'firstgen',
+           'Foster Youth' = 'foster', Gender = 'gender',
+           'Reported Disability' = 'dsps', 'Veteran Status' = 'veteran')
+
 # Color blind palette
 colors <- c("#E87722", "#001A72", "#E69F00", "#009E73", "#999999",
             "#F0E442", "#000000", "#56B4E9", "#CC79A7", "#999900")
@@ -144,9 +151,9 @@ shinyServer(function(input, output, session) {
 
   # toggle equity selector
   observe({
-    if(input$demoEnroll != 'None')
+    if(input$demoEnroll != 'None' & input$filtEnroll == 'None')
       {showElement(id = 'enrollEquity', anim = TRUE)}
-    if(input$demoEnroll == 'None')
+    if(input$demoEnroll == 'None' | input$filtEnroll != 'None')
       {hideElement(id = 'enrollEquity', anim = TRUE)}
   })
 
@@ -158,7 +165,9 @@ shinyServer(function(input, output, session) {
       reset('optionEnroll')
       reset('filtEnroll')
     }
-    if(input$demoEnroll == 'None') {reset('equityEnroll')}
+    if(input$demoEnroll == 'None' | input$filtEnroll != 'None') {
+      reset('equityEnroll')
+    }
   })
 
   # render a message based on cohort
@@ -236,9 +245,9 @@ shinyServer(function(input, output, session) {
 
   # toggle equity selector
   observe({
-    if(input$demoAchieve != 'None')
+    if(input$demoAchieve != 'None' & input$filtAchieve == 'None')
     {showElement(id = 'achieveEquity', anim = TRUE)}
-    if(input$demoAchieve == 'None')
+    if(input$demoAchieve == 'None' | input$filtAchieve != 'None')
     {hideElement(id = 'achieveEquity', anim = TRUE)}
   })
 
@@ -251,7 +260,9 @@ shinyServer(function(input, output, session) {
       reset('optionAchieve')
       reset('filtAchieve')
     }
-    if(input$demoAchieve == 'None') {reset('equityAchieve')}
+    if(input$demoAchieve == 'None' | input$filtAchieve != 'None') {
+      reset('equityAchieve')
+    }
   })
 
 
