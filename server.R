@@ -149,6 +149,14 @@ shinyServer(function(input, output, session) {
     }
   })
 
+  # Toggle select specific filter menu and edit filter options
+  observe({
+    if(input$filtEnroll != 'None')
+      {showElement(id = 'filtE', anim = FALSE)}
+    if(input$filtEnroll == 'None')
+      {hideElement(id = 'filtE', anim = FALSE)}
+  })
+  
   # toggle equity selector
   observe({
     if(input$demoEnroll != 'None' & input$filtEnroll == 'None')
@@ -193,9 +201,9 @@ shinyServer(function(input, output, session) {
   # toggle comparison options
   observe({
     if(input$achieve != 'None')
-    {showElement(id = 'achieveComp', anim = TRUE)}
+      {showElement(id = 'achieveComp', anim = TRUE)}
     if(input$achieve == 'None')
-    {hideElement(id = 'achieveComp', anim = TRUE)}
+      {hideElement(id = 'achieveComp', anim = TRUE)}
   })
   
   # Update term input selections based on cohort selected
@@ -238,17 +246,25 @@ shinyServer(function(input, output, session) {
   # toggle term selector
   observe({
     if(input$optionAchieve != 'years')
-    {showElement(id = 'achieveTerm', anim = TRUE)}
+      {showElement(id = 'achieveTerm', anim = TRUE)}
     if(input$optionAchieve == 'years')
-    {hideElement(id = 'achieveTerm', anim = TRUE)}
+      {hideElement(id = 'achieveTerm', anim = TRUE)}
+  })
+  
+  # Toggle select specific filter menu and edit filter options
+  observe({
+    if(input$filtAchieve != 'None')
+      {showElement(id = 'filtA', anim = FALSE)}
+    if(input$filtAchieve == 'None')
+      {hideElement(id = 'filtA', anim = FALSE)}
   })
 
   # toggle equity selector
   observe({
     if(input$demoAchieve != 'None' & input$filtAchieve == 'None')
-    {showElement(id = 'achieveEquity', anim = TRUE)}
+      {showElement(id = 'achieveEquity', anim = TRUE)}
     if(input$demoAchieve == 'None' | input$filtAchieve != 'None')
-    {hideElement(id = 'achieveEquity', anim = TRUE)}
+      {hideElement(id = 'achieveEquity', anim = TRUE)}
   })
 
 
@@ -673,8 +689,6 @@ shinyServer(function(input, output, session) {
                          input$demoEnroll,
                          data = cohorts,
                          type = type)
-    
-    print(temp)
     
     temp <- activeData(temp, input$termEnroll, cohorts, type = 'enroll')
 

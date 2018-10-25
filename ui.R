@@ -193,10 +193,10 @@ shinyUI(fluidPage(
                                      'And/or look within a group:', 
                                      demos)
                   ),
-                  column(6,
+                  hidden(column(id = 'filtE', 6,
                          selectInput('filtOptionEnroll', 
                                      'Select specific group', 
-                                     'None', selected = 1)
+                                     'None', selected = 1))
                   )
                 )
             )
@@ -294,10 +294,10 @@ shinyUI(fluidPage(
                                    'And/or look within a group:', 
                                    demos)
                 ),
-                column(6,
+                hidden(column(id = 'filtA', 6,
                        selectInput('filtOptionAchieve', 
                                    'Select a specific group', 
-                                   'None')
+                                   'None'))
                 )
               )
             )
