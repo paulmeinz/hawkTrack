@@ -32,11 +32,20 @@ definition <- c('All' = 'emplid',
 
 # Current Enrollment/Milestone Achievement--------------------------------------
 affirm <- c('No', 'Yes')
-demos <- c(None = 'None', Age = 'age', 
-           'EGUSD Students' = 'egusd', Ethnicity = 'ethnicity',
+demos <- c(None = 'None', 
+           Age = 'age',
+           'Calworks' = 'calworks',
+           'CARE' = 'care',
+           'Diop' = 'diop',
+           'EGUSD Students' = 'egusd', 
+           'EOPS' = 'eops',
+           Ethnicity = 'ethnicity',
            'First Generation' = 'firstgen',
-           'Foster Youth' = 'foster', Gender = 'gender',
-           'Reported Disability' = 'dsps', 'Veteran Status' = 'veteran')
+           'Foster Youth' = 'foster', 
+           Gender = 'gender',
+           'Puente' = 'puente',
+           'Reported Disability' = 'dsps', 
+           'Veteran Status' = 'veteran')
 options <- c('Look at trends for this cohort' = 'years',
              'Compare to previous cohorts' = 'cohorts')
 enrollment <- c('[Select One]' = 'None',

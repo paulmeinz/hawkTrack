@@ -55,11 +55,20 @@ milestones <- c('[Select One]' = 'None',
 )
 
 # Demo lookup
-demos <- c(None = 'None', Age = 'age', 
-           'EGUSD Students' = 'egusd', Ethnicity = 'ethnicity',
+demos <- c(None = 'None', 
+           Age = 'age',
+           'Calworks' = 'calworks',
+           'CARE' = 'care',
+           'Diop' = 'diop',
+           'EGUSD Students' = 'egusd', 
+           'EOPS' = 'eops',
+           Ethnicity = 'ethnicity',
            'First Generation' = 'firstgen',
-           'Foster Youth' = 'foster', Gender = 'gender',
-           'Reported Disability' = 'dsps', 'Veteran Status' = 'veteran')
+           'Foster Youth' = 'foster', 
+           Gender = 'gender',
+           'Puente' = 'puente',
+           'Reported Disability' = 'dsps', 
+           'Veteran Status' = 'veteran')
 
 # Color blind palette
 colors <- c("#E87722", "#001A72", "#E69F00", "#009E73", "#999999",
