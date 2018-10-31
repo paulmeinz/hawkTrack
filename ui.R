@@ -193,7 +193,7 @@ shinyUI(fluidPage(
             div(id = 'enrollComp',
                 radioButtons('optionEnroll', 'Comparisons', options),
                 selectInput('demoEnroll', 
-                            'Break the results down by demographic
+                            'Break the results down by
                             groups:', 
                             demos),
                 fluidRow(
@@ -295,7 +295,7 @@ shinyUI(fluidPage(
             div(id = 'achieveComp',
               radioButtons('optionAchieve', 'Comparisons', options),
               selectInput('demoAchieve', 
-                          'Break the results down by demographic groups:', 
+                          'Break the results down by groups:', 
                           demos),
               fluidRow(
                 column(6,
