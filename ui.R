@@ -83,11 +83,10 @@ shinyUI(fluidPage(
 
   useShinyjs(),
 
-
   # Welcome page----------------------------------------------------------------
 
 
-  navbarPage(title = 'CRC HawkTrack',
+  navbarPage(title = 'CRC HawkTrack', id = 'navbar',
     tabPanel(title = 'Welcome',
       fluidRow(id = 'welcome-top',
                column(12,
@@ -141,7 +140,8 @@ shinyUI(fluidPage(
             inputPanel(
               selectInput('cohort', 'Pick a cohort', cohort),
               selectInput('definition', 'Select a cohort definition',
-                          definition)
+                          definition),
+              actionButton('showtabs', 'Select this cohort')
             )
           ),
           column(4, htmlOutput('cohortSize')),
@@ -167,7 +167,7 @@ shinyUI(fluidPage(
 
     # Cohort Enrollment page----------------------------------------------------
 
-
+    
     tabPanel(title = 'Cohort Enrollment',
       sidebarLayout(
         sidebarPanel(

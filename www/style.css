@@ -108,4 +108,7 @@ p.help {
 	text-shadow: -2px 0 #000000,0 2px #000000,2px 0 #000000,0 -2px #000000;
 }
 
-
+#navbar li a[data-value='Cohort Enrollment'],
+#navbar li a[data-value='Cohort Achievements'] {
+	display: none;
+}

@@ -85,6 +85,23 @@ shinyServer(function(input, output, session) {
 
 ################################################################################
 
+  # Hide/Unhide the achievements/enrollment tab
+  observeEvent(input$cohort, {
+    hide(selector = "#navbar li a[data-value='Cohort Enrollment']")
+    hide(selector = "#navbar li a[data-value='Cohort Achievements']")
+  }, priority = 100)
+  
+  observeEvent(input$definition, {
+    hide(selector = "#navbar li a[data-value='Cohort Enrollment']")
+    hide(selector = "#navbar li a[data-value='Cohort Achievements']")
+  }, priority = 100)
+  
+  observeEvent(input$showtabs, {
+    show(selector = "#navbar li a[data-value='Cohort Enrollment']", 
+         anim = TRUE)
+    show(selector = "#navbar li a[data-value='Cohort Achievements']", 
+         anim = TRUE)
+  })
 
   # Get the current term for the selected cohort
   currentTerm <- reactive({
