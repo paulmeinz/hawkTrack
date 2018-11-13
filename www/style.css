@@ -114,5 +114,11 @@ p.help {
 }
 
 #place {
-	padding: 50px;
+	padding: 25px;
+}
+
+#showtabs {
+	border-style: outset;
+	font-weight: bold;
+	border-width: 2px;
 }
