@@ -83,51 +83,7 @@ shinyUI(fluidPage(
 
   useShinyjs(),
 
-  # Welcome page----------------------------------------------------------------
-
-
   navbarPage(title = 'CRC HawkTrack', id = 'navbar',
-    tabPanel(title = 'Welcome',
-      fluidRow(id = 'welcome-top',
-               column(12,
-                      h1(id = 'welcome-header',
-                         'Welcome to the CRC HawkTrack!')
-                      ),
-               p(class = 'welcome-text', id = 'specific1',
-                 "The HawkTrack follows new students at CRC from their first",
-                 "fall to their sixth major term (three years).",
-                 " Select a cohort in the 'Select a Cohort' tab. Then click",
-                 " the enrollment/achievement tabs to look at data for the",
-                 " cohort - from term enrollment to completion.")
-      ),
-      fluidRow(id = 'welcome-mid',
-               column(6,
-                      p(class = 'welcome-text', id = 'specific',
-                        "If you have questions, please contact:",
-                        br(),
-                        a(href = 'mailto:CRC-Research@crc.losrios.edu',
-                          style = 'color: #ffffff',
-                          "CRC-Research@crc.losrios.edu"))
-
-               ),
-               column(6,
-                      p(class = 'welcome-text', id = 'specific',
-                        "If you have a research question or want",
-                        br(),
-                        "additional data ",
-                        a(href = crcLink, style = 'color:#ffffff',
-                          target= '_blank',
-                          "CLICK HERE"))
-               )
-      ),
-      fluidRow(id = 'copyright',
-               column(12,
-                      p(id = 'info',
-                        'Product of the CRC Office of',
-                        'Institutional Effectiveness')
-               )
-      )
-    ),
 
 
     # Cohort selection page-----------------------------------------------------
@@ -365,6 +321,47 @@ shinyUI(fluidPage(
           )
         )
       )
+    ),
+    
+    # Help page ----------------------------------------------------------------
+    tabPanel(title = 'Need Help?',
+             fluidRow(id = 'welcome-top',
+                      column(6,
+                             h1(id = 'welcome-header',
+                                'Welcome to the CRC HawkTrack!'),
+                             p(class = 'welcome-text', id = 'specific1',
+                               "Someday soon 
+                                a tutorial video will be on this page...
+                               "),
+                             br(),
+                             br(),
+                             p(class = 'welcome-text', id = 'specific',
+                               "In the meantime, 
+                               if you have questions, please contact:",
+                               br(),
+                               a(href = 'mailto:meinzp@crc.losrios.edu',
+                                 style = 'color: #ffffff',
+                                 "meinzp@crc.losrios.edu")),
+                             br(),
+                             br(),
+                             p(class = 'welcome-text', id = 'specific',
+                               "Otherwise, if you want additional data ",
+                               br(),
+                               a(href = crcLink, style = 'color:#ffffff',
+                                 target= '_blank',
+                                 "CLICK HERE"))
+                      ),
+                      column(6, id = 'place', 
+                             a(href="https://placekitten.com/"),
+                             img(src = "https://placekitten.com/400/400"))
+             ),
+             fluidRow(id = 'copyright',
+                      column(12,
+                             p(id = 'info',
+                               'Product of the CRC Office of',
+                               'Institutional Effectiveness  ')
+                      )
+             )
     )
   )
 

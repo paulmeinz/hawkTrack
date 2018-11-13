@@ -112,3 +112,7 @@ p.help {
 #navbar li a[data-value='Cohort Achievements'] {
 	display: none;
 }
+
+#place {
+	padding: 50px;
+}

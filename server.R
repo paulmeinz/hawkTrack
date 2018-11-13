@@ -87,13 +87,17 @@ shinyServer(function(input, output, session) {
 
   # Hide/Unhide the achievements/enrollment tab
   observeEvent(input$cohort, {
-    hide(selector = "#navbar li a[data-value='Cohort Enrollment']")
-    hide(selector = "#navbar li a[data-value='Cohort Achievements']")
+    hide(selector = "#navbar li a[data-value='Cohort Enrollment']",
+         anim = TRUE)
+    hide(selector = "#navbar li a[data-value='Cohort Achievements']",
+         anim = TRUE)
   }, priority = 100)
   
   observeEvent(input$definition, {
-    hide(selector = "#navbar li a[data-value='Cohort Enrollment']")
-    hide(selector = "#navbar li a[data-value='Cohort Achievements']")
+    hide(selector = "#navbar li a[data-value='Cohort Enrollment']",
+         anim = TRUE)
+    hide(selector = "#navbar li a[data-value='Cohort Achievements']",
+         anim = TRUE)
   }, priority = 100)
   
   observeEvent(input$showtabs, {
