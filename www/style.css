@@ -54,7 +54,7 @@ p.help {
 }
 
 .tab-pane {
-	background-image: url('LRC-home-banner1.jpg');
+	background-image: url('dashboard-background_horizontal-1.jpg');
 	background-color: #001A72;
 
 }
@@ -62,6 +62,7 @@ p.help {
 #info {
 	color: white;
 	text-align: right;
+	padding: 5px;
 }
 
 .cohortMsg {
@@ -98,6 +99,7 @@ p.help {
 	padding: 10px;
 	background-color: #001A72;
 	text-align: center;
+	border-radius: 10px
 }
 
 .defLink {
@@ -108,4 +110,19 @@ p.help {
 	text-shadow: -2px 0 #000000,0 2px #000000,2px 0 #000000,0 -2px #000000;
 }
 
+#navbar li a[data-value='Cohort Enrollment'],
+#navbar li a[data-value='Cohort Achievements'],
+#navbar li a[data-value='Select a Cohort'],
+#navbar li a[data-value='Need Help?'] {
+	font-weight: bold;
+	color: #001A72;
+}
+
+#place {
+	padding: 25px;
+}
+
+#inst {
+	padding-top: 25px;
+}
 

@@ -323,8 +323,13 @@ shinyServer(function(input, output, session) {
     num <- data %>% filter(!is.na(filt)) %>% summarise(headcount = n())
     
     # write html
-    msg <- paste('Displaying data for ', num[1, 1], ' out of ', den[1, 1],
-                 ' students in the ', input$cohort, ' fall cohort.')
+    msg <- paste('Displaying data for ', 
+                 names(definition)[definition == input$definition], 
+                 ' students in the Cosumnes River College ', 
+                 ' fall ', input$cohort, ' cohort - ', 
+                 num[1, 1], ' out of ', den[1, 1],
+                 ' new students.' 
+                 )
 
     HTML(paste(msg))
   })
