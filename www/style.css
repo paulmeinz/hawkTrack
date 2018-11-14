@@ -74,7 +74,7 @@ p.help {
 #cohortSize {
 	font-size: 170%;
 	color: white;
-	text-align: center;
+	text-align: left;
 	padding-top: 25px;
 }
 
@@ -89,7 +89,7 @@ p.help {
 #def {
 	font-size: 130%;
 	color: white;
-	text-align: center;
+	text-align: left;
 	padding-top: 25px;
 }
 
