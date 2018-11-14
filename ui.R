@@ -327,6 +327,8 @@ shinyUI(fluidPage(
     tabPanel(title = 'Need Help?',
              fluidRow(id = 'welcome-top',
                       column(6,
+                             br(),
+                             br(),
                              h1(id = 'welcome-header',
                                 'Welcome to the CRC HawkTrack!'),
                              p(class = 'welcome-text', id = 'specific1',
