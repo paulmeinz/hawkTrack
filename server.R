@@ -479,7 +479,6 @@ shinyServer(function(input, output, session) {
                                               'First Generation'))
     # Order by demo
     plotSet <- plotSet[order(as.character(plotSet$demo)),]
-    print(order(as.character(plotSet$demo)))
 
     # make plot
     n1 <- nPlot(percent ~ demo,
