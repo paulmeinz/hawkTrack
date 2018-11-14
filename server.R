@@ -405,7 +405,7 @@ shinyServer(function(input, output, session) {
 
     # Do some aesthetic stuff
     tooltip <- gsub("[\r\n]", "", makeDemoToolTip())
-    n1$yAxis(axisLabel = 'Proportion of UNDUPLICATED Students (%)',
+    n1$yAxis(axisLabel = 'Percent of Students',
              width = 50)
     n1$xAxis(rotateLabels = -15)
     n1$chart(color = colors,
@@ -488,7 +488,7 @@ shinyServer(function(input, output, session) {
 
     # Do some aesthetic stuff
     tooltip <- gsub("[\r\n]", "", makeDemoToolTip())
-    n1$yAxis(axisLabel = 'Proportion of UNDUPLICATED Students (%)',
+    n1$yAxis(axisLabel = 'Percent of Students',
              width = 50)
     n1$chart(color = colors,
              forceY = c(0, 100),
@@ -677,7 +677,7 @@ shinyServer(function(input, output, session) {
                 type = "discreteBarChart",
                 width = session$clientData[["output_plot5_width"]])
 
-    n1$yAxis(axisLabel = 'Proportion of UNDUPLICATED Students (%)',
+    n1$yAxis(axisLabel = 'Percent of Students',
              width = 50)
     n1$xAxis(rotateLabels = -15)
     n1$chart(color = colors,
@@ -960,7 +960,7 @@ shinyServer(function(input, output, session) {
                 type = "discreteBarChart",
                 width = session$clientData[["output_plot7_width"]])
 
-    n1$yAxis(axisLabel = 'Proportion of UNDUPLICATED Students (%)',
+    n1$yAxis(axisLabel = 'Percent of Students',
              width = 50)
     n1$xAxis(rotateLabels = -15)
     n1$chart(color = colors,
