@@ -345,7 +345,8 @@ shinyServer(function(input, output, session) {
     
     # write html
     msg <- paste('Displaying data for ', num[1, 1], ' out of ', den[1, 1],
-                 ' students in the ', input$cohort, ' fall cohort.')
+                 ' students in the ', input$cohort, ' fall cohort at 
+                 Cosumnes River College.')
 
     HTML(paste(msg))
   })

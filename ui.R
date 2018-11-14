@@ -97,7 +97,7 @@ shinyUI(fluidPage(
               selectInput('cohort', 'Pick a cohort', cohort),
               selectInput('definition', 'Pick a cohort definition',
                           definition),
-              actionButton('showtabs', 'Select this cohort')
+              actionButton('showtabs', 'See data for this cohort')
             )
           ),
           column(4, htmlOutput('cohortSize')),
