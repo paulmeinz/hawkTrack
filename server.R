@@ -324,10 +324,11 @@ shinyServer(function(input, output, session) {
     
     # write html
     msg <- paste('Displaying data for ', 
-                 names(definition)[definition == input$definition], 
+                 tolower(names(definition)[definition == input$definition]), 
                  ' students in the Cosumnes River College ', 
                  ' fall ', input$cohort, ' cohort - ', 
-                 num[1, 1], ' out of ', den[1, 1],
+                 '<strong>', num[1, 1], '</strong>', ' out of ', 
+                 '<strong>', den[1, 1], '</strong>',
                  ' new students.' 
                  )
 
@@ -476,6 +477,9 @@ shinyServer(function(input, output, session) {
                                               'Reported Disability',
                                               '24 and younger',
                                               'First Generation'))
+    # Order by demo
+    plotSet <- plotSet[order(as.character(plotSet$demo)),]
+    print(order(as.character(plotSet$demo)))
 
     # make plot
     n1 <- nPlot(percent ~ demo,
