@@ -98,7 +98,7 @@ shinyUI(fluidPage(
                   selectInput('definition', 'Pick a cohort definition',
                               definition)),
               div(id = 'inst',
-                  "Click the 'Cohort Enrollment' or 'Cohort Acheivement'
+                  "Click the 'Cohort Enrollment' or 'Cohort Achievement'
                   tabs to see enrollment/achievement data for this cohort.")
             )
           ),
