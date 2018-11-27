@@ -532,6 +532,7 @@ shinyServer(function(input, output, session) {
   # Create comparison plot title
   output$enrollcompTitle <- renderUI({
     
+    def <- names(definition)[definition == input$definition]
     # title depends on the particular comparison selected
     if (input$optionEnroll == 'years') {
       desc <- unique(cohorts$termdescr[cohorts$cohortyear == input$cohort &
@@ -539,12 +540,15 @@ shinyServer(function(input, output, session) {
       )
       text <- paste(input$cohort, 'Cohort: Trends on or before the ', 
                     createTermString(input$termEnroll), ' term (',
-                    desc, ')', sep = '')
+                    desc, ')', '<br/>',
+                    '(', tolower(def), ' students)',
+                    sep = '')
     }
 
     if (input$optionEnroll == 'cohorts') {
       text <- paste(input$cohort, ' Compared to Four Previous Cohorts ',
-                    'in their ', createTermString(input$termEnroll), ' Term')
+                    'in their ', createTermString(input$termEnroll), ' Term',
+                    '<br/>', '(', tolower(def), ' students)', sep = '')
     }
 
     HTML(paste(text))
@@ -811,6 +815,7 @@ shinyServer(function(input, output, session) {
   # comparison plot title
   output$achcompTitle <- renderUI({
     
+    def <- names(definition)[definition == input$definition]
     # create a comparison title based on the comparison selected
     if (input$optionAchieve == 'years') {
       desc <- unique(cohorts$termdescr[cohorts$cohortyear == input$cohort &
@@ -818,12 +823,14 @@ shinyServer(function(input, output, session) {
       )
       text <- paste(input$cohort, 'Cohort: Trends on or before the ', 
                     createTermString(input$terAchieve), ' term (',
-                    desc, ')', sep = '')
+                    desc, ')', '<br/>', '(', tolower(def), ' students)'
+                    , sep = '')
     }
 
     if (input$optionAchieve == 'cohorts') {
       text <- paste(input$cohort, ' Compared to Four Previous Cohorts ',
-                    'in their ', createTermString(input$termAchieve), ' Term')
+                    'in their ', createTermString(input$termAchieve), ' Term',
+                    '<br/>', '(', tolower(def), ' students)', sep = '')
     }
 
     HTML(paste(text))
