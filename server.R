@@ -519,8 +519,11 @@ shinyServer(function(input, output, session) {
     )
     
     # Create enrollment plot title
-    text <- paste(input$cohort, ' Cohort: Enrollment Snapshot, ', desc,
-                  ' (', createTermString(input$termEnroll), ' term)', sep = '')
+    def <- names(definition)[definition == input$definition]
+    text <- paste(input$cohort, ' Cohort: Enrollment Snapshot, ', desc, '<br/>',
+                  '(', createTermString(input$termEnroll), ' term, ', 
+                  tolower(def),
+                  ' students)', sep = '')
 
     HTML(paste(text))
   })
@@ -796,8 +799,11 @@ shinyServer(function(input, output, session) {
     desc <- unique(cohorts$termdescr[cohorts$cohortyear == input$cohort &
                                        cohorts$term == input$termAchieve]
     )
-    text <- paste(input$cohort, ' Cohort: Milestone Snapshot, ', desc,
-                  ' (', createTermString(input$termAchieve), ' term)', sep = '')
+    def <- names(definition)[definition == input$definition]
+    text <- paste(input$cohort, ' Cohort: Milestone Snapshot, ', desc,'<br/>',
+                  '(', createTermString(input$termEnroll), ' term, ', 
+                  tolower(def),
+                  ' students)', sep = '')
     
     HTML(paste(text))
   })
