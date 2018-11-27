@@ -75,7 +75,7 @@ p.help {
 	font-size: 170%;
 	color: white;
 	text-align: left;
-	padding-top: 25px;
+	padding: 25px;
 }
 
 #enrollTitle, #enrollcompTitle, #achcompTitle, #achTitle  {
@@ -90,7 +90,7 @@ p.help {
 	font-size: 130%;
 	color: white;
 	text-align: left;
-	padding-top: 25px;
+	padding: 25px;
 }
 
 #warn1, #warn2, #acwarn, #acwarn2 {
@@ -126,3 +126,6 @@ p.help {
 	padding-top: 25px;
 }
 
+#select {
+	padding: 5px;
+}

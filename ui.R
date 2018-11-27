@@ -94,7 +94,8 @@ shinyUI(fluidPage(
         fluidRow(
           column(4,
             inputPanel(
-              div(selectInput('cohort', 'Pick a cohort', cohort),
+              div(id = 'select',
+                  selectInput('cohort', 'Pick a cohort', cohort),
                   selectInput('definition', 'Pick a cohort definition',
                               definition)),
               div(id = 'inst',
