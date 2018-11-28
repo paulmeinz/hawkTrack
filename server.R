@@ -701,10 +701,7 @@ shinyServer(function(input, output, session) {
 
   output$enrollCompPlt <- renderChart({
 
-    type <- compType[input$enroll]
-    
-    # this helps determin the tooltip type
-    type <- ifelse(input$equityEnroll == 'Yes', '%', type)
+    type <- unname(compType[input$enroll])
 
     # disaggregate function
     temp <- outcomeDisag(input$enroll,
@@ -774,14 +771,17 @@ shinyServer(function(input, output, session) {
                   type = 'multiBarChart',
                   width = session$clientData[["output_plot6_width"]])
 
+      title <- ifelse(type == '%', 'Group rate minus cohort rate',
+                      'Group average minus cohort average')
+      
       n1$yAxis(axisLabel = title,
                width = 50)
       n1$xAxis(rotateLabels = -15)
       n1$chart(color = colors,
                showControls = F,
                reduceXTicks = F,
-               forceY = c(floor(min(temp$outcome)) * .9,
-                          floor(max(temp$outcome)) * 1.1),
+               forceY = c(floor(min(temp$outcome)),
+                          abs(floor(min(temp$outcome)))),
                tooltipContent = makeDemoToolTip('equity',
                                                 compType[input$enroll]))
     }
@@ -990,10 +990,7 @@ shinyServer(function(input, output, session) {
 
   output$achCompPlt <- renderChart({
 
-    type <- compType[input$achieve]
-    
-    # helps select tooltip type
-    type <- ifelse(input$equityAchieve == 'Yes', '%', type)
+    type <- unname(compType[input$achieve])
 
     temp <- outcomeDisag(input$achieve,
                          input$optionAchieve,
@@ -1013,6 +1010,7 @@ shinyServer(function(input, output, session) {
     yax[yax == 100 & type != '%'] <- max(temp$outcome) + 3
 
     title <- names(milestones)[milestones == input$achieve]
+    print(type)
 
 
     if (input$demoAchieve == 'None') {
@@ -1055,6 +1053,9 @@ shinyServer(function(input, output, session) {
                   data = temp,
                   type = 'multiBarChart',
                   width = session$clientData[["output_plot8_width"]])
+      
+      title <- ifelse(type == '%', 'Group rate minus cohort rate',
+                      'Group average minus cohort average')
 
       n1$yAxis(axisLabel = title,
                width = 50)
@@ -1062,8 +1063,8 @@ shinyServer(function(input, output, session) {
       n1$chart(color = colors,
                showControls = F,
                reduceXTicks = F,
-               forceY = c(floor(min(temp$outcome)) * .9,
-                          floor(max(temp$outcome)) * 1.1),
+               forceY = c(floor(min(temp$outcome)),
+                          abs(floor(min(temp$outcome)))),
                tooltipContent = makeDemoToolTip('equity', 
                                                 compType[input$achieve]))
     }
