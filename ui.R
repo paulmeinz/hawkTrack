@@ -335,14 +335,14 @@ shinyUI(fluidPage(
                              h1(id = 'welcome-header',
                                 'Welcome to the CRC HawkTrack!'),
                              p(class = 'welcome-text', id = 'specific1',
-                               "Someday soon 
-                                a tutorial video will be on this page...
+                               "Watch the video on the right for a HawkTrack
+                                tutorial.
                                "),
                              br(),
                              br(),
                              p(class = 'welcome-text', id = 'specific',
-                               "In the meantime, 
-                               if you have questions, please contact:",
+                               "If you have any other questions, 
+                               please contact:",
                                br(),
                                a(href = 'mailto:meinzp@crc.losrios.edu',
                                  style = 'color: #ffffff',
@@ -356,9 +356,7 @@ shinyUI(fluidPage(
                                  target= '_blank',
                                  "CLICK HERE"))
                       ),
-                      column(6, id = 'place', 
-                             a(href="https://placekitten.com/"),
-                             img(src = "https://placekitten.com/400/400"))
+                      column(6, uiOutput('video'))
              ),
              fluidRow(id = 'copyright',
                       column(12,

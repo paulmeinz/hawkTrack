@@ -85,6 +85,12 @@ shinyServer(function(input, output, session) {
 
 ################################################################################
 
+  # Tutorial Video
+  output$video <- renderUI({
+    HTML('<iframe width="700" height="415" src="https://www.youtube.com/embed/-w1H6YwR61I"
+         frameborder="0" allow="accelerometer; 
+         autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
+  })
 
   # Get the current term for the selected cohort
   currentTerm <- reactive({
