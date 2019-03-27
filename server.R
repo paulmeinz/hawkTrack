@@ -805,7 +805,7 @@ shinyServer(function(input, output, session) {
     )
     def <- names(definition)[definition == input$definition]
     text <- paste(input$cohort, ' Cohort: Milestone Snapshot, ', desc,'<br/>',
-                  '(', createTermString(input$termEnroll), ' term, ', 
+                  '(', createTermString(input$termAchieve), ' term, ', 
                   tolower(def),
                   ' students)', sep = '')
     
@@ -822,7 +822,7 @@ shinyServer(function(input, output, session) {
                                          cohorts$term == input$termAchieve]
       )
       text <- paste(input$cohort, 'Cohort: Trends on or before the ', 
-                    createTermString(input$terAchieve), ' term (',
+                    createTermString(input$termAchieve), ' term (',
                     desc, ')', '<br/>', '(', tolower(def), ' students)'
                     , sep = '')
     }
@@ -1010,7 +1010,6 @@ shinyServer(function(input, output, session) {
     yax[yax == 100 & type != '%'] <- max(temp$outcome) + 3
 
     title <- names(milestones)[milestones == input$achieve]
-    print(type)
 
 
     if (input$demoAchieve == 'None') {
