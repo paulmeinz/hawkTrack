@@ -23,7 +23,6 @@ defLink <- "https://www.crc.losrios.edu/files/ie/HawkTrack_Data_Element_Definiti
 cohort <- unique(cohorts$cohortyear[cohorts$term == 1])
 cohort <- cohort[order(cohort, decreasing = TRUE)]
 definition <- c('All' = 'emplid',
-                'Certificate Path' = 'cert',
                 'Deg/Trans/Cert Seeking' = 'degreeseek',
                 'Two Year Path' = 'twoyear',
                 'Three Year Path' = 'threeyear',
@@ -35,7 +34,6 @@ affirm <- c('No', 'Yes')
 demos <- c(None = 'None', 
            Age = 'age',
            'Calworks' = 'calworks',
-           'CARE' = 'care',
            'Diop' = 'diop',
            'EGUSD Students' = 'egusd', 
            'EOPS' = 'eops',
