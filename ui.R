@@ -33,6 +33,7 @@ definition <- c('All' = 'emplid',
 affirm <- c('No', 'Yes')
 demos <- c(None = 'None', 
            Age = 'age',
+           'Career Academic Community' = 'cac',
            'Calworks' = 'calworks',
            'Diop' = 'diop',
            'EGUSD Students' = 'egusd', 

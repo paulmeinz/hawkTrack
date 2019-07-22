@@ -57,6 +57,7 @@ milestones <- c('[Select One]' = 'None',
 # Demo lookup
 demos <- c(None = 'None', 
            Age = 'age',
+           'Career Academic Community' = 'cac',
            'Calworks' = 'calworks',
            'CARE' = 'care',
            'Diop' = 'diop',
