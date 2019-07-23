@@ -30,7 +30,11 @@ compType <- c('None' = 'None',
               'mile45' = '%',
               'mile60' = '%',
               'compcum' = '%',
-              'persistcac' = '%')
+              'persistcac' = '%',
+              'mathAndEng' = '%',
+              'transprepcum' = '%',
+              'transfercum' = '%',
+              'awardcum' = '%')
 
 # Enrollment Lookup
 enrollment <- c('[Select One]' = 'None',
@@ -48,11 +52,15 @@ milestones <- c('[Select One]' = 'None',
                 'Average GPA' = 'gpa',
                 '% Comp Ed Plan' = 'comprehensive',
                 '% Transfer English' = 'cumTransEnglish',
+                '% Transfer English and Math' = 'mathAndEng',
                 '% Transfer Math' = 'cumTransMath',
                 '% 15 Transfer Units' = 'mile15',
                 '% 30 Transfer Units' = 'mile30',
                 '% 45 Transfer Units' = 'mile45',
                 '% 60 Transfer Units' = 'mile60',
+                '% Transfer Prepared' = 'transprepcum',
+                '% Transfer' = 'transfercum',
+                '% Earning an Award' = 'awardcum',
                 '% Completion' = 'compcum'
 )
 
