@@ -29,7 +29,8 @@ compType <- c('None' = 'None',
               'mile30' = '%',
               'mile45' = '%',
               'mile60' = '%',
-              'compcum' = '%')
+              'compcum' = '%',
+              'persistcac' = '%')
 
 # Enrollment Lookup
 enrollment <- c('[Select One]' = 'None',
@@ -39,7 +40,8 @@ enrollment <- c('[Select One]' = 'None',
                 '% Enrolled Full Time (15 units)' = 'units15',
                 '% Enrolled in math' = 'Math',
                 '% Enrolled in English' = 'English',
-                'Average Units Withdrawn' = 'wunits')
+                'Average Units Withdrawn' = 'wunits',
+                '% Enrolled in same CAC' = 'persistcac')
 
 # Mileston Lookup
 milestones <- c('[Select One]' = 'None',
