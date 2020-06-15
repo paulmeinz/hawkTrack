@@ -8,7 +8,7 @@ library(hawkTrackHelp)
 
 load('cohorts.rdata')
 
-crcLink <- "https://researchapps.crc.losrios.edu/CRC_Research_Data_Request_Form"
+crcLink <- "https://crclosrios.co1.qualtrics.com/jfe/form/SV_86cJqok0Qj1Lrdr"
 defLink <- "https://www.crc.losrios.edu/files/ie/HawkTrack_Data_Element_Definitions.pdf"
 
 
@@ -195,12 +195,13 @@ shinyUI(fluidPage(
                        plotOutput('plot5', height = '0px')
                 ),
                 column(3, 
-                       hidden(div(id = 'enwarn', htmlOutput('warn1'))),
-                       div(class = 'defLink', 
-                           a(href = defLink, style = 'color: #ffffff',
-                             target= '_blank',"CLICK HERE for metric and
-                             cohort definitions")
-                          )
+                       hidden(div(id = 'enwarn', htmlOutput('warn1')))
+                       #,
+                       #div(class = 'defLink', 
+                       #     a(href = defLink, style = 'color: #ffffff',
+                       #      target= '_blank',"CLICK HERE for metric and
+                       #      cohort definitions")
+                       #   )
                 )
               )
             )
@@ -216,12 +217,13 @@ shinyUI(fluidPage(
                        plotOutput('plot6', height = '0px')
                 ),
                 column(3, 
-                       hidden(div(id = 'enwarn2', htmlOutput('warn2'))),
-                       div(class = 'defLink', 
-                           a(href = defLink, style = 'color: #ffffff',
-                             target= '_blank',"CLICK HERE for metric and
-                             cohort definitions")
-                       )
+                       hidden(div(id = 'enwarn2', htmlOutput('warn2')))
+                       #,
+                       #div(class = 'defLink', 
+                       #    a(href = defLink, style = 'color: #ffffff',
+                       #      target= '_blank',"CLICK HERE for metric and
+                       #      cohort definitions")
+                       #)
                 )
               )
             )
@@ -296,12 +298,13 @@ shinyUI(fluidPage(
                          plotOutput('plot7', height = '0px')
                   ),
                   column(3, 
-                         hidden(div(id = 'acwarn', htmlOutput('warn3'))),
-                         div(class = 'defLink', 
-                             a(href = defLink, style = 'color: #ffffff',
-                               target= '_blank',"CLICK HERE for metric and
-                               cohort definitions")
-                         )
+                         hidden(div(id = 'acwarn', htmlOutput('warn3')))
+                         #,
+                         #div(class = 'defLink', 
+                         #    a(href = defLink, style = 'color: #ffffff',
+                         #      target= '_blank',"CLICK HERE for metric and
+                         #      cohort definitions")
+                         #)
                   )
                 )
             )
@@ -317,12 +320,13 @@ shinyUI(fluidPage(
                          plotOutput('plot8', height = '0px')
                   ),
                   column(3, 
-                         hidden(div(id = 'acwarn2', htmlOutput('warn4'))),
-                         div(class = 'defLink', 
-                             a(href = defLink, style = 'color: #ffffff',
-                               target= '_blank',"CLICK HERE for metric and
-                               cohort definitions")
-                         )
+                         hidden(div(id = 'acwarn2', htmlOutput('warn4')))
+                         #,
+                         #div(class = 'defLink', 
+                         #    a(href = defLink, style = 'color: #ffffff',
+                         #      target= '_blank',"CLICK HERE for metric and
+                         #      cohort definitions")
+                         #)
                   )
                 )
             )
@@ -367,7 +371,7 @@ shinyUI(fluidPage(
                       column(12,
                              p(id = 'info',
                                'Product of the CRC Office of',
-                               'Institutional Effectiveness  ')
+                               'Research and Equity  ')
                       )
              )
     )
