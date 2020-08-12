@@ -47,8 +47,10 @@ demos <- c(None = 'None',
            'Puente' = 'puente',
            'Reported Disability' = 'dsps', 
            'Veteran Status' = 'veteran')
+
 options <- c('Look at trends for this cohort' = 'years',
              'Compare to previous cohorts' = 'cohorts')
+
 enrollment <- c('[Select One]' = 'None',
                 'Average Units' = 'units',
                 'Average Units Withdrawn' = 'wunits',
@@ -57,7 +59,10 @@ enrollment <- c('[Select One]' = 'None',
                 '% Enrolled Full Time (15 units)' = 'units15',
                 '% Enrolled in math' = 'Math',
                 '% Enrolled in English' = 'English',
+                '% Enrolled in Transfer Math' = 'transMath',
+                '% Enrolled in Transfer English' = 'transEnglish',
                 '% Enrolled in same CAC' = 'persistcac')
+
 milestones <- c('[Select One]' = 'None',
                 'Average GPA' = 'gpa',
                 '% Comp Ed Plan' = 'comprehensive',
