@@ -680,16 +680,16 @@ shinyServer(function(input, output, session) {
     percent <- temp %>% summarise('% Enrolled' = mean(enrolled) * 100,
                                   '% Fulltime (12 Units)' = mean(units12) * 100,
                                   '% Fulltime (15 Units)' = mean(units15) * 100,
-                                  'Enrolled in English' = mean(English) * 100,
-                                  'Enrolled in math' = mean(Math) * 100)
+                                  'Enrolled in transfer English' = mean(transEnglish) * 100,
+                                  'Enrolled in transfer math' = mean(transMath) * 100)
     percent <- gather(percent, 'variable', 'percent', 1:5)
 
     # calculate headcounts
     headcount <- temp %>% summarise('% Enrolled' = sum(enrolled),
                                     '% Fulltime (12 Units)' = sum(units12),
                                     '% Fulltime (15 Units)' = sum(units15),
-                                    'Enrolled in English' = sum(English),
-                                    'Enrolled in math' = sum(Math))
+                                    'Enrolled in transfer English' = sum(transEnglish),
+                                    'Enrolled in transfer math' = sum(transMath))
     headcount <- gather(headcount, 'variable', 'headcount', 1:5)
 
     # get the total and assign it to each row
