@@ -45,9 +45,9 @@ enrollment <- c('[Select One]' = 'None',
                 '% Enrolled' = 'enrolled',
                 '% Enrolled Full Time (12 units)' = 'units12',
                 '% Enrolled Full Time (15 units)' = 'units15',
-                '% Enrolled in math' = 'Math',
+                '% Enrolled in Quant' = 'Math',
                 '% Enrolled in English' = 'English',
-                '% Enrolled in Transfer Math' = 'transMath',
+                '% Enrolled in Transfer Quant' = 'transMath',
                 '% Enrolled in Transfer English' = 'transEnglish',
                 '% Enrolled in same CAC' = 'persistcac')
 
@@ -56,8 +56,8 @@ milestones <- c('[Select One]' = 'None',
                 'Average GPA' = 'gpa',
                 '% Comp Ed Plan' = 'comprehensive',
                 '% Transfer English' = 'cumTransEnglish',
-                '% Transfer English and Math' = 'mathAndEng',
-                '% Transfer Math' = 'cumTransMath',
+                '% Transfer English and Quant' = 'mathAndEng',
+                '% Transfer Quant' = 'cumTransMath',
                 '% 15 Transfer Units' = 'mile15',
                 '% 30 Transfer Units' = 'mile30',
                 '% 45 Transfer Units' = 'mile45',
@@ -681,7 +681,7 @@ shinyServer(function(input, output, session) {
                                   '% Fulltime (12 Units)' = mean(units12) * 100,
                                   '% Fulltime (15 Units)' = mean(units15) * 100,
                                   'Enrolled in transfer English' = mean(transEnglish) * 100,
-                                  'Enrolled in transfer math' = mean(transMath) * 100)
+                                  'Enrolled in transfer Quant' = mean(transMath) * 100)
     percent <- gather(percent, 'variable', 'percent', 1:5)
 
     # calculate headcounts
@@ -689,7 +689,7 @@ shinyServer(function(input, output, session) {
                                     '% Fulltime (12 Units)' = sum(units12),
                                     '% Fulltime (15 Units)' = sum(units15),
                                     'Enrolled in transfer English' = sum(transEnglish),
-                                    'Enrolled in transfer math' = sum(transMath))
+                                    'Enrolled in transfer Quant' = sum(transMath))
     headcount <- gather(headcount, 'variable', 'headcount', 1:5)
 
     # get the total and assign it to each row
@@ -957,7 +957,7 @@ shinyServer(function(input, output, session) {
     percent <- temp %>%
       summarise('% Comp Ed Plan' = mean(comprehensive) * 100,
                 '% Transfer English' = mean(cumTransEnglish) * 100,
-                '% Transfer Math' = mean(cumTransMath) * 100,
+                '% Transfer Quant' = mean(cumTransMath) * 100,
                 '% 15 Transfer Units' = mean(mile15) * 100,
                 '% 30 Transfer Units' = mean(mile30) * 100,
                 '% 45 Transfer Units' = mean(mile45) * 100,
@@ -969,7 +969,7 @@ shinyServer(function(input, output, session) {
     headcount <- temp %>%
       summarise('% Comp Ed Plan' = sum(comprehensive),
                 '% Transfer English' = sum(cumTransEnglish),
-                '% Transfer Math' = sum(cumTransMath),
+                '% Transfer Quant' = sum(cumTransMath),
                 '% 15 Transfer Units' = sum(mile15),
                 '% 30 Transfer Units' = sum(mile30),
                 '% 45 Transfer Units' = sum(mile45),
